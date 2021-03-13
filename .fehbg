@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-scale /mnt/c/Users/Jonathan/Dropbox/media/backgound/trees.jpg
