@@ -1,0 +1,70 @@
+" This will have to do until someone writes us a nice syntax file :)
+" vim: set filetype=vim:
+
+" *********************************
+" *********** Settings ************
+" *********************************
+set theme dark
+set hintchars 0123456789
+set hintfiltermode vimperator-reflow
+set hintnames numeric
+
+" *********************************
+" *********** Bindings ************
+" *********************************
+" Make yy use canonical / short links on the 5 websites that support them
+bind yy clipboard yankshort
+bind ,t tabdetach
+
+" Delete tabs
+bind <A-d> composite tabclosealltoleft | tabclosealltoright
+bind <A-∂> composite tabclosealltoleft | tabclosealltoright " For OSX
+bind <C-d> tabclosealltoright
+bind ,d  composite tabclosealltoleft | tabclosealltoright
+
+" *********************************
+" ********* Autocontains **********
+" *********************************
+autocontain drive.google.com Nerdery
+autocontain calendar.google.com Nerdery
+autocontain docs.google.com Nerdery
+autocontain jamboard.google.com Nerdery
+autocontain openair.com Nerdery
+autocontain auth.openair.com Nerdery
+autocontain ultipro.com Nerdery
+autocontain trello.com Nerdery
+autocontain miro.com Nerdery
+autocontain knowledge.nerdery.com Nerdery
+autocontain issues.nerdery.com Nerdery
+autocontain git.nerdery.com Nerdery
+autocontain acloudguru.com Nerdery
+autocontain acloud.guru Nerdery
+autocontain retail-platform-test.appspot.com Nerdery
+autocontain miro.com Nerdery
+autocontain netsuite.com Nerdery
+
+" *********************************
+" ********* Page-Specific *********
+" *********************************
+" Reddit
+bindurl reddit.com gu urlparent 3 " Make gu take you back to subreddit from comments
+unbindurl ^https://(www\.)?reddit\.com <esc> " Esc out of posts
+unbindurl ^https://(www\.)?reddit\.com j " Leave j as reddit 'down'
+unbindurl ^https://(www\.)?reddit\.com k " Leave k as reddit 'up'
+unbindurl ^https://(www\.)?reddit\.com n " Leave n as reddit 'next post'
+unbindurl ^https://(www\.)?reddit\.com p " Leave n as reddit 'prev post'
+" If browsing a comment, only hint appropriate links
+bindurl ^https://(www\.)?reddit\.com.*comments f hint -Jc [data-test-id=post-content] a,.Comment a
+bindurl ^https://(www\.)?reddit\.com.*comments F hint -Jbc [data-test-id=post-content] a,.Comment a
+bindurl ^https://(www\.)?reddit\.com.*comments ;i hint -ic [data-test-id=post-content] img
+bindurl ^https://(www\.)?reddit\.com.*comments ;I hint -Ic [data-test-id=post-content] img
+" Auto-focus on right div
+autocmd DocLoad reddit.com hint -; -c '#SHORTCUT_FOCUSABLE_DIV'
+
+" Only hint search results on Google and DDG
+bindurl www.google.com f hint -Jc .rc > .r > a
+bindurl www.google.com F hint -Jbc .rc>.r>a
+
+" Highlight right content on DDG
+bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
+bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
