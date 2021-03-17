@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale /mnt/c/Users/Jonathan/Dropbox/media/backgound/trees.jpg
+feh --no-fehbg --bg-scale '/home/mandest/pics/someday_by_aenami.png' 
