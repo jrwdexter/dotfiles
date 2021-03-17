@@ -56,6 +56,10 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status root_indicator background_
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -192,4 +196,4 @@ elif command -v cowsay &> /dev/null; then
   fi
 fi
 
-alias x="(nohup mopidy > $HOME/mopidy.out &) && (nohup awesome > $HOME/awesome.out &)"
+alias x="(nohup mopidy > /tmp/mopidy.out &) && (nohup awesome > /tmp/awesome.out &) && (nohup picom --experimental-backends > /tmp/picom.out)"
