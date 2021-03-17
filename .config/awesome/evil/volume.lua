@@ -5,6 +5,7 @@
 -- evil::microphone
 --      muted (boolean)
 local awful = require("awful")
+local gears = require("gears")
 
 local volume_old = -1
 local muted_old = -1
@@ -14,9 +15,9 @@ local function emit_volume_info()
     -- In the output of `pacmd list-sinks`, lines +7 and +11 after "* index:"
     -- contain the volume level and muted state respectively
     -- This is why we are using `awk` to print them.
-    awful.spawn.easy_async_with_shell("pacmd list-sinks | awk '/\\* index: /{nr[NR+7];nr[NR+11]}; NR in nr'", function(stdout)
-        local volume = stdout:match('(%d+)%% /')
-        local muted = stdout:match('muted:(%s+)[yes]')
+    awful.spawn.easy_async_with_shell("pactl list | awk '/^Sink #/{nr[NR+8];nr[NR+9]};NR in nr'", function(stdout)
+        local volume = stdout:match('(%d+)%%[,$]')
+        local muted = stdout:match('Mute:(%s+)[yes]')
         local muted_int = muted and 1 or 0
         local volume_int = tonumber(volume)
         -- Only send signal if there was a change

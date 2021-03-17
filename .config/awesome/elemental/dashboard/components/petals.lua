@@ -87,7 +87,7 @@ end
 
 -- Create the containers
 local petal_top_left = create_icon_petal("google_drive_2020.png", x.color3, x.color11, "https://drive.google.com/", true, true, false, true)
-local petal_top_right = create_icon_petal("google_mail_2020.png", x.color2, x.color10, "https://meet.google.com/", true, true, true, false)
+local petal_top_right = create_icon_petal("google_mail_2020.png", x.color2, x.color10, "https://mail.google.com/", true, true, true, false)
 local petal_bottom_right = create_text_petal("OA", x.color4, x.color12, "https://nerdery.app.openair.com/dashboard.pl?uid=QNJJUcTE6hGAWzIVeI6Jhw;app=ma;action=paint;_dashboard_layout=text;r=8kA6YAq8165",false, true, true, true)
 local petal_bottom_left = create_text_petal("UP", x.color1, x.color9, "https://ultipro.nerdery.com/", true, false, true, true)
 

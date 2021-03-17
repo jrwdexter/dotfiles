@@ -1,11 +1,12 @@
 local awful   = require("awful")
+local gears   = require("gears")
 local helpers = require("helpers")
 local wibox   = require("wibox")
 
 local uptime_text = wibox.widget.textbox()
-awful.widget.watch("uptime -p | sed 's/^...//'", 60, function(_, stdout)
+awful.widget.watch("uptime -p", 60, function(_, stdout)
     -- Remove trailing whitespaces
-    local out = stdout:gsub('^%s*(.-)%s*$', '%1')
+    local out = stdout:gsub('^%s*up%s*(.-)%s*$', '%1')
     uptime_text.text = out
 end)
 

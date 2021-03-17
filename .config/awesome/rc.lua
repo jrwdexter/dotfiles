@@ -78,7 +78,8 @@ user = {
     -- Check apps.lua for more
     terminal = "kitty -1",
     floating_terminal = "kitty -1",
-    browser = "/mnt/c/Program\\ Files/Firefox\\ Developer\\ Edition/firefox.exe",
+    browser = "firefox-developer-edition",
+    -- browser = "/mnt/c/Program\\ Files/Firefox\\ Developer\\ Edition/firefox.exe",
     file_manager = "kitty -1 --class files -e ranger",
     editor = "kitty -1 --class editor -e nvim",
     email_client = "kitty -1 --class email -e neomutt",
@@ -830,6 +831,7 @@ awful.rules.rules = {
         rule_any = {
             class = {
                 "firefox",
+                "firefox-developer-edition",
                 "Nightly",
                 -- "qutebrowser",
             },
