@@ -40,7 +40,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'hashivim/vim-terraform'
 Plug 'sbdchd/neoformat'
-Plug 'freitass/todo.txt-vim'
+Plug 'dbeniamine/todo.txt-vim'
+Plug 'OrangeT/vim-csharp'
 Plug 'tridactyl/vim-tridactyl'
 Plug 'mrk21/yaml-vim'
 
