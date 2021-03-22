@@ -67,6 +67,7 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   osx
+  gcloud
   virtualenv
   fzf
   git
@@ -196,4 +197,4 @@ elif command -v cowsay &> /dev/null; then
   fi
 fi
 
-alias x="(nohup mopidy > /tmp/mopidy.out &) && (nohup awesome > /tmp/awesome.out &) && (nohup picom --experimental-backends > /tmp/picom.out)"
+alias x="(nohup mopidy > /tmp/mopidy.out &) && (nohup awesome > /tmp/awesome.out &) && (nohup picom --experimental-backends > /tmp/picom.out &)"
