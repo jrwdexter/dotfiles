@@ -83,6 +83,7 @@ user = {
     file_manager = "kitty -1 --class files -e ranger",
     editor = "kitty -1 --class editor -e nvim",
     email_client = "kitty -1 --class email -e neomutt",
+    visualizer = "kitty -1 --class visualizer -e cava",
     music_client = "kitty -1 --class music -e ncmpcpp",
     -- music_client = "kitty --class music -e ncmpcpp",
 
@@ -313,7 +314,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Tag layouts
     local layouts = {
         l.max,
-        l.max,
+        l.tile,
         l.max,
         l.max,
         l.tile,
@@ -421,6 +422,23 @@ awful.rules.rules = {
         properties = { floating = true }
     },
 
+    { 
+      rule_any = {
+        instance = {
+          "lotion"
+        },
+        class = {
+          "notion",
+          "lotion",
+        }
+      },
+      properties = { 
+        screen = 1,
+        tag = awful.screen.focused().tags[9],
+        fullscreen = true,
+      }
+    },
+
     -- TODO why does Chromium always start up floating in AwesomeWM?
     -- Temporary fix until I figure it out
     {
@@ -501,7 +519,8 @@ awful.rules.rules = {
                 "riotclientux.exe",
                 "leagueclient.exe",
                 "^editor$",
-                "markdown_input"
+                "markdown_input",
+                "cava"
             },
             class = {
                 "qutebrowser",
@@ -515,7 +534,8 @@ awful.rules.rules = {
                 "Lutris",
                 "Chromium",
                 "^editor$",
-                "markdown_input"
+                "markdown_input",
+                "cava"
                 -- "Thunderbird",
             },
             type = {
@@ -584,17 +604,20 @@ awful.rules.rules = {
 
     -- Visualizer
     {
-        rule_any = { class = { "Visualizer" } },
+        rule_any = { class = { "visualizer" } },
         properties = {
-            floating = true,
-            maximized_horizontal = true,
-            sticky = true,
-            ontop = false,
+            screen = 1,
+            tag = awful.screen.focused().tags[2],
+            -- floating = true,
+            -- maximized_horizontal = true,
+            -- sticky = true,
+            -- ontop = false,
             skip_taskbar = true,
-            below = true,
-            focusable = false,
-            height = screen_height * 0.40,
-            opacity = 0.6,
+            -- below = true,
+            above = true,
+            -- focusable = false,
+            -- height = screen_height * 0.40,
+            -- opacity = 0.6,
             titlebars_enabled = false,
         },
         callback = function (c)
