@@ -15,7 +15,7 @@ allow_for_physical_item_deletion = "no"
 visualizer_fifo_path = /tmp/mpd.fifo
 visualizer_output_name = "mpd_visualizer"
 visualizer_in_stereo = "yes"
-visualizer_sample_multiplier = 2
+# visualizer_sample_multiplier = 2
 visualizer_sync_interval = 30
 visualizer_look = ●●
 
@@ -33,7 +33,7 @@ titles_visibility = "no"
 progressbar_look = "   "
 progressbar_color = "black"
 progressbar_elapsed_color = "white"
-progressbar_boldness = "yes"
+# progressbar_boldness = "yes"
 # Song status #
 #now_playing_prefix = "$b"
 #now_playing_suffix = "$/b"

@@ -521,7 +521,7 @@ keys.globalkeys = gears.table.join(
     awful.key({ superkey }, "F3", apps.music,
         {description = "music client", group = "launcher"}),
     -- Spawn cava in a terminal
-    awful.key({ superkey }, "F4", function() awful.spawn("visualizer") end,
+    awful.key({ superkey }, "F4", apps.visualizer,
         {description = "cava", group = "launcher"}),
     -- Spawn ncmpcpp in a terminal, with a special visualizer config
     awful.key({ superkey, shiftkey }, "F4", function() awful.spawn(user.terminal .. " -e 'ncmpcpp -c ~/.config/ncmpcpp/config_visualizer -s visualizer'") end,

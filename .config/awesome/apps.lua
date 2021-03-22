@@ -96,7 +96,11 @@ apps.org = function ()
 end
 
 apps.music = function ()
-    helpers.scratchpad({instance = "music"}, user.music_client, { switchtotag = true })
+    helpers.run_or_raise({instance = "music"}, false, user.music_client, { switchtotag = true })
+end
+
+apps.visualizer = function()
+    helpers.run_or_raise({instance = "visualizer"}, false, user.visualizer, { switchtotag = true })
 end
 
 apps.process_monitor = function ()
