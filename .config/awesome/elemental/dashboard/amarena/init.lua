@@ -175,6 +175,16 @@ screenshot_box:buttons(gears.table.join(
 
 helpers.add_hover_cursor(screenshot_box, "hand1")
 
+-- Timeslot widget
+local timer = require("elemental.dashboard.components.screenshot")
+local timer_box = create_boxed_widget(timer, dpi(225), dpi(117), x.background)
+timer_box:buttons(gears.table.join(
+    awful.button({ }, 1, function()
+        awesome.emit_signal("evil::toggle_timesheet")
+    end)
+))
+helpers.add_hover_cursor(timer_box, "hand1")
+
 ----------------------------------
 -------- DASHBOARD LAYOUT --------
 ----------------------------------
@@ -199,7 +209,7 @@ dashboard:setup {
                 -- Column 2
                 url_petals_box,
                 notification_state_box,
-                screenshot_box,
+                timer_box,
                 disk_box,
                 layout = wibox.layout.fixed.vertical
             },
