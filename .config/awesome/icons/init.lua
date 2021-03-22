@@ -47,6 +47,8 @@ icons.text.by_class = {
     ['Emacs'] = { symbol = "", color = x.color2 },
     ['email'] = { symbol = "", color = x.color6 },
     ['music'] = { symbol = "", color = x.color6 },
+    ['visualizer'] = { symbol = "", color = x.color6 },
+    ['lotion'] = { symbol = "", color = x.color3 },
     ['mpv'] = { symbol = "", color = x.color6 },
     ['KeePassXC'] = { symbol = "", color = x.color1 },
     ['Gucharmap'] = { symbol = "", color = x.color6 },
@@ -136,6 +138,13 @@ local image_icon_names = {
     "reboot",
     "suspend",
     "lock",
+    "clock",
+    "clock2",
+    "star_empty",
+    "star_half",
+    "star_full",
+    "heart",
+    "heart_broken",
 }
 
 -- Path to icons
