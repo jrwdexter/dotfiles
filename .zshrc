@@ -199,4 +199,37 @@ elif command -v cowsay &> /dev/null; then
   fi
 fi
 
-alias x="(nohup mopidy > /tmp/mopidy.out &) && (nohup awesome > /tmp/awesome.out &) && (nohup picom --experimental-backends > /tmp/picom.out &)"
+check_or_run() {
+  proc="$1"
+  proc_id=$(pidof -w $proc)
+  if [[ $proc_id ]]; then
+    echo -e "\e[0;94m$proc\e[0m already running"
+  else
+    nohup $proc $2 > "/tmp/$proc.out" &
+    echo -e "Starting \e[0;92m$proc\e[0m..."
+  fi
+}
+
+x11() {
+  check_or_run "mopidy"
+  check_or_run "picom" "--experimental-backends"
+  check_or_run "awesome"
+}
+
+check_and_kill() {
+  proc="$1"
+  proc_id=$(pidof -w $proc)
+  if [[ $proc_id ]]; then
+    pkill -9 $proc
+    echo -e "Killing \e[0;91m$proc\e[0m..."
+  else
+    echo -e "$proc not found"
+  fi
+}
+
+kill_x11()
+{
+  check_and_kill "mopidy"
+  check_and_kill "picom"
+  check_and_kill "awesome"
+}
