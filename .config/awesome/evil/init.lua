@@ -17,6 +17,7 @@ require("evil.mpd")
 -- No need to worry that you will be updating too often when restarting AwesomeWM :)
 -- This is useful because some APIs have a limit on the number of calls per hour.
 require("evil.coronavirus")
+require("evil.vaccines")
 require("evil.gcal")
 require("evil.weather")
 require("evil.timer")
