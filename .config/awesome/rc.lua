@@ -145,6 +145,12 @@ user = {
     -- Uses the https://api.covidtracking.com/ API
     coronavirus_country = "usa",
     coronavirus_state = "mn",
+    
+    -- >> Covid Vaccine <<
+    -- Location(s) to check for COVID vaccines
+    -- Uses the https://www.vaccinespotter.org/ API
+    vaccine_state = "MN",
+    vaccine_zip_codes = {"55127"},
 }
 -- ===================================================================
 
