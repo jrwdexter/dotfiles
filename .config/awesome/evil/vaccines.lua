@@ -10,10 +10,11 @@ local helpers = require("helpers")
 local naughty = require("naughty")
 local json = require("json")
 
-local update_interval = 60 * 60 * .01 -- 30 minutes
+local update_interval = 60 * 60 * .5 -- 30 minutes
 local state = user.vaccine_state or "MN"
 local zip_codes = user.vaccine_zip_codes or {"55127"}
 local temp_file = "/tmp/awesomewm-evil-vaccines"
+local ifttt_key = user.ifttt_key
 local vaccine_script
 
 local zip_code_selects
@@ -49,23 +50,16 @@ vaccine_script = [[
 
 helpers.remote_watch(vaccine_script, update_interval, temp_file, function(stdout)
   vaccine_data = json.decode(stdout)
-  gears.debug.dump(vaccine_data)
+  awesome.emit_signal("evil::vaccines", vaccine_data)
 
   if not (vaccine_data[1] == nil) then
-    awesome.emit_signal("evil::vaccines", vaccine_data)
+    local ifttt_payload = {
+      value1 = vaccine_data[1].name,
+      value2 = vaccine_data[1].url,
+    }
+    local curl_command = [[
+      curl -X POST -H "Content-Type: application/json" -d ']]..json.encode(ifttt_payload)..[[' https://maker.ifttt.com/trigger/vaccine_available/with/key/]]..ifttt_key
+    gears.debug.dump(curl_command)
+    awful.spawn.easy_async_with_shell(curl_command)
   end
-    -- local cases_total = stdout:match('^CTOTAL@(.*)@CTODAY')
-    -- local cases_today = stdout:match('CTODAY@(.*)@DTOTAL')
-    -- local deaths_total = stdout:match('DTOTAL@(.*)@DTODAY')
-    -- local deaths_today = stdout:match('DTODAY@(.*)@')
-
-    -- If it is found, we assume the command succeeded
-
-    -- if cases_total then
-        -- awesome.emit_signal("evil::coronavirus", cases_total, cases_today, deaths_total, deaths_today)
-    -- else
-        -- Remove temp_file to force an update the next time
-        -- awful.spawn.with_shell("rm "..temp_file)
-        -- awesome.emit_signal("evil::coronavirus", -1, -1, -1, -1)
-    -- end
 end)
