@@ -23,7 +23,7 @@ fzf.init = function()
 
   -- Function to use GFiles if in git repo; otherwise, just use Files FZF
   function AllFiles()
-    vim.api.nvim_command('silent !git rev-parse --git-dir 2> /dev/null')
+    vim.api.nvim_command('silent !git rev-parse --git-dir')
     if not (vim.v.shell_error == 0) then
       --vim.api.nvim_command('Files')
       vim.api.nvim_command('Telescope fd')
