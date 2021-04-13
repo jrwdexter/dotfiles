@@ -377,6 +377,7 @@ end
 
 function helpers.float_and_resize(c, width, height)
     c.maximized = false
+    naughty.notification({message = "Test #2"})
     c.width = width
     c.height = height
     awful.placement.centered(c,{honor_workarea=true, honor_padding = true})

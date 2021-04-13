@@ -109,6 +109,7 @@ user = {
         -- Make sure the directory exists so that your screenshots
         -- are not lost
         screenshots = os.getenv("XDG_SCREENSHOTS_DIR") or "~/Pictures/Screenshots",
+        wallpapers = "~/media/wallpapers",
     },
 
     -- >> Sidebar <<
@@ -165,6 +166,7 @@ user = {
 -- ===================================================================
 -- Theme handling library
 local beautiful = require("beautiful")
+local json = require("json")
 local xrdb = beautiful.xresources.get_current_theme()
 -- Make dpi function global
 dpi = beautiful.xresources.apply_dpi
@@ -322,10 +324,10 @@ awful.screen.connect_for_each_screen(function(s)
     local l = awful.layout.suit -- Alias to save time :)
     -- Tag layouts
     local layouts = {
-        l.max,
+        l.tile,
         l.tile,
         l.max,
-        l.max,
+        l.tile,
         l.tile,
         l.max,
         l.max,
@@ -337,14 +339,24 @@ awful.screen.connect_for_each_screen(function(s)
     -- Tag names
     local tagnames = beautiful.tagnames or { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }
     -- Create all tags at once (without seperate configuration for each tag)
-    awful.tag(tagnames, s, layouts)
+    -- awful.tag(tagnames, s, layouts)
 
     -- Create tags with seperate configuration for each tag
-    -- awful.tag.add(tagnames[1], {
-    --     layout = layouts[1],
-    --     screen = s,
-    --     master_width_factor = 0.6,
-    --     selected = true,
+    for k, v in pairs(tagnames) do
+      awful.tag.add(v, {
+        layout = layouts[k],
+        screen = s,
+        master_width_factor = 0.6,
+        selected = (k == 1),
+        gap_single_client = true,
+        master_fill_policy = 'master_width_factor',
+      })
+    end
+    -- awful.tag.add(tagnames[5], {
+        -- layout = layouts[5],
+        -- screen = s,
+        -- master_width_factor = 0.6,
+        -- selected = true,
     -- })
     -- ...
 end)
@@ -404,7 +416,7 @@ awful.rules.rules = {
                 "floating_terminal",
                 "riotclientux.exe",
                 "leagueclientux.exe",
-                "Devtools", -- Firefox devtools
+                -- "Devtools", -- Firefox devtools
             },
             class = {
                 "Gpick",
@@ -516,6 +528,20 @@ awful.rules.rules = {
         properties = { placement = centered_client_placement },
     },
 
+    -- Small clients (helpful for 'top of layout' elements
+    -- {
+      -- rule_any = {
+        -- instance = {
+        -- },
+        -- class = {
+          -- "visualizer"
+        -- },
+      -- },
+      -- callback = function(c)
+        -- c:setwfact((theme.tile_fact_steps or 0.05) * 3)
+      -- end
+    -- },
+
     -- Titlebars OFF (explicitly)
     {
         rule_any = {
@@ -529,7 +555,6 @@ awful.rules.rules = {
                 "leagueclient.exe",
                 "^editor$",
                 "markdown_input",
-                "cava"
             },
             class = {
                 "qutebrowser",
@@ -544,7 +569,6 @@ awful.rules.rules = {
                 "Chromium",
                 "^editor$",
                 "markdown_input",
-                "cava"
                 -- "Thunderbird",
             },
             type = {
@@ -615,22 +639,14 @@ awful.rules.rules = {
     {
         rule_any = { class = { "visualizer" } },
         properties = {
-            screen = 1,
+            screen = awful.screen.focused(),
             tag = awful.screen.focused().tags[2],
-            -- floating = true,
-            -- maximized_horizontal = true,
-            -- sticky = true,
-            -- ontop = false,
             skip_taskbar = true,
-            -- below = true,
             above = true,
-            -- focusable = false,
-            -- height = screen_height * 0.40,
-            -- opacity = 0.6,
             titlebars_enabled = false,
         },
         callback = function (c)
-            awful.placement.bottom(c)
+            awful.client.setwfact(0.2)
         end
     },
 
@@ -704,6 +720,18 @@ awful.rules.rules = {
             width = screen_width * 0.7,
             height = screen_height * 0.75
         }
+    },
+
+    {
+      rule_any = {
+        class = { "files" }
+      },
+      properties = {
+        floating = true,
+        ontop = true,
+        width = screen_width * .4,
+        height = screen_height * 0.4,
+      }
     },
 
     -- Markdown input
