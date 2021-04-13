@@ -1,12 +1,4 @@
-" Settings
-GuiFont! JetBrains\ Mono:h11
-GuiPopupmenu 0
-
-" Mappings
-let g:my_gvimrc=substitute($MYVIMRC, 'init.vim$', 'ginit.vim', 'g')
-
-nnoremap <leader>eg :execute 'edit' g:my_gvimrc<CR>
-nnoremap <leader>sg :execute 'source' g:my_gvimrc<CR>
-
-" Colors
-colorscheme dracula
+let nvim_config_path = expand('<sfile>:p:h')
+let ginit_path = nvim_config_path . "/ginit.lua"
+echom ginit_path
+execute 'luafile ' . ginit_path
