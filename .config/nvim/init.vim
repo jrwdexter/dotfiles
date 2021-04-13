@@ -21,14 +21,18 @@ Plug 'tpope/vim-fugitive' " Git commands
 Plug 'airblade/vim-gitgutter'
 
 " Window + workspace management
-Plug 'scrooloose/nerdtree'
-Plug 'bling/vim-airline' " Bottom status bar
+" Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-web-devicons' " File Icons
+Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'bling/vim-airline' " Bottom status bar
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'majutsushi/tagbar' " F8 for tagbar toggling
 Plug 'moll/vim-bbye' " Close buffers
 Plug 'mtth/scratch.vim' "Scratch buffer
 
 " Autocomplete
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+Plug 'onsails/lspkind-nvim' " Show pictograms next to autocomplete
 " Plug 'neoclide/coc.nvim', { 'branch': 'release' } " maybe slower completion?
 
 " Language/syntax tools
@@ -46,10 +50,8 @@ Plug 'tridactyl/vim-tridactyl'
 Plug 'mrk21/yaml-vim'
 
 " Colors
-" Plug 'altercation/vim-colors-solarized', { 'set': 'all' }
-" Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'chrisbra/Colorizer'
-Plug 'dracula/vim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'norcalli/nvim-base16.lua'
 
 " Firefox/Chrome integration
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -127,6 +129,13 @@ if exists('$TMUX') && !has('nvim')  " Support resizing in tmux
 endif
 
 " PLUGIN SETTINGS
+
+" lua << EOF
+" local base16 = require 'base16'
+" base16(base16.themes.onedark, true)
+" EOF
+set termguicolors
+lua require'colorizer'.setup()
 
 if filereadable("/usr/bin/python3")
   let g:python3_host_prog="/usr/bin/python3"
@@ -238,8 +247,8 @@ noremap <leader>b :Buffers<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " NERDTree!
-nmap <leader>t :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+nmap <leader>t :NvimTreeToggle<CR>
+nmap <leader>f :NvimTreeFindFile<CR>
 
 " BROKEN + duplicate
 nmap <leader>] :TagbarToggle<CR>
@@ -247,7 +256,8 @@ nmap <leader>] :TagbarToggle<CR>
 " BROKEN
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 
-nmap <leader>g :GitGutterToggle<CR>
+nmap <leader>gg :GitGutterToggle<CR>
+nmap <leader>gh :GitGutterLineHighlightsToggle \| :GitGutterLineNrHighlightsToggle<CR>
 
 " kwbd! - closing
 nmap <leader>q :Bdelete!<CR>
