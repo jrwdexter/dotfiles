@@ -595,6 +595,7 @@ keys.clientkeys = gears.table.join(
     -- Single tap: Center client 
     -- Double tap: Center client + Floating + Resize
     awful.key({ superkey }, "c", function (c)
+        naughty.notification({message = "Test"})
         awful.placement.centered(c, {honor_workarea = true, honor_padding = true})
         helpers.single_double_tap(
             nil,

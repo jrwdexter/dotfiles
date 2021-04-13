@@ -59,7 +59,6 @@ helpers.remote_watch(vaccine_script, update_interval, temp_file, function(stdout
     }
     local curl_command = [[
       curl -X POST -H "Content-Type: application/json" -d ']]..json.encode(ifttt_payload)..[[' https://maker.ifttt.com/trigger/vaccine_available/with/key/]]..ifttt_key
-    gears.debug.dump(curl_command)
     awful.spawn.easy_async_with_shell(curl_command)
   end
 end)

@@ -13,7 +13,7 @@ apps.browser = function ()
     awful.spawn(user.browser, { switchtotag = true })
 end
 apps.file_manager = function ()
-    awful.spawn(user.file_manager, { floating = true })
+    awful.spawn(user.file_manager)
 end
 apps.telegram = function ()
     helpers.run_or_raise({class = 'TelegramDesktop'}, false, "telegram", { switchtotag = true })

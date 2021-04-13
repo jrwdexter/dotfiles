@@ -4,6 +4,7 @@ local gears   = require("gears")
 local wibox   = require("wibox")
 local naughty = require("naughty")
 local icons   = require("icons")
+local json    = require("json")
 
 local corona_cases = wibox.widget.textbox()
 local corona_deaths = wibox.widget.textbox()
@@ -78,6 +79,7 @@ end)
 
 awesome.connect_signal("evil::vaccines", function(vaccine_data)
   if not (vaccine_data[1] == nil) then
+    gears.debug.dump(json.encode(vaccine_data))
     vaccine_location.markup = vaccine_data[1].name
     vaccine_icon.markup = ""
     naughty.notify({title = "Vaccine available!!", text = "Go get it at "..vaccine_data[1].name, timeout = 600, icon = icons.image.heart})
