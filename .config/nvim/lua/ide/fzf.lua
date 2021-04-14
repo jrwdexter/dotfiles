@@ -40,7 +40,7 @@ fzf.init = function()
 
   vim.api.nvim_command([[
     command! -bang -nargs=* GitFzf
-      call fzf#run({ 'source': 'rg --files --hidden --no-messages -g HEAD '.g:src_dir.' | rg .git.HEAD | sed -E s/..git.HEAD$//', 'sink': 'cd', 'down': '40%' })
+      call fzf#run({ 'source': 'rg --files --follow --hidden --no-messages -g HEAD '.g:src_dir.' | rg .git.HEAD | sed -E s/..git.HEAD$//', 'sink': 'cd', 'down': '40%' })
   ]])
 end
 
