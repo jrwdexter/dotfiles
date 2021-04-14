@@ -135,6 +135,9 @@ unset __conda_setup # <<< conda initialize <<<
 
 alias tf=terraform
 alias g=git
+if (command -v cmdg > /dev/null); then
+  alias cmdgp="cmdg -config ~/.cmdg/cmdg-personal.conf"
+fi
 
 lpw() {
   >&1 echo -ne "Querying for account...\r"
@@ -156,13 +159,18 @@ lpw() {
 today() {
   today=$(date +"%Y-%m-%d")
   tomorrow=$(date -d "+1 days" +"%Y-%m-%d")
-  gcalcli --calendar jdexter@nerdery.com agenda $today $tomorrow --nodeclined
+  gcalcli agenda $today $tomorrow --nodeclined
 }
 
 tomorrow() {
   tomorrow=$(date -d "+1 days" +"%Y-%m-%d")
   nextDay=$(date -d "+2 days" +"%Y-%m-%d")
-  gcalcli --calendar jdexter@nerdery.com agenda $tomorrow $nextDay --nodeclined
+  gcalcli agenda $tomorrow $nextDay --nodeclined
+}
+
+next() {
+  now=$(date +"%H:%M")
+  gcalcli agenda "$now" "23:59" --nodeclined | head -n 2
 }
 
 #####################################
@@ -260,3 +268,5 @@ kill_x11()
   check_and_kill "picom"
   check_and_kill "awesome"
 }
+
+alias vaccines='cat /tmp/awesome.out | tail -n 100 | grep "appointments" | tail -n 1 | sed -E "s/ \(string\)$//" | jq 2> /dev/null'
