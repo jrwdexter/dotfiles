@@ -5,12 +5,10 @@
 --      name (integer)
 --      zip (integer)
 local awful = require("awful")
-local gears = require("gears")
 local helpers = require("helpers")
-local naughty = require("naughty")
 local json = require("json")
 
-local update_interval = 60 * 60 * .5 -- 30 minutes
+local update_interval = 60 * 60 * .1 -- 6 minutes
 local state = user.vaccine_state or "MN"
 local zip_codes = user.vaccine_zip_codes or {"55127"}
 local temp_file = "/tmp/awesomewm-evil-vaccines"
