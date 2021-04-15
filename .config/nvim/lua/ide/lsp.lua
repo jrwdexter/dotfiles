@@ -62,29 +62,33 @@ lsp.init = function()
     --end
   end
 
+  local lspconfig = require('lspconfig')
+
   -- LSP: C#
   local omnisharp_bin, success, _ = run_command('which omnisharp')
   if success then
-    omnisharp_bin = omnisharp_bin:gsub("/sbin/", "/bin/") -- Replace /sbin with /bin for working linux command location
+    omnisharp_bin = omnisharp_bin:gsub("^%s*(.-)%s*$", "%1") -- trim
     local pid = vim.fn.getpid()
-    require'lspconfig'.omnisharp.setup{
+    lspconfig.omnisharp.setup{
       cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) },
-      on_attach = on_attach
+      on_attach = on_attach,
     }
   end
 
   -- LSP: PYTHON
-  require'lspconfig'.pyls.setup{
+  -- Python has an automatic cmd
+  lspconfig.pyls.setup{
     on_attach = on_attach
   }
 
   -- LSP: LUA
   local sumneko_bin, success, _ = run_command('which lua-language-server')
   if success then
+    -- TODO: Need to find how to determine where lua-language-server sits
     local sumneko_root_path = '/usr/share/lua-language-server'
-    local sumneko_binary    = '/usr/bin/lua-language-server'
+    local sumneko_binary    = sumneko_bin
 
-    require'lspconfig'.sumneko_lua.setup {
+    lspconfig.sumneko_lua.setup {
       cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
       settings = {
         Lua = {
@@ -196,6 +200,7 @@ lsp.init = function()
           return vim.fn["compe#complete"]()
       end
   end
+  
   _G.s_tab_complete = function()
       if vim.fn.pumvisible() == 1 then
           return t "<C-p>"
@@ -207,7 +212,6 @@ lsp.init = function()
   end
 
   --  mappings
-
   vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
   vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
   vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
