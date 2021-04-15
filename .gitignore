@@ -2,5 +2,5 @@
 .zshenv-private
 
 # Submodules
-.config/Themes
-.fonts/typicons.font
+#.config/Themes
+#.fonts/typicons.font
