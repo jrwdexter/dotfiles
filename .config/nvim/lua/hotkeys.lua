@@ -1,5 +1,5 @@
 -- Clear highlights
-vim.api.nvim_set_keymap('n', '<esc><esc>', ':noh<CR>', {})
+vim.api.nvim_set_keymap('n', '//', ':noh<CR>', {})
 
 --************* Navigation *************
 
