@@ -1,3 +1,4 @@
 [submodule ".config/Themes"]
 	path = .config/Themes
 	url = git@github.com:morpheusthewhite/spicetify-themes
+	ignore = dirty
