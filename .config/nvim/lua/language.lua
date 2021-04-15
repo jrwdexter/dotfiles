@@ -11,7 +11,10 @@ language.startup = function(use)
   use { 'sbdchd/neoformat' }
   use { 'dbeniamine/todo.txt-vim' }
   use { 'tridactyl/vim-tridactyl' }
-  use { 'mrk21/yaml-vim' } 
+  use { 'mrk21/yaml-vim' }
+
+  use { 'mattn/emmet-vim' }
+
 
   -- use { 'leafgarland/typescript-vim' }
   -- use { 'pangloss/vim-javascript' }
