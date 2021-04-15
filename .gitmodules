@@ -1,3 +1,7 @@
 [submodule ".config/Themes"]
 	path = .config/Themes
 	url = git@github.com:morpheusthewhite/spicetify-themes
+
+[submodule ".fonts/typicons.font"]
+	path = .fonts/typicons.font
+	url = git@github.com:stephenhutchings/typicons.font
