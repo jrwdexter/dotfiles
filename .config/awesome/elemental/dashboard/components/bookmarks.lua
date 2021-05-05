@@ -6,6 +6,35 @@ local wibox   = require("wibox")
 local temp_file = '/tmp/awesome-evil-git-repos'
 local update_interval = 15 * 60 -- 15 minutes
 
+local function create_web_bookmark(name, url, color, hover_color)
+    local bookmark = wibox.widget.textbox()
+    bookmark.font = "sans bold 22"
+    -- bookmark.text = wibox.widget.textbox(name:sub(1,1):upper()..name:sub(2))
+    bookmark.markup = helpers.colorize_text(name, color)
+    bookmark.align = "center"
+    bookmark.valign = "center"
+
+    -- Buttons
+    bookmark:buttons(gears.table.join(
+        awful.button({ }, 1, function ()
+            awful.spawn.with_shell(user.browser.." "..url)
+            dashboard_hide()
+        end)
+    ))
+
+    -- Hover effect
+    bookmark:connect_signal("mouse::enter", function ()
+        bookmark.markup = helpers.colorize_text(name, hover_color)
+    end)
+    bookmark:connect_signal("mouse::leave", function ()
+        bookmark.markup = helpers.colorize_text(name, color)
+    end)
+
+    helpers.add_hover_cursor(bookmark, "hand1")
+
+    return bookmark
+end
+
 local function create_bookmark(name, path, color, hover_color)
     local bookmark = wibox.widget.textbox()
     bookmark.font = "sans bold 22"
@@ -65,12 +94,17 @@ helpers.remote_watch(rg_cmd, update_interval, temp_file, update_git_repos);
 -- End pull
 
 local bookmarks = wibox.widget {
-    create_bookmark("home", os.getenv("HOME"), x.color1, x.color9),
-    create_bookmark("downloads", user.dirs.downloads, x.color2, x.color10),
-    create_bookmark("music", user.dirs.music, x.color6, x.color14),
-    create_bookmark("pictures", user.dirs.pictures, x.color4, x.color12),
-    create_bookmark("wallpapers", user.dirs.wallpapers, x.color5, x.color13),
-    create_bookmark("screenshots", user.dirs.screenshots, x.color3, x.color11),
+    create_web_bookmark("trello", "https://trello.com/jonathandexter4/boards", x.color1, x.color9),
+    create_web_bookmark("kumai", "https://kimai.monkeyjumplabs.com", x.color2, x.color10),
+    create_web_bookmark("node-red", "https://node-red.monkeyjumplabs.com/ui", x.color6, x.color14),
+    create_web_bookmark("hubspot", "https://app.hubspot.com", x.color4, x.color12),
+    create_web_bookmark("quickbooks", "https://app.qbo.intuit.com/app", x.color5, x.color13),
+    --create_bookmark("home", os.getenv("HOME"), x.color1, x.color9),
+    --create_bookmark("downloads", user.dirs.downloads, x.color2, x.color10),
+    --create_bookmark("music", user.dirs.music, x.color6, x.color14),
+    --create_bookmark("pictures", user.dirs.pictures, x.color4, x.color12),
+    --create_bookmark("wallpapers", user.dirs.wallpapers, x.color5, x.color13),
+    --create_bookmark("screenshots", user.dirs.screenshots, x.color3, x.color11),
     spacing = dpi(15),
     layout = wibox.layout.fixed.vertical
 }
