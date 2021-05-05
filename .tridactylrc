@@ -25,23 +25,17 @@ bind ,d  composite tabclosealltoleft | tabclosealltoright
 " *********************************
 " ********* Autocontains **********
 " *********************************
-autocontain drive.google.com Nerdery
-autocontain calendar.google.com Nerdery
-autocontain docs.google.com Nerdery
-autocontain jamboard.google.com Nerdery
-autocontain openair.com Nerdery
-autocontain auth.openair.com Nerdery
-autocontain ultipro.com Nerdery
-autocontain trello.com Nerdery
-autocontain miro.com Nerdery
-autocontain knowledge.nerdery.com Nerdery
-autocontain issues.nerdery.com Nerdery
-autocontain git.nerdery.com Nerdery
-autocontain acloudguru.com Nerdery
-autocontain acloud.guru Nerdery
-autocontain retail-platform-test.appspot.com Nerdery
-autocontain miro.com Nerdery
-autocontain netsuite.com Nerdery
+autocontain drive.google.com MJL
+autocontain calendar.google.com MJL
+autocontain docs.google.com MJL
+autocontain jamboard.google.com MJL
+autocontain trello.com MJL
+autocontain miro.com MJL
+autocontain acloudguru.com MJL
+autocontain acloud.guru MJL
+autocontain hubspot.com MJL
+autocontain intuit.com MJL
+autocontain monkeyjumplabs.com MJL
 
 " *********************************
 " ********* Page-Specific *********
@@ -53,6 +47,7 @@ unbindurl ^https://(www\.)?reddit\.com j " Leave j as reddit 'down'
 unbindurl ^https://(www\.)?reddit\.com k " Leave k as reddit 'up'
 unbindurl ^https://(www\.)?reddit\.com n " Leave n as reddit 'next post'
 unbindurl ^https://(www\.)?reddit\.com p " Leave n as reddit 'prev post'
+
 " If browsing a comment, only hint appropriate links
 bindurl ^https://(www\.)?reddit\.com.*comments f hint -Jc [data-test-id=post-content] a,.Comment a
 bindurl ^https://(www\.)?reddit\.com.*comments F hint -Jbc [data-test-id=post-content] a,.Comment a
