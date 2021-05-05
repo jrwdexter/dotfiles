@@ -548,6 +548,9 @@ keys.globalkeys = gears.table.join(
     -- Editor
     awful.key({ superkey }, "e", apps.editor,
         {description = "editor", group = "launcher"}),
+    -- Email
+    awful.key({ superkey, ctrlkey}, "e", apps.mail,
+        {description = "email", group = "launcher" }),
     -- Quick edit file
     awful.key({ superkey, shiftkey }, "e",
         function()
