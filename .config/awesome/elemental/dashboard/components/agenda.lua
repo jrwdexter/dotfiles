@@ -95,7 +95,7 @@ local agenda = wibox.widget {
         align = "center",
         valign = "top",
         font = "sans italic 12",
-        markup = helpers.colorize_text("jdexter@nerdery.com", x.color2),
+        markup = helpers.colorize_text("jonathan.dexter@monkeyjumplabs.com", x.color2),
         widget = wibox.widget.textbox()
       },
       layout = wibox.layout.fixed.vertical

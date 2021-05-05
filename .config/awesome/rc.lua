@@ -82,7 +82,7 @@ user = {
     -- browser = "/mnt/c/Program\\ Files/Firefox\\ Developer\\ Edition/firefox.exe",
     file_manager = "kitty -1 --class files -e ranger",
     editor = "kitty -1 --class editor -e nvim",
-    email_client = "kitty -1 --class email -e neomutt",
+    email_client = "kitty -1 --class email -e cmdg",
     visualizer = "kitty -1 --class visualizer -e cava",
     music_client = "kitty -1 --class music -e ncmpcpp",
     -- music_client = "kitty --class music -e ncmpcpp",
@@ -93,7 +93,7 @@ user = {
 
     -- >> User profile <<
     profile_picture = os.getenv("HOME").."/.config/awesome/profile.png",
-    calendar_email = 'jdexter@nerdery.com',
+    calendar_email = 'jonathan.dexter@monkeyjumplabs.com',
     google_oauth = {
       client_id = os.getenv("GCAL_CLIENT_ID"),
       client_secret = os.getenv("GCAL_CLIENT_SECRET"),
@@ -997,7 +997,7 @@ awful.rules.rules = {
                 "email",
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[7] }
+        properties = { screen = 1, tag = awful.screen.focused().tags[3] }
     },
 
     -- Game clients/launchers
