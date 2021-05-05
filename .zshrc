@@ -134,6 +134,14 @@ unset __conda_setup # <<< conda initialize <<<
 #####################################
 
 alias tf=terraform
+alias dk=docker
+alias dks=docker stop
+alias dksa=docker ps --format "{{.ID}}" | xargs docker stop
+alias dkps=docker ps
+alias dkl=docker logs
+alias dklf=docker logs -f
+alias dki=docker images
+alias dkrm=docker rm
 alias g=git
 if (command -v cmdg > /dev/null); then
   alias cmdgp="cmdg -config ~/.cmdg/cmdg-personal.conf"
