@@ -1,0 +1,3 @@
+#!/bin/bash
+name=$(git config user.name)
+git log --all --author="$name" --after="$@ 00:00" --before="$@ 23:59" --pretty="%aN | %ci | %s" --reverse

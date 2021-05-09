@@ -1,5 +1,5 @@
 -- Settings
-vim.api.nvim_command('GuiFont! JetBrains\\ Mono:h11')
+vim.api.nvim_command('GuiFont! JetBrainsMono\\ NF:h11')
 vim.api.nvim_command('GuiPopupmenu 0')
 
 -- Mappings
