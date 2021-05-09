@@ -80,6 +80,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Manually use kitty
+if type kitty > /dev/null; then
+  kitty + complete setup zsh | source /dev/stdin
+fi
+
 #####################################
 ######### NON-ZSH SETTINGS ##########
 #####################################
@@ -133,16 +138,27 @@ unset __conda_setup # <<< conda initialize <<<
 #### ALIASES + CUSTOM FUNCTIONS #####
 #####################################
 
-alias tf=terraform
-alias dk=docker
-alias dks=docker stop
-alias dksa=docker ps --format "{{.ID}}" | xargs docker stop
-alias dkps=docker ps
-alias dkl=docker logs
-alias dklf=docker logs -f
-alias dki=docker images
-alias dkrm=docker rm
+if type terraform > /dev/null ; then
+  alias tf=terraform
+fi
+
+if type docker > /dev/null ; then
+  alias dk=docker
+  alias dks='docker stop'
+  #dksa() {
+    #docker ps --format "{{.ID}}" | xargs docker stop
+  #}
+
+  alias dksa='docker ps --format "{{.ID}}" | xargs docker stop'
+  alias dkps='docker ps'
+  alias dkl='docker logs'
+  alias dklf='docker logs -f'
+  alias dki='docker images'
+  alias dkrm='docker rm'
+fi
+
 alias g=git
+
 if (command -v cmdg > /dev/null); then
   alias cmdgp="cmdg -config ~/.cmdg/cmdg-personal.conf"
 fi
