@@ -80,6 +80,15 @@ lsp.init = function()
     on_attach = on_attach
   }
 
+  -- LSP: CSS
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  
+  require'lspconfig'.cssls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+  }
+
   -- LSP: PYTHON
   -- Python has an automatic cmd
   lspconfig.pyls.setup{
