@@ -89,6 +89,11 @@ lsp.init = function()
     on_attach = on_attach
   }
 
+  -- LSP: Docker
+  require'lspconfig'.dockerls.setup{
+    on_attach = on_attach
+  }
+
   -- LSP: PYTHON
   -- Python has an automatic cmd
   lspconfig.pyls.setup{
