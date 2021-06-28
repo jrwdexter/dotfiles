@@ -2,13 +2,14 @@ local awful   = require("awful")
 local gears   = require("gears")
 local helpers = require("helpers")
 local wibox   = require("wibox")
+local naughty = require("naughty")
 
 local temp_file = '/tmp/awesome-evil-git-repos'
 local update_interval = 15 * 60 -- 15 minutes
 
 local function create_web_bookmark(name, url, color, hover_color)
     local bookmark = wibox.widget.textbox()
-    bookmark.font = "sans bold 22"
+    bookmark.font = "sans bold 16"
     -- bookmark.text = wibox.widget.textbox(name:sub(1,1):upper()..name:sub(2))
     bookmark.markup = helpers.colorize_text(name, color)
     bookmark.align = "center"
@@ -37,7 +38,7 @@ end
 
 local function create_bookmark(name, path, color, hover_color)
     local bookmark = wibox.widget.textbox()
-    bookmark.font = "sans bold 22"
+    bookmark.font = "sans bold 16"
     -- bookmark.text = wibox.widget.textbox(name:sub(1,1):upper()..name:sub(2))
     bookmark.markup = helpers.colorize_text(name, color)
     bookmark.align = "center"
@@ -83,16 +84,6 @@ awesome.connect_signal('evil::git_repos', function(git_repos)
   -- Do something with git repos
 end)
 
--- Pull into evil/git-repos.lua
-local function update_git_repos(stdout)
-  awesome.emit_signal('evil::git_repos', stdout)
-end
-
-local src_dir = os.getenv("SRC")
-local rg_cmd  = 'rg --files --hidden --no-messages -g HEAD '..src_dir..' | rg .git.HEAD | sed -E s/..git.HEAD$//'
-helpers.remote_watch(rg_cmd, update_interval, temp_file, update_git_repos);
--- End pull
-
 local bookmarks = wibox.widget {
     create_web_bookmark("trello", "https://trello.com/jonathandexter4/boards", x.color1, x.color9),
     create_web_bookmark("kumai", "https://kimai.monkeyjumplabs.com", x.color2, x.color10),
@@ -105,8 +96,30 @@ local bookmarks = wibox.widget {
     --create_bookmark("pictures", user.dirs.pictures, x.color4, x.color12),
     --create_bookmark("wallpapers", user.dirs.wallpapers, x.color5, x.color13),
     --create_bookmark("screenshots", user.dirs.screenshots, x.color3, x.color11),
+    margins = dpi(30),
     spacing = dpi(15),
     layout = wibox.layout.fixed.vertical
 }
+
+awesome.connect_signal('evil::github::pr', function(prs)
+  if prs then
+    for i,w in pairs(bookmarks:get_all_children()) do
+      bookmarks:remove_widgets(w)
+    end
+    for i,pr in pairs(prs) do
+      bookmarks:add(create_web_bookmark(pr.title, pr.url, x['color'..i], x['color'..(i+8)]))
+    end
+  end
+end)
+
+-- Pull into evil/git-repos.lua
+local function update_git_repos(stdout)
+  awesome.emit_signal('evil::git_repos', stdout)
+end
+
+local src_dir = os.getenv("SRC")
+local rg_cmd  = 'rg --files --hidden --no-messages -g HEAD '..src_dir..' | rg .git.HEAD | sed -E s/..git.HEAD$//'
+helpers.remote_watch(rg_cmd, update_interval, temp_file, update_git_repos);
+-- End pull
 
 return bookmarks
