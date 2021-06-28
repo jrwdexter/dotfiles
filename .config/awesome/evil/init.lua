@@ -4,6 +4,7 @@ require("evil.ram")
 require("evil.temperature")
 require("evil.battery")
 require("evil.disk")
+require("evil.github")
 
 -- User controlled
 require("evil.volume")
