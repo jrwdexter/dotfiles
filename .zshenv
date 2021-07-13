@@ -11,6 +11,9 @@ export XDG_VIDEOS_DIR=/mnt/c/Users/Jonathan/Videos
 export XDG_SCREENSHOTS_DIR=/mnt/c/Users/Jonathan/Pictures/Screenshots
 export XDG_DROPBOX_DIR=/mnt/c/Users/Jonathan/Dropbox
 
+# RC Files
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # Set PULSE_SERVER for audio
 if [ -f /etc/resolv.conf ]; then
   export PULSE_SERVER=tcp:$(grep nameserver /etc/resolv.conf | awk '{print $2}');
