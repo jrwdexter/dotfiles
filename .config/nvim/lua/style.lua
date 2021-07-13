@@ -10,7 +10,7 @@ style.startup = function(use)
   use { 'junegunn/vim-emoji' }
 
   -- Line indentations
-  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+  use {"lukas-reineke/indent-blankline.nvim" }
 end
 
 
