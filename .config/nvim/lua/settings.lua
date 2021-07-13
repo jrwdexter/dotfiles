@@ -1,5 +1,3 @@
-
-
 -- Start dir! - second version is called for command-line vim
 if vim.fn.isdirectory("/src") == 1 then
   vim.g.src_dir = "/src"
@@ -83,6 +81,6 @@ if vim.g.GuiLoaded then
 else
   -- Command line version
   -- let $TERM = 'xterm'
-  vim.o.t_AB="\\e[48;5;%dm"
-  vim.o.t_AF="\\e[38;5;%dm"
+  -- vim.o.t_AB="\\e[48;5;%dm"
+  -- vim.o.t_AF="\\e[38;5;%dm"
 end
