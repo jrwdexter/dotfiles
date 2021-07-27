@@ -96,7 +96,7 @@ lsp.init = function()
 
   -- LSP: PYTHON
   -- Python has an automatic cmd
-  lspconfig.pyls.setup{
+  lspconfig.pylsp.setup{
     on_attach = on_attach
   }
 

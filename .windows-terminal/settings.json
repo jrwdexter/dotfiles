@@ -56,14 +56,12 @@
                 "commandline": "C:\\Users\\Jonathan\\scoop\\apps\\pwsh\\current\\pwsh.exe",
                 "guid": "{fe66f4b8-350f-56bb-adb0-c2ce745f6db5}",
                 "hidden": false,
-                "name": "pwsh (scoop)",
-                "source": "Windows.Terminal.PowershellCore"
+                "name": "pwsh (scoop)"
             },
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
-                "name": "pwsh (global)",
-                "source": "Windows.Terminal.PowershellCore"
+                "name": "pwsh (global)"
             },
             {
                 "commandline": "cmd.exe",
