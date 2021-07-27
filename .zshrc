@@ -269,6 +269,8 @@ check_or_run() {
   fi
 }
 
+# WSL Support
+
 x11() {
   check_or_run "mopidy"
   check_or_run "picom" "--experimental-backends"
@@ -291,6 +293,26 @@ kill_x11()
   check_and_kill "mopidy"
   check_and_kill "picom"
   check_and_kill "awesome"
+}
+
+clean_wsl_mem() {
+  if [ -f /proc/sys/vm/drop_caches ]; then
+    echo -e "Dropping cache..."
+    if (sudo sh -c 'echo 1 > /proc/sys/vm/drop_caches'); then
+      echo -e "\e[092mSuccess\e[0m: dropped cache"
+    else
+      echo -e "\e[093mFailure\e[0m: could not drop cache"
+    fi
+    
+    echo -e "Compacting memory..."
+    if (sudo sh -c 'echo 1 > /proc/sys/vm/compact_memory'); then
+      echo -e "\e[092mSuccess\e[0m: compacted memory"
+    else
+      echo -e "\e[093mFailure\e[0m: could not compact memory"
+    fi
+  else
+    echo -e "\e[093mAborting\e[0m: Not running in WSL."
+  fi
 }
 
 alias vaccines='cat /tmp/awesome.out | tail -n 100 | grep "appointments" | tail -n 1 | sed -E "s/ \(string\)$//" | jq 2> /dev/null'
