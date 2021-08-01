@@ -72,9 +72,9 @@ if os.getenv('TMUX') and vim.fn.has('nvim') then -- support resizing in tmux
   vim.o.ttymouse='xterm2'
 end
 
-if vim.fn.filereadable("/usr/bin/python3") then
-  vim.g.python3_host_prog="/usr/bin/python3"
-end
+-- if vim.fn.filereadable("/usr/bin/python3") then
+--   vim.g.python3_host_prog="/usr/bin/python3"
+-- end
 
 if vim.g.GuiLoaded then
   vim.g.GuiPopupmenu = 0
