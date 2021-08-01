@@ -20,9 +20,12 @@ if [ -f /etc/resolv.conf ]; then
 fi
 
 # Set DISPLAY
-[ -f /etc/resolv.conf ] &&
+if [ -f /etc/resolv.conf ]; then
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 ||
+  export LIBGL_ALWAYS_INDIRECT=1
+else
   export DISPLAY="127.0.1.1:0"
+fi
 
 # Import any private variables as required
 if [ -f ~/.zshenv-private ]; then
