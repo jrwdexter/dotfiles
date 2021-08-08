@@ -35,7 +35,8 @@ language.init = function()
             "bash",
             "cpp",
             "rust",
-            "lua"
+            "lua",
+            "python"
         },
         highlight = {
             enable = true,
