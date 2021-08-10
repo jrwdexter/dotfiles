@@ -8,10 +8,12 @@ local function run_command(cmd)
 end
 
 local function find_file(file)
-  if vim.fn.executable('where') then
-    return run_command('where '..file)
-  elseif vim.fn.executable('which') then
+  if vim.fn.executable('which') then
     return run_command('which '..file)
+  else
+    test = run_command('where '..file..' | head -n 1')
+    print(test)
+    return test
   end
 end
 
