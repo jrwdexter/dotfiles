@@ -406,10 +406,10 @@ function helpers.remote_watch(command_or_func, interval, output_file, callback)
     local run_the_thing = function()
         if (type(command_or_func) == 'function') then
             command = command_or_func()
-            awful.spawn.easy_async_with_shell(command.." | tee "..output_file, function(out) callback(out) end)
+            awful.spawn.easy_async_with_shell(command.." | tee "..output_file, function(out, err, exitreason, exitcode) callback(out, err, exitreason, exitcode) end)
         else
             -- Pass output to callback AND write it to file
-            awful.spawn.easy_async_with_shell(command.." | tee "..output_file, function(out) callback(out) end)
+            awful.spawn.easy_async_with_shell(command.." | tee "..output_file, function(out, err, exitreason, exitcode) callback(out, err, exitreason, exitcode) end)
         end
         -- awful.spawn.easy_async_with_shell(command, function(out) callback(out) end)
     end
