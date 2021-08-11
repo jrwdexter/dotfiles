@@ -83,7 +83,7 @@ user = {
     file_manager = "kitty -1 --class files -e ranger",
     editor = "kitty -1 --class editor -e nvim",
     email_client = "kitty -1 --class email -e cmdg",
-    visualizer = "kitty -1 --class visualizer -e cava",
+    visualizer = "alacritty --class visualizer -e cava",
     music_client = "kitty -1 --class music -e ncmpcpp",
     -- music_client = "kitty --class music -e ncmpcpp",
 
