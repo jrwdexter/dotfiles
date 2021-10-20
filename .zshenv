@@ -11,6 +11,9 @@ export XDG_VIDEOS_DIR=/mnt/c/Users/Jonathan/Videos
 export XDG_SCREENSHOTS_DIR=/mnt/c/Users/Jonathan/Pictures/Screenshots
 export XDG_DROPBOX_DIR=/mnt/c/Users/Jonathan/Dropbox
 
+# Support for GPG 2
+export GPG_TTY=$(tty)
+
 # RC Files
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
