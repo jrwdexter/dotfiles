@@ -83,7 +83,7 @@ user = {
     file_manager = "kitty -1 --class files -e ranger",
     editor = "kitty -1 --class editor -e nvim",
     email_client = "kitty -1 --class email -e cmdg",
-    visualizer = "alacritty --class visualizer -e cava",
+    visualizer = "alacritty --class visualizer --config-file "..os.getenv("HOME").."/.config/alacritty/visualizer.yml -e cava",
     music_client = "kitty -1 --class music -e ncmpcpp",
     -- music_client = "kitty --class music -e ncmpcpp",
 
@@ -324,8 +324,8 @@ awful.screen.connect_for_each_screen(function(s)
     local l = awful.layout.suit -- Alias to save time :)
     -- Tag layouts
     local layouts = {
-        l.tile,
-        l.tile,
+        l.max,
+        l.max,
         l.max,
         l.tile,
         l.tile,
