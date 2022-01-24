@@ -12,29 +12,31 @@ local awful = require("awful")
 
 local function emit_info()
     awful.spawn.easy_async_with_shell("sh -c 'mpc -f ARTIST@%artist%@TITLE@%title%@FILE@%file%@'",
-        function(stdout)
-            local artist = stdout:match('^ARTIST@(.*)@TITLE')
-            local title = stdout:match('@TITLE@(.*)@FILE')
-            local status = stdout:match('\n%[(.*)%]')
+        function(stdout, _, _, exitcode)
+            if exitcode == 0 then
+                local artist = stdout:match('^ARTIST@(.*)@TITLE')
+                local title = stdout:match('@TITLE@(.*)@FILE')
+                local status = stdout:match('\n%[(.*)%]')
 
-            if not artist or artist == "" then
-              artist = "N/A"
-            end
-            if not title or title == "" then
-              title = stdout:match('@FILE@(.*)@')
-              if not title or title == "" then
-                  title = "N/A"
-              end
-            end
+                if not artist or artist == "" then
+                  artist = "N/A"
+                end
+                if not title or title == "" then
+                  title = stdout:match('@FILE@(.*)@')
+                  if not title or title == "" then
+                      title = "N/A"
+                  end
+                end
 
-            local paused
-            if status == "playing" then
-                paused = false
-            else
-                paused = true
-            end
+                local paused
+                if status == "playing" then
+                    paused = false
+                else
+                    paused = true
+                end
 
-            awesome.emit_signal("evil::mpd", artist, title, paused)
+                awesome.emit_signal("evil::mpd", artist, title, paused)
+            end
         end
     )
 end
@@ -63,8 +65,10 @@ end)
 -- MPD Volume
 local function emit_volume_info()
     awful.spawn.easy_async_with_shell("mpc volume | awk '{print substr($2, 1, length($2)-1)}'",
-        function(stdout)
-            awesome.emit_signal("evil::mpd_volume", tonumber(stdout))
+        function(stdout, _, _, exitcode)
+            if exitcode == 0 then
+                awesome.emit_signal("evil::mpd_volume", tonumber(stdout))
+            end
         end
     )
 end
@@ -99,10 +103,14 @@ local mpd_options_script = [[
 
 local function emit_options_info()
     awful.spawn.easy_async_with_shell("mpc | tail -1",
-        function(stdout)
-            local loop = stdout:match('repeat: (.*)')
-            local random = stdout:match('random: (.*)')
-            awesome.emit_signal("evil::mpd_options", loop:sub(1, 2) == "on", random:sub(1, 2) == "on")
+        function(stdout, _, _, exitcode)
+            if exitcode == 0 then
+                local loop = stdout:match('repeat: (.*)')
+                local random = stdout:match('random: (.*)')
+                if not (loop == nil) and not (random == nil) then
+                    awesome.emit_signal("evil::mpd_options", loop:sub(1, 2) == "on", random:sub(1, 2) == "on")
+                end
+            end
         end
     )
 end

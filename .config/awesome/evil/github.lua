@@ -30,11 +30,11 @@ local gh_script = function()
     echo $prs | jq "[.data.search.edges[].node]" ' ]]
 end
 
-helpers.remote_watch(gh_script, update_interval, temp_file, function(stdout)
-  if stdout then
+helpers.remote_watch(gh_script, update_interval, temp_file, function(stdout, stderr, _, code)
+  if stdout and not (stdout == '') then
     awesome.emit_signal("evil::github::pr", json.decode(stdout))
   else
-    awful.spawn.with_shell("rm "..temp_file)
+    naughty.notification({title = 'Error retrieving github results', message= stderr})
     awesome.emit_signal("evil:github::pr", {})
   end
 end)

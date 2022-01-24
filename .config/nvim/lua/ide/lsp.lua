@@ -8,11 +8,12 @@ local function run_command(cmd)
 end
 
 local function find_file(file)
-  if vim.fn.executable('where') then
-    return run_command('where '..file)
+  if vim.fn.executable('readlink') and vim.fn.executable('which') then
+    return run_command('readlink -f `which '..file..'` | head -n 1')
   elseif vim.fn.executable('which') then
     return run_command('which '..file)
   end
+  return '', false, nil
 end
 
 --Fix for not spawning things correctly on windows
@@ -133,15 +134,17 @@ lsp.init = function(capabilities)
   }
 
   -- LSP: LUA
-  local sumneko_bin, success, _ = find_file('lua-language-server')
-  if success then
-    -- TODO: Need to find how to determine where lua-language-server sits
-    local sumneko_root_path = '/usr/share/lua-language-server'
-    local sumneko_binary    = sumneko_bin
+  local sumneko_bin, lua_success, _ = find_file('lua-language-server')
+  if lua_success then
+    sumneko_bin = sumneko_bin:gsub('%s+$', '')
+    local sumneko_bin_dir, _, _ = run_command('dirname '..sumneko_bin)
+    sumneko_bin_dir = sumneko_bin_dir:gsub('%s+$', '')
+    local sumneko_root_path, _, _ = run_command('realpath '..sumneko_bin_dir..'/../..')
+    sumneko_root_path = sumneko_root_path:gsub('%s+$', '')
 
     lspconfig.sumneko_lua.setup {
       capabilities = capabilities,
-      cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+      cmd = {sumneko_bin, "-E", sumneko_root_path .. "/main.lua"};
       settings = {
         Lua = {
           runtime = {
