@@ -20,7 +20,7 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':tabclose<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>n', ':tabnew<CR>', { noremap = true })
 
 vim.api.nvim_set_keymap('', '<C-s>', ':w<CR>', {})
-vim.api.nvim_set_keymap('', '<F5>', ':make<CR>', {})
+--vim.api.nvim_set_keymap('', '<F5>', ':make<CR>', {})
 
 -- Calculator
 vim.api.nvim_set_keymap('i', '<C-A>', '<C-O>yiW<End>=<C-R>=<C-R>0<CR>', {})
@@ -36,5 +36,5 @@ vim.api.nvim_set_keymap('n', 'dat', '/><cr>?<[^/]<cr>v/><cr>/><cr>d', { noremap 
 -- Vim Editing / Reloading
 vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>eh', ':e C:\\Windows\\System32\\drivers\\etc\\hosts<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ":luafile $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', '<leader>sv', ":lua globals.reload_vimrc()<CR>", { noremap = true, silent = true })
