@@ -8,7 +8,7 @@ local function run_command(cmd)
 end
 
 local function find_file(file)
-  if vim.fn.executable('readlink') and vim.fn.executable('which') then
+  if (vim.fn.executable('readlink') ~= 0) and (vim.fn.executable('which') ~= 0) then
     return run_command('readlink -f `which '..file..'` | head -n 1')
   elseif vim.fn.executable('which') then
     return run_command('which '..file)
