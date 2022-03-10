@@ -8,7 +8,7 @@ local function run_command(cmd)
 end
 
 local function find_file(file)
-  if vim.fn.executable('readlink') and vim.fn.executable('which') then
+  if (vim.fn.executable('readlink') ~= 0) and (vim.fn.executable('which') ~= 0) then
     return run_command('readlink -f `which '..file..'` | head -n 1')
   elseif vim.fn.executable('which') then
     return run_command('which '..file)
@@ -16,11 +16,20 @@ local function find_file(file)
   return '', false, nil
 end
 
+--Fix for not spawning things correctly on windows
+vim.loop.spawn = (function ()
+  local spawn = vim.loop.spawn
+  return function(path, options, on_exit)
+    local full_path = vim.fn.exepath(path)
+    return spawn(full_path, options, on_exit)
+  end
+end)()
+
 lsp.startup = function(use)
   use { 'neovim/nvim-lspconfig' }
 end
 
-lsp.init = function()
+lsp.init = function(capabilities)
   local lspconfig = require('lspconfig')
 
   local on_attach = function(client, bufnr)
@@ -36,6 +45,7 @@ lsp.init = function()
     buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<C-S-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('i', '<C-S-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -70,22 +80,30 @@ lsp.init = function()
     --end
   end
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  --local capabilities = vim.lsp.protocol.make_client_capabilities()
+  --capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- LSP: C#
-  local omnisharp_bin, omnisharp_success, _ = find_file('omnisharp')
-  if omnisharp_success then
+  local omnisharp_bin, success, _ = find_file('omnisharp')
+  if success then
     omnisharp_bin = omnisharp_bin:gsub("^%s*(.-)%s*$", "%1") -- trim
+    local util = lspconfig.util
     local pid = vim.fn.getpid()
     lspconfig.omnisharp.setup{
+      capabilities = capabilities,
+      filetypes = { 'cs', 'csx', 'fs', 'fsx', 'vb' },
       cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) },
       on_attach = on_attach,
+      root_dir = function(fname) 
+        local dir = util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname) or util.root_pattern 'omnisharp.json'(fname)
+        return dir
+      end
     }
   end
 
   -- LSP: Typescript
   require'lspconfig'.tsserver.setup{
+    capabilities = capabilities,
     on_attach = on_attach
   }
 
@@ -97,13 +115,22 @@ lsp.init = function()
 
   -- LSP: Docker
   require'lspconfig'.dockerls.setup{
+    capabilities = capabilities,
     on_attach = on_attach
   }
 
   -- LSP: PYTHON
   -- Python has an automatic cmd
   lspconfig.pylsp.setup{
+    capabilities = capabilities,
     on_attach = on_attach
+  }
+
+  require'lspconfig'.yamlls.setup{
+    capabilities = capabilities,
+    settings = {
+      cmd = { "yaml-language-server.cmd", "--stdio" }
+    }
   }
 
   -- LSP: LUA
@@ -116,6 +143,7 @@ lsp.init = function()
     sumneko_root_path = sumneko_root_path:gsub('%s+$', '')
 
     lspconfig.sumneko_lua.setup {
+      capabilities = capabilities,
       cmd = {sumneko_bin, "-E", sumneko_root_path .. "/main.lua"};
       settings = {
         Lua = {

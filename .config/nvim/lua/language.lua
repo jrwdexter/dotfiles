@@ -74,11 +74,10 @@ language.init = function()
   vim.api.nvim_set_keymap('n', '<leader>fo', ':Neoformat<CR>', { noremap = true })
 
   -- Neoformat
-  vim.api.nvim_command('autocmd FileType javascript setlocal formatprg=prettier')
   vim.api.nvim_command('autocmd FileType lua setlocal formatprg=luarocks')
   vim.g.neoformat_try_formatprg = 1
 
-  vim.api.nvim_command([[augroup FileTypes
+  vim.cmd([[augroup FileTypes
     " todo.txt
     autocmd!
     autocmd BufRead,BufNewFile todo*.txt set set filetype=todo.txt
@@ -87,6 +86,8 @@ language.init = function()
     autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
     " md is markdown
     autocmd BufRead,BufNewFile *.md set filetype=markdown
+    " csx
+    autocmd BufRead,BufNewFile *.csx set filetype=csx syntax=cs
   augroup END]])
 end
 

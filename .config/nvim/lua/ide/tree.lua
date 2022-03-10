@@ -1,11 +1,16 @@
 local tree = {}
 
 tree.startup = function(use)
-  use { 'kyazdani42/nvim-web-devicons' } -- File Icons
-  use { 'kyazdani42/nvim-tree.lua' }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons' -- File Icons
+    }
+  }
 end
 
 tree.init = function()
+  require'nvim-tree'.setup{}
   vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', {})
   vim.api.nvim_set_keymap('n', '<leader>f', ':NvimTreeFindFile<CR>', {})
 end
