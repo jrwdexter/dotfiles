@@ -2,17 +2,22 @@ local external = {}
 
 external.startup = function(use)
   -- Firefox/Chrome integration
-  use { 'glacambre/firenvim' } -- paq { 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } }
+  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end } -- paq { 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } }
 end
 
 external.init = function()
+  local allSites = '.*'
   -- Firefox neovim settings
   vim.g['firenvim_config'] = {
-    globalSettings= {},
-    localSettings= {}
+    globalSettings= {
+      alt = 'all'
+    },
+    localSettings= {
+      [allSites] = {
+        takeover= 'never'
+      }
+    }
   }
-  fc = vim.g.firenvim_config['localSettings']
-  fc['.*'] = "{ 'takeover': 'never' }"
 end
 
 return external
