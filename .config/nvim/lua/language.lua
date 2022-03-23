@@ -80,7 +80,7 @@ language.init = function()
   vim.cmd([[augroup FileTypes
     " todo.txt
     autocmd!
-    autocmd BufRead,BufNewFile todo*.txt set set filetype=todo.txt
+    autocmd BufRead,BufNewFile todo*.txt set filetype=todo.txt
     autocmd BufRead,BufNewFile *.todo set filetype=todo.txt
     " fdoc is yaml
     autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
