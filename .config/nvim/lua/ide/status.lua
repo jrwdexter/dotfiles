@@ -1,13 +1,13 @@
 local status = {}
 
 status.startup = function(use)
-  use { 'glepnir/galaxyline.nvim', branch = 'main' }
+  use { 'dsych/galaxyline.nvim', branch = 'bugfix/diagnostics' }
   use { 'majutsushi/tagbar' } -- F8 for tagbar toggling
 end
 
 status.init = function()
-  -- Tagbar BROKEN
-  vim.api.nvim_set_keymap('n', '<F8>', ':TagbarToggle<CR>', {})
+  ---- Tagbar BROKEN
+  --vim.api.nvim_set_keymap('n', '<F8>', ':TagbarToggle<CR>', {})
 
   local gl = require("galaxyline")
   local gls = gl.section

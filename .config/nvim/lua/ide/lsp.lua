@@ -128,8 +128,20 @@ lsp.init = function(capabilities)
 
   require'lspconfig'.yamlls.setup{
     capabilities = capabilities,
+    filetypes = { 'yaml', 'yaml.docker-compose', 'helm' },
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+        vim.diagnostic.disable()
+      end
+    end,
     settings = {
-      cmd = { "yaml-language-server.cmd", "--stdio" }
+      cmd = { "yaml-language-server.cmd", "--stdio" },
+      schemas = {
+            ["https://json.schemastore.org/chart.json"] = "/deployment/helm/*",
+            ["https://json.schemastore.org/chart.json"] = "**/k8s/**.yaml",
+            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+      },
     }
   }
 
