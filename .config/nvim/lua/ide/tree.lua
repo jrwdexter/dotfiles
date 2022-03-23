@@ -10,7 +10,9 @@ tree.startup = function(use)
 end
 
 tree.init = function()
-  require'nvim-tree'.setup{}
+  require'nvim-tree'.setup {
+    update_cwd = true
+  }
   vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', {})
   vim.api.nvim_set_keymap('n', '<leader>f', ':NvimTreeFindFile<CR>', {})
 end
