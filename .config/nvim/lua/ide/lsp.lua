@@ -16,14 +16,14 @@ local function find_file(file)
   return '', false, nil
 end
 
---Fix for not spawning things correctly on windows
-vim.loop.spawn = (function ()
-  local spawn = vim.loop.spawn
-  return function(path, options, on_exit)
-    local full_path = vim.fn.exepath(path)
-    return spawn(full_path, options, on_exit)
-  end
-end)()
+----Fix for not spawning things correctly on windows
+--vim.loop.spawn = (function ()
+  --local spawn = vim.loop.spawn
+  --return function(path, options, on_exit)
+    --local full_path = vim.fn.exepath(path)
+    --return spawn(full_path, options, on_exit)
+  --end
+--end)()
 
 lsp.startup = function(use)
   use { 'neovim/nvim-lspconfig' }
