@@ -126,6 +126,13 @@ apps.markdown_input = function ()
         nil)
 end
 
+apps.todo_input = function ()
+    helpers.scratchpad(
+        { instance = "todo_input" },
+        user.terminal.." --class todo_input -e nvim "..user.dirs.home.."/todo.txt",
+        nil)
+end
+
 -- Scratchpad terminal with tmux (see bin/scratchpad)
 apps.scratchpad = function()
     helpers.scratchpad({instance = "scratchpad"}, "scratchpad", nil)
