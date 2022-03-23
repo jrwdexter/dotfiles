@@ -84,6 +84,8 @@ language.init = function()
     autocmd BufRead,BufNewFile *.todo set filetype=todo.txt
     " fdoc is yaml
     autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+    " helm is yaml
+    autocmd BufRead,BufNewFile **/k8s/**.yaml set filetype=helm syntax=yaml
     " md is markdown
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     " csx
