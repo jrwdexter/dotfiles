@@ -101,6 +101,7 @@ user = {
 
     -- Directories with fallback values
     dirs = {
+        home = os.getenv("HOME") or "~",
         downloads = os.getenv("XDG_DOWNLOAD_DIR") or "~/Downloads",
         documents = os.getenv("XDG_DOCUMENTS_DIR") or "~/Documents",
         music = os.getenv("XDG_MUSIC_DIR") or "~/Music",
@@ -328,7 +329,7 @@ awful.screen.connect_for_each_screen(function(s)
         l.max,
         l.max,
         l.tile,
-        l.tile,
+        l.corner.ne,
         l.max,
         l.max,
         l.max,
@@ -514,10 +515,12 @@ awful.rules.rules = {
                 "Steam",
                 "discord",
                 "markdown_input",
+                "todo_input",
                 "scratchpad",
             },
             instance = {
                 "markdown_input",
+                "todo_input",
                 "scratchpad",
             },
             role = {
@@ -555,6 +558,7 @@ awful.rules.rules = {
                 "leagueclient.exe",
                 "^editor$",
                 "markdown_input",
+                "todo_input",
             },
             class = {
                 "qutebrowser",
@@ -569,6 +573,7 @@ awful.rules.rules = {
                 "Chromium",
                 "^editor$",
                 "markdown_input",
+                "todo_input",
                 -- "Thunderbird",
             },
             type = {
@@ -704,12 +709,14 @@ awful.rules.rules = {
         rule_any = {
             instance = {
                 "scratchpad",
-                "markdown_input"
+                "markdown_input",
+                "todo_input",
             },
             class = {
                 "scratchpad",
-                "markdown_input"
-            },
+                "markdown_input",
+                "todo_input",
+            }
         },
         properties = {
             skip_taskbar = false,
@@ -738,10 +745,12 @@ awful.rules.rules = {
     {
         rule_any = {
             instance = {
-                "markdown_input"
+                "markdown_input",
+                "todo_input"
             },
             class = {
-                "markdown_input"
+                "markdown_input",
+                "todo_input"
             },
         },
         properties = {
