@@ -23,6 +23,11 @@ theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name 
 -- theme.font          = "sans 11"
 theme.font          = "monospace 11"
 
+theme.hotkeys_modifiers_fg = x.color2
+theme.hotkeys_fg = x.color9
+theme.hotkeys_font = "monospace 16"
+theme.hotkeys_description_font = "monospace 14"
+
 -- This is how to get other .Xresources values (beyond colors 0-15, or custom variables)
 -- local cool_color = awesome.xrdb_get_value("", "color16")
 
