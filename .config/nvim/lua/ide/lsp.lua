@@ -16,14 +16,14 @@ local function find_file(file)
   return '', false, nil
 end
 
---Fix for not spawning things correctly on windows
-vim.loop.spawn = (function ()
-  local spawn = vim.loop.spawn
-  return function(path, options, on_exit)
-    local full_path = vim.fn.exepath(path)
-    return spawn(full_path, options, on_exit)
-  end
-end)()
+----Fix for not spawning things correctly on windows
+--vim.loop.spawn = (function ()
+  --local spawn = vim.loop.spawn
+  --return function(path, options, on_exit)
+    --local full_path = vim.fn.exepath(path)
+    --return spawn(full_path, options, on_exit)
+  --end
+--end)()
 
 lsp.startup = function(use)
   use { 'neovim/nvim-lspconfig' }
@@ -128,8 +128,20 @@ lsp.init = function(capabilities)
 
   require'lspconfig'.yamlls.setup{
     capabilities = capabilities,
+    filetypes = { 'yaml', 'yaml.docker-compose', 'helm' },
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+        vim.diagnostic.disable()
+      end
+    end,
     settings = {
-      cmd = { "yaml-language-server.cmd", "--stdio" }
+      cmd = { "yaml-language-server.cmd", "--stdio" },
+      schemas = {
+            ["https://json.schemastore.org/chart.json"] = "/deployment/helm/*",
+            ["https://json.schemastore.org/chart.json"] = "**/k8s/**.yaml",
+            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+      },
     }
   }
 
