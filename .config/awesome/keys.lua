@@ -543,7 +543,9 @@ keys.globalkeys = gears.table.join(
     -- Markdown input scratchpad (I for input)
     -- For quickly typing markdown comments and pasting them in
     -- the browser
-    awful.key({ superkey }, "i", apps.markdown_input,
+    awful.key({ superkey }, "i", apps.todo_input,
+        {description = "markdown scratchpad", group = "launcher"}),
+    awful.key({ superkey, shiftkey }, "i", apps.markdown_input,
         {description = "markdown scratchpad", group = "launcher"}),
     -- Editor
     awful.key({ superkey }, "e", apps.editor,
