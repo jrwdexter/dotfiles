@@ -27,6 +27,13 @@ language.init = function()
   if ts_config then
     ts_config.setup {
         ensure_installed = {
+            "bash",
+            "dockerfile",
+            "hcl",
+            "json",
+            "regex",
+            "vim",
+            "todotxt",
             "javascript",
             "typescript",
             "html",
@@ -36,7 +43,8 @@ language.init = function()
             "cpp",
             "rust",
             "lua",
-            "python"
+            "python",
+            "yaml"
         },
         highlight = {
             enable = true,
@@ -74,7 +82,7 @@ language.init = function()
   vim.api.nvim_set_keymap('n', '<leader>fo', ':Neoformat<CR>', { noremap = true })
 
   -- Neoformat
-  vim.api.nvim_command('autocmd FileType lua setlocal formatprg=luarocks')
+  vim.api.nvim_command('autocmd FileType lua setlocal formatprg=luaformatter')
   vim.g.neoformat_try_formatprg = 1
 
   vim.cmd([[augroup FileTypes
