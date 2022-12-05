@@ -12,8 +12,6 @@ end
 -- Map leader!
 vim.g.mapleader = ','
 
--- don't highlight current line
--- set nocursorline
 
 -- Stop error bells, dammit!
 
@@ -30,6 +28,7 @@ vim.o.cp = false
 -- syntax enable
 vim.o.magic = true
 vim.o.autoindent=true
+vim.o.cursorline=false             -- don't show a cursor line
 vim.o.autoread=true                  -- reload files when changed on disk, i.e. via `git checkout`
 vim.o.backspace='2'                  -- Fix broken backspace in some setups
 vim.o.backupcopy='yes'               -- see :help crontab
@@ -41,7 +40,7 @@ vim.o.ignorecase=true                -- case-insensitive search
 vim.o.incsearch=true                 -- search as you type
 vim.o.laststatus=2                   -- always show statusline
 vim.o.list=true                      -- show trailing whitespace
-vim.o.listchars='tab:\t ,trail:▫'
+vim.o.listchars='tab:\\t ,trail:▫'    -- characters to utilize during :list command
 vim.wo.number=true                   -- show line numbers
 vim.o.number=true                    -- show line numbers
 vim.o.ruler=true                     -- show where you are

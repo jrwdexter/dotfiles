@@ -12,4 +12,6 @@ vim.api.nvim_set_keymap('n', '<leader>sg', ":execute luafile g:my_gvimrc<CR>:fil
 -- -- Colors
 -- colorscheme dracula
 local base16 = require 'base16'
-base16(base16.themes.dracula, true)
+if base16 ~= nil then
+  base16(base16.themes.dracula, true)
+end

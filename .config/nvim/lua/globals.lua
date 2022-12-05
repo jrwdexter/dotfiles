@@ -4,6 +4,7 @@ globals.init = function()
   local funcs = {}
 
   funcs.reload_vimrc = function()
+    -- TODO: replace these with some calculated way to unload these packages
     package.loaded['external'] = nil
     package.loaded['git'] = nil
     package.loaded['globals'] = nil
