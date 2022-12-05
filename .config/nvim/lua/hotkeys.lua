@@ -26,10 +26,6 @@ vim.api.nvim_set_keymap('', '<C-s>', ':w<CR>', {})
 vim.api.nvim_set_keymap('i', '<C-A>', '<C-O>yiW<End>=<C-R>=<C-R>0<CR>', {})
 
 -- VsVim replace in tag functionality
--- nvim.api.nvim_set_keymap('n', 'cit', '/><cr>?<[^/]<cr>/><cr>c/<<cr>>', { noremap = true })
--- nvim.api.nvim_set_keymap('n', 'dit', '/><cr>?<[^/]<cr>/><cr>c/<<cr>><esc>', { noremap = true })
-
--- VsVim replace in tag functionality
 vim.api.nvim_set_keymap('n', 'cat', '/><cr>?<[^/]<cr>v/><cr>/><cr>c', { noremap = true })
 vim.api.nvim_set_keymap('n', 'dat', '/><cr>?<[^/]<cr>v/><cr>/><cr>d', { noremap = true })
 
