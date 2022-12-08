@@ -1,14 +1,17 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #####################################
 ############# OH-MY-ZSH #############
 #####################################
 
 export ZSH=$HOME/.oh-my-zsh
 
-# POWERLEVEL9K_MODE='awesome-patched'
 ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status root_indicator background_jobs time)
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -323,3 +326,11 @@ alias luamake=/home/mandest/src/lua-language-server/3rd/luamake/luamake
 
 # Kubernetes aliases
 source ~/.kubectl_aliases
+
+# Azure completion
+if [[ -f /opt/azure-cli/az.completion ]]; then
+  source /opt/azure-cli/az.completion
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

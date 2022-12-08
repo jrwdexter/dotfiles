@@ -1,5 +1,5 @@
 # Additional PATH information
-export PATH="$HOME/Dropbox/script/bash:$PATH:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.dotnet/tools"
+export PATH="$HOME/Dropbox/script/bash:$PATH:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.dotnet/tools:/opt/azure-cli/bin"
 export EDITOR=nvim
 
 # Add if windows sometime - maybe?
