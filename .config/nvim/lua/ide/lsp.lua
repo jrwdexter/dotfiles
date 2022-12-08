@@ -145,6 +145,13 @@ lsp.init = function(capabilities)
     }
   }
 
+  -- LSP: Haskell
+  -- TODO
+  local hls_bin, hls_success, _ = find_file('haskell-language-server-wrapper')
+  if hls_success then
+    require'lspconfig'.hls.setup{}
+  end
+
   -- LSP: LUA
   local sumneko_bin, lua_success, _ = find_file('lua-language-server')
   if lua_success then
