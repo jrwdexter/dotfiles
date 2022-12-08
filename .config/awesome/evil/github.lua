@@ -1,21 +1,23 @@
 -- Provides:
 -- evil::github::pr
 --     pull_requests (table)
-local awful = require("awful")
 local helpers = require("helpers")
 local naughty = require("naughty")
-local gears = require("gears")
 local json = require("json")
 
 local update_interval = 60 * 15 -- 15 minutes
 local temp_file = "/tmp/awesome-evil-git-prs"
-org = 'Monkeyjump Labs'
-local watch_repos = { 'imaginedeliver-mailroom-be', 'imaginedeliver-mailroom-fe' }
+local org = 'Monkeyjump-Labs'
+local watch_repos = { org..'/cam-fe', org..'/cam-api', org..'/cam-tf' }
+local repo_filter = ""
+for _, v in ipairs(watch_repos) do
+  repo_filter = repo_filter.." repo:"..v
+end
 local gh_script = function()
   return [[
     sh -c '
     prs=`gh api graphql -f query='"'"'query {
-      search(first: 6, query: "is:pr is:open org:Monkeyjump-Labs", type:ISSUE) {
+      search(first: 6, query: "is:pr is:open ]]..repo_filter..[[", type:ISSUE) {
         issueCount,
         edges {
           node {
