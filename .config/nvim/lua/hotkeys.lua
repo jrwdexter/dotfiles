@@ -25,12 +25,7 @@ vim.api.nvim_set_keymap('', '<C-s>', ':w<CR>', {})
 -- Calculator
 vim.api.nvim_set_keymap('i', '<C-A>', '<C-O>yiW<End>=<C-R>=<C-R>0<CR>', {})
 
--- VsVim replace in tag functionality
-vim.api.nvim_set_keymap('n', 'cat', '/><cr>?<[^/]<cr>v/><cr>/><cr>c', { noremap = true })
-vim.api.nvim_set_keymap('n', 'dat', '/><cr>?<[^/]<cr>v/><cr>/><cr>d', { noremap = true })
-
 -- Vim Editing / Reloading
 vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>eh', ':e C:\\Windows\\System32\\drivers\\etc\\hosts<cr>', { noremap = true })
-
 vim.api.nvim_set_keymap('n', '<leader>sv', ":lua globals.reload_vimrc()<CR>", { noremap = true, silent = true })
