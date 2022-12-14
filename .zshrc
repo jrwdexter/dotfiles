@@ -1,3 +1,11 @@
+
+# SSH Agent
+if [[ -z ${SSH_AUTH_SOCK+x} ]]
+then
+  eval $(ssh-agent -s)
+  ssh-add
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -108,12 +116,6 @@ fi
 #####################################
 ####### SERVICES + LIBRARIES ########
 #####################################
-
-if [[ -z ${SSH_AUTH_SOCK+x} ]]
-then
-  eval $(ssh-agent -s)
-  ssh-add
-fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
