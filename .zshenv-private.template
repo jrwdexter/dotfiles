@@ -1,2 +1,21 @@
+export SRC=__SRC_DIR__
 export GCAL_CLIENT_ID=__YOUR_CLIENT_ID__
 export GCAL_CLIENT_SECRET=__YOUR_CLIENT_SECRET__
+
+# WSL Specific Setup Items (Remove on native linux)
+# Set PULSE_SERVER for audio
+#if [ -f /etc/resolv.conf ]; then
+  #if [ $(grep nameserver /etc/resolv.conf | wc -l) = "1" ]; then
+    #export PULSE_SERVER=tcp:$(grep nameserver /etc/resolv.conf | awk '{print $2}');
+  #fi
+#fi
+
+## Set DISPLAY
+#if [ -f /etc/resolv.conf ]; then
+  #if [ $(grep nameserver /etc/resolv.conf | wc -l) = "1" ]; then
+    #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 ||
+    #export LIBGL_ALWAYS_INDIRECT=1
+  #fi
+#else
+  #export DISPLAY="127.0.1.1:0"
+#fi
