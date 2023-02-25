@@ -10,6 +10,7 @@
 -- >> The file that binds everything together.
 --]]
 
+local gears = require('gears')
 
 local themes = {
     "manta",        -- 1 --
@@ -71,6 +72,9 @@ local exit_screen_themes = {
     "ephemeral",     -- 2 -- Uses text-generated icons (consumes less RAM)
 }
 local exit_screen_theme = exit_screen_themes[2]
+
+local local_profile_pic = os.getenv("HOME").."/profile.png"
+local profile_picture = gears.filesystem.file_readable(local_profile_pic) and local_profile_pic or os.getenv("HOME").."/.config/awesome/profile.png"
 -- ===================================================================
 -- User variables and preferences
 user = {
@@ -79,11 +83,13 @@ user = {
     terminal = "kitty -1",
     floating_terminal = "kitty -1",
     browser = "firefox-developer-edition",
+    browser_class = "firefoxdeveloperedition",
     -- browser = "/mnt/c/Program\\ Files/Firefox\\ Developer\\ Edition/firefox.exe",
     file_manager = "kitty -1 --class files -e ranger",
     editor = "kitty -1 --class editor -e nvim",
-    email_client = "kitty -1 --class email -e cmdg",
-    visualizer = "alacritty --class visualizer --config-file "..os.getenv("HOME").."/.config/alacritty/visualizer.yml -e cava",
+    email_client = "wavebox",
+    email_client_class = "Wavebox",
+    visualizer = os.getenv("HOME").."/bin/visualizer",
     music_client = "kitty -1 --class music -e ncmpcpp",
     -- music_client = "kitty --class music -e ncmpcpp",
 
@@ -92,7 +98,7 @@ user = {
     -- web_search_cmd = "xdg-open https://www.google.com/search?q="
 
     -- >> User profile <<
-    profile_picture = os.getenv("HOME").."/.config/awesome/profile.png",
+    profile_picture = profile_picture,
     calendar_email = 'jonathan.dexter@monkeyjumplabs.com',
     google_oauth = {
       client_id = os.getenv("GCAL_CLIENT_ID"),
@@ -325,9 +331,9 @@ awful.screen.connect_for_each_screen(function(s)
     local l = awful.layout.suit -- Alias to save time :)
     -- Tag layouts
     local layouts = {
-        l.max,
-        l.max,
-        l.max,
+        l.tile,
+        l.tile,
+        l.tile,
         l.tile,
         l.corner.ne,
         l.max,
@@ -426,6 +432,7 @@ awful.rules.rules = {
                 "File-roller",
                 "fst",
                 "Nvidia-settings",
+                "floating",
             },
             name = {
                 "Event Tester",  -- xev
@@ -567,6 +574,7 @@ awful.rules.rules = {
                 --"discord",
                 --"TelegramDesktop",
                 "firefox",
+                "firefoxdeveloperedition",
                 "Nightly",
                 "Steam",
                 "Lutris",
@@ -574,6 +582,7 @@ awful.rules.rules = {
                 "^editor$",
                 "markdown_input",
                 "todo_input",
+                "Visualizer"
                 -- "Thunderbird",
             },
             type = {
@@ -609,6 +618,7 @@ awful.rules.rules = {
             class = {
                 "TelegramDesktop",
                 "firefox",
+                "firefoxdeveloperedition",
                 "Nightly",
             },
             type = {
@@ -900,7 +910,7 @@ awful.rules.rules = {
         rule_any = {
             class = {
                 "firefox",
-                "firefox-developer-edition",
+                "firefoxdeveloperedition",
                 "Nightly",
                 -- "qutebrowser",
             },
@@ -913,11 +923,13 @@ awful.rules.rules = {
         properties = { screen = 1, tag = awful.screen.focused().tags[1] },
     },
 
-    -- Games
+    -- Productivity
     {
         rule_any = {
             class = {
-                "underlords",
+                "jetbrains-rider",
+                "jetbrains-webstorm",
+                "jetbrains-datagrip",
                 "lt-love",
                 "portal2_linux",
                 "deadcells",
@@ -938,7 +950,7 @@ awful.rules.rules = {
                 "glyphclientapp.exe"
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[2] }
+        properties = { screen = 1, tag = awful.screen.focused().tags[3] }
     },
 
     -- Chatting
@@ -951,13 +963,14 @@ awful.rules.rules = {
                 "TelegramDesktop",
                 "Signal",
                 "Slack",
+                "wavebox",
                 "TeamSpeak 3",
                 "zoom",
                 "weechat",
                 "6cord",
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[3] }
+        properties = { screen = 1, tag = awful.screen.focused().tags[2] }
     },
 
     -- Editing
@@ -1000,13 +1013,14 @@ awful.rules.rules = {
     {
         rule_any = {
             class = {
+                "wavebox",
                 "email",
             },
             instance = {
                 "email",
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[3] }
+        properties = { screen = 1, tag = awful.screen.focused().tags[2] }
     },
 
     -- Game clients/launchers
