@@ -155,17 +155,14 @@ lsp.init = function(capabilities)
   end
 
   -- LSP: LUA
-  local sumneko_bin, lua_success, _ = find_file('lua-language-server')
+  local luals_bin, lua_success, _ = find_file('lua-language-server')
   if lua_success then
-    sumneko_bin = sumneko_bin:gsub('%s+$', '')
-    local sumneko_bin_dir, _, _ = run_command('dirname '..sumneko_bin)
-    sumneko_bin_dir = sumneko_bin_dir:gsub('%s+$', '')
-    local sumneko_root_path, _, _ = run_command('realpath '..sumneko_bin_dir..'/../..')
-    sumneko_root_path = sumneko_root_path:gsub('%s+$', '')
+    luals_bin = luals_bin:gsub('%s+$', '')
+    local luals_bin_dir, _, _ = run_command('dirname '..luals_bin)
+    luals_bin_dir = luals_bin_dir:gsub('%s+$', '')
 
-    lspconfig.sumneko_lua.setup {
+    lspconfig.lua_ls.setup {
       capabilities = capabilities,
-      cmd = {sumneko_bin, "-E", sumneko_root_path .. "/main.lua"};
       settings = {
         Lua = {
           runtime = {
