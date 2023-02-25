@@ -26,6 +26,7 @@ local host_text = wibox.widget.textbox()
 awful.spawn.easy_async_with_shell("cat /proc/sys/kernel/hostname", function(out)
     -- Remove trailing whitespaces
     out = out:gsub('^%s*(.-)%s*$', '%1')
+    out = out:gsub('^([^.]*).*', '%1')
     host_text.markup = helpers.colorize_text("@"..out, x.color8)
 end)
 -- host_text.markup = "<span foreground='" .. x.color8 .."'>" .. minutes.text .. "</span>"
