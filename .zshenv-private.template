@@ -4,18 +4,14 @@ export GCAL_CLIENT_SECRET=__YOUR_CLIENT_SECRET__
 
 # WSL Specific Setup Items (Remove on native linux)
 # Set PULSE_SERVER for audio
+# In order to use pulse audio on windows,you need to install the windows Pulse server and enable the native TCP module (see https://wiki.archlinux.org/title/PulseAudio/Examples#PulseAudio_over_network)
 #if [ -f /etc/resolv.conf ]; then
-  #if [ $(grep nameserver /etc/resolv.conf | wc -l) = "1" ]; then
-    #export PULSE_SERVER=tcp:$(grep nameserver /etc/resolv.conf | awk '{print $2}');
-  #fi
+  #export PULSE_SERVER=tcp:$(grep nameserver /etc/resolv.conf | awk '{print $2}');
 #fi
 
 ## Set DISPLAY
+# This is only required for WSL, when we are planning on forwarding the X11 display to a X11 client
 #if [ -f /etc/resolv.conf ]; then
-  #if [ $(grep nameserver /etc/resolv.conf | wc -l) = "1" ]; then
-    #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 ||
-    #export LIBGL_ALWAYS_INDIRECT=1
-  #fi
-#else
-  #export DISPLAY="127.0.1.1:0"
+  #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 ||
+  #export LIBGL_ALWAYS_INDIRECT=1
 #fi
