@@ -25,7 +25,7 @@ local send_mpd_notif = function (artist, song, paused)
             -- Since the evil::mpd signal is also emitted when seeking, only
             -- send a notification when the song and artist are different than
             -- before.
-            if artist ~= old_artist and song ~=old_song then
+            if artist ~= old_artist or song ~=old_song then
                 notif = notifications.notify_dwim(
                     {
                         title = "Now playing:",
