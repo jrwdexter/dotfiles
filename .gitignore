@@ -4,3 +4,9 @@
 # Submodules
 #.config/Themes
 #.fonts/typicons.font
+
+# Python
+**/__pycache__/
+
+# LibLUA (must be compiled per-platform if we're using it)
+**/liblua_pam.so
