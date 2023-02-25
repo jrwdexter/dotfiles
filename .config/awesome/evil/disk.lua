@@ -9,7 +9,11 @@ local update_interval = 180 -- every 3 minutes
 -- Use /dev/sdxY according to your setup
 local disk_script = [[
     bash -c "
-    df -kh /mnt/c | tail -1 | awk '{printf \"%d@%d\", $4, $3}'
+    if [-d /mnt/c]; then
+      df -kh /mnt/c | tail -1 | awk '{printf \"%d@%d\", $4, $3}'
+    else
+      df -kh / | tail -1 | awk '{printf \"%d@%d\", $4, $3}'
+    fi
     "
 ]]
 
