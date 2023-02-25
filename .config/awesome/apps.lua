@@ -10,13 +10,13 @@ local notifications = require("notifications")
 local apps = {}
 
 apps.browser = function ()
-    awful.spawn(user.browser, { switchtotag = true })
+  helpers.run_or_raise({ class =user.browser_class }, false, user.browser)
 end
 apps.file_manager = function ()
     awful.spawn(user.file_manager)
 end
-apps.telegram = function ()
-    helpers.run_or_raise({class = 'TelegramDesktop'}, false, "telegram", { switchtotag = true })
+apps.chat = function ()
+    helpers.run_or_raise({class = 'Slack'}, false, "slack", { switchtotag = true })
 end
 apps.discord = function ()
     -- Run or raise Discord running in the browser, spawned with Chromium browser's app mode
@@ -32,7 +32,7 @@ apps.weechat = function ()
     helpers.run_or_raise({instance = 'weechat'}, true, user.terminal.." --class weechat -e weechat")
 end
 apps.mail = function ()
-    helpers.run_or_raise({instance = 'email'}, false, user.email_client, {switchtotag = true})
+    helpers.run_or_raise({class = user.email_client_class}, false, user.email_client, {switchtotag = true})
 end
 apps.gimp = function ()
     helpers.run_or_raise({class = 'Gimp'}, false, "gimp")
@@ -100,7 +100,7 @@ apps.music = function ()
 end
 
 apps.visualizer = function()
-    helpers.run_or_raise({instance = "visualizer"}, false, user.visualizer, { switchtotag = true })
+    helpers.run_or_raise({class = "Visualizer"}, false, user.visualizer, { switchtotag = true })
 end
 
 apps.process_monitor = function ()
