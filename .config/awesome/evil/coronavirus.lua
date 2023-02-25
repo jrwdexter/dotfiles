@@ -6,7 +6,6 @@
 --      deaths_today (integer)
 local awful = require("awful")
 local helpers = require("helpers")
-local naughty = require("naughty")
 
 local update_interval = 60 * 60 * 4 -- 4 hours
 local country = user.coronavirus_country or "usa"
