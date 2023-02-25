@@ -57,8 +57,8 @@ bindurl ^https://(www\.)?reddit\.com.*comments ;I hint -Ic [data-test-id=post-co
 autocmd DocLoad reddit.com hint -; -c '#SHORTCUT_FOCUSABLE_DIV'
 
 " Only hint search results on Google and DDG
-bindurl www.google.com f hint -Jc .rc > .r > a
-bindurl www.google.com F hint -Jbc .rc>.r>a
+bindurl www.google.com f hint -Jc #rso .g a
+bindurl www.google.com F hint -Jbc #rso .g a
 
 " Highlight right content on DDG
 bindurl ^https://duckduckgo.com f hint -Jc [data-nrn=result]
