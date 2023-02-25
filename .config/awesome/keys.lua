@@ -767,21 +767,21 @@ keys.tasklist_buttons = gears.table.join(
 -- Mouse buttons on a tag of the taglist widget
 keys.taglist_buttons = gears.table.join(
   awful.button({}, 1, function(t)
-    -- t:view_only()
+    --t:view_only()
     helpers.tag_back_and_forth(t.index)
   end),
-  awful.button({ modkey }, 1, function(t)
+  awful.button({ shiftkey }, 1, function(t)
     if client.focus then
       client.focus:move_to_tag(t)
     end
   end),
-  -- awful.button({ }, 3, awful.tag.viewtoggle),
+  awful.button({}, 3, awful.tag.viewtoggle),
   awful.button({}, 3, function(t)
     if client.focus then
       client.focus:move_to_tag(t)
     end
   end),
-  awful.button({ modkey }, 3, function(t)
+  awful.button({ shiftkey }, 3, function(t)
     if client.focus then
       client.focus:toggle_tag(t)
     end
