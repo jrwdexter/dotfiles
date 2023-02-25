@@ -61,5 +61,5 @@ bindurl www.google.com f hint -Jc .rc > .r > a
 bindurl www.google.com F hint -Jbc .rc>.r>a
 
 " Highlight right content on DDG
-bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
-bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
+bindurl ^https://duckduckgo.com f hint -Jc [data-nrn=result]
+bindurl ^https://duckduckgo.com F hint -Jbc [data-nrn=result]
