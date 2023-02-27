@@ -910,8 +910,8 @@ awful.rules.rules = {
         rule_any = {
             class = {
                 "firefox",
-                "firefoxdeveloperedition",
-                "Nightly",
+                "google-chrome",
+                "zoom"
                 -- "qutebrowser",
             },
         },
@@ -923,54 +923,60 @@ awful.rules.rules = {
         properties = { screen = 1, tag = awful.screen.focused().tags[1] },
     },
 
-    -- Productivity
+    -- Mail
     {
         rule_any = {
             class = {
-                "jetbrains-rider",
-                "jetbrains-webstorm",
-                "jetbrains-datagrip",
-                "lt-love",
-                "portal2_linux",
-                "deadcells",
-                "csgo_linux64",
-                "EtG.x86_64",
-                "factorio",
-                "dota2",
-                "Terraria.bin.x86",
-                "dontstarve_steam",
-                "Wine",
-                "trove.exe"
+                "wavebox",
+                "email",
             },
             instance = {
-                "love.exe",
-                "synthetik.exe",
-                "pathofexile_x64steam.exe",
-                "leagueclient.exe",
-                "glyphclientapp.exe"
+                "email",
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[3] }
+        properties = { screen = 1, tag = awful.screen.focused().tags[2] }
     },
 
     -- Chatting
     {
         rule_any = {
             class = {
-                "Chromium",
-                "Chromium-browser",
                 "discord",
                 "TelegramDesktop",
                 "Signal",
                 "Slack",
-                "wavebox",
-                "TeamSpeak 3",
-                "zoom",
                 "weechat",
                 "6cord",
             },
         },
         properties = { screen = 1, tag = awful.screen.focused().tags[2] }
+    },
+
+    -- Backend
+    {
+        rule_any = {
+            class = {
+                "firefoxdeveloperedition",
+                "jetbrains-webstorm",
+                "jetbrains-pycharm",
+            },
+            instance = {
+            },
+        },
+        properties = { screen = 1, tag = awful.screen.focused().tags[3] }
+    },
+
+    -- Backend
+    {
+        rule_any = {
+            class = {
+                "jetbrains-rider",
+                "jetbrains-datagrip",
+            },
+            instance = {
+            },
+        },
+        properties = { screen = 1, tag = awful.screen.focused().tags[4] }
     },
 
     -- Editing
@@ -982,7 +988,7 @@ awful.rules.rules = {
                 -- "Subl3",
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[4] }
+        properties = { screen = 1, tag = awful.screen.focused().tags[10] }
     },
 
     -- System monitoring
@@ -1007,20 +1013,6 @@ awful.rules.rules = {
             },
         },
         properties = { screen = 1, tag = awful.screen.focused().tags[6] }
-    },
-
-    -- Mail
-    {
-        rule_any = {
-            class = {
-                "wavebox",
-                "email",
-            },
-            instance = {
-                "email",
-            },
-        },
-        properties = { screen = 1, tag = awful.screen.focused().tags[2] }
     },
 
     -- Game clients/launchers
