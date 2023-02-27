@@ -110,7 +110,7 @@ local exit = create_button(exit_text_icon, x.color4, "Exit", exit_command)
 local lock = create_button(lock_text_icon, x.color5, "Lock", lock_command)
 
 -- Create the exit screen wibox
-exit_screen = wibox({visible = false, ontop = true, type = "dock"})
+exit_screen = wibox({visible = false, ontop = true, type = "dock", screen = awful.screen.primary })
 awful.placement.maximize(exit_screen)
 
 exit_screen.bg = beautiful.exit_screen_bg or beautiful.wibar_bg or "#111111"
@@ -151,6 +151,8 @@ function exit_screen_show()
             keybinds[key]()
         end
     end)
+    exit_screen.screen = awful.screen.primary
+    awful.placement.maximize(exit_screen)
     exit_screen.visible = true
 end
 
@@ -187,5 +189,6 @@ exit_screen:setup {
         layout = wibox.layout.align.horizontal
     },
     expand = "none",
+    screen = awful.screen.primary,
     layout = wibox.layout.align.vertical
 }
