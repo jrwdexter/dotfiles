@@ -99,7 +99,9 @@ app_drawer.fg = beautiful.app_drawer_fg or x.foreground or "#FEFEFE"
 -- Add app drawer or mask to each screen
 for s in screen do
     if s == screen.primary then
+        app_drawer.screen = screen.primary
         s.app_drawer = app_drawer
+        awful.placement.maximize(app_drawer)
     else
         s.app_drawer = helpers.screen_mask(s, beautiful.lock_screen_bg or beautiful.exit_screen_bg or x.background)
     end
