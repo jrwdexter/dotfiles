@@ -9,7 +9,7 @@ configuration {
     fixed-num-lines: true;
     show-icons: false;
     sidebar-mode: true;
-    combi-modi: "window,run";
+    combi-modi: "window,run,emoji";
     // run-list-command: "fd -t x . `sed -E 's/:/\n/g' <<< $PATH | grep -v /mnt | xargs -i sh -c 'test -d {} && echo {}'`";
     // run-list-command: "fd . / -t x -E /mnt";
     separator-style: "none";
@@ -32,6 +32,7 @@ configuration {
     display-drun: "";
     display-combi: "";
     display-calc: "";
+    display-emoji: "";
     kb-remove-word-back: "Control+BackSpace,Alt+d,Alt+BackSpace";
     kb-accept-entry: "Control+m,Return,KP_Enter,Alt+m";
     kb-mode-next: "Shift+Right,Control+Tab,Alt+l,Alt+Tab";
