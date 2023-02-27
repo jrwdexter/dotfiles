@@ -35,6 +35,7 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 * Backgrounds: [feh](https://wiki.archlinux.org/title/Feh)
 * Quick Launcher: [rofi](https://github.com/davatorium/rofi)
   * *Optional*: [rofi-calc]() for quick calculations
+  * *Optional*: [rofi-emoji]() for quick emojis
 
 **Dashboard Support**
 | Name                                                      | Description                          | Notes                                                   |
