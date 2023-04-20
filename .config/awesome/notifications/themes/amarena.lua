@@ -32,6 +32,8 @@ local app_config = {
     ['mpv'] = { icon = "", title = true },
     ['keyboard'] = { icon = "", title = false },
     ['email'] = { icon = "", title = true },
+    ['Wavebox'] = { icon = "", title = true },
+    ['Slack'] = { icon = "", title = true },
 }
 
 local urgency_color = {
