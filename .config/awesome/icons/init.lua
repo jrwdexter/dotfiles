@@ -38,7 +38,9 @@ icons.text.by_class = {
     ['TelegramDesktop'] = { symbol = "", color = x.color4 },
     ['Firefox'] = { symbol = "", color = x.color3 },
     ['firefox'] = { symbol = "", color = x.color3 },
+    ['firefoxdeveloperedition'] = { symbol = "", color = x.color4 },
     ['Nightly'] = { symbol = "", color = x.color4 },
+    ['Google-chrome'] = { symbol = "", color = x.color4 },
     ['Chromium'] = { symbol = "", color = x.color4 },
     ['Chromium-browser'] = { symbol = "", color = x.color4 },
     ['Steam'] = { symbol = "", color = x.color2 },
@@ -46,6 +48,7 @@ icons.text.by_class = {
     ['editor'] = { symbol = "", color = x.color5 },
     ['Emacs'] = { symbol = "", color = x.color2 },
     ['email'] = { symbol = "", color = x.color6 },
+    ['Wavebox'] = { symbol = "", color = x.color6 },
     ['music'] = { symbol = "", color = x.color6 },
     ['visualizer'] = { symbol = "", color = x.color6 },
     ['lotion'] = { symbol = "", color = x.color3 },
@@ -63,6 +66,7 @@ icons.text.by_class = {
     ['scratchpad'] = { symbol = "", color = x.color1 },
     ['weechat'] = { symbol = "", color = x.color5 },
     ['discord'] = { symbol = "", color = x.color5 },
+    ['Slack'] = { symbol = "", color = x.color5 },
     ['6cord'] = { symbol = "", color = x.color3 },
     ['libreoffice-writer'] = { symbol = "", color = x.color4 },
     ['libreoffice-calc'] = { symbol = "", color = x.color2 },
@@ -77,6 +81,9 @@ icons.text.by_class = {
     ['Gimp'] = { symbol = "", color = x.color4 },
     ['Inkscape'] = { symbol = "", color = x.color2 },
     ['Gpick'] = { symbol = "", color = x.color6 },
+    ['jetbrains-webstorm'] = { symbol = "", color = x.color4 },
+    ['jetbrains-rider'] = { symbol = "", color = x.color5 },
+    ['jetbrains-datagrip'] = { symbol = "", color = x.color6 },
 
     -- Default
     ['_'] = { symbol = "", color = x.color7.."99" }
@@ -84,6 +91,7 @@ icons.text.by_class = {
 
 -- Available icons
 local image_icon_names = {
+    "Slack",
     "playerctl_toggle",
     "playerctl_prev",
     "playerctl_next",
