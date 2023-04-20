@@ -56,7 +56,7 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 **System Tools**
 * htop
 * ranger
-* sxiv
+* nsxiv
 * maim
 * xrandr
   * arandr
@@ -90,6 +90,7 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 * Lutris
 * Notion (via lotion)
 * Chrome
+* Onepassword / opp command line
 
 **Others**
 | Name                                                      | Description                    | Notes                                   |
