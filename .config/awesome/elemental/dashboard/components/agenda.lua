@@ -85,11 +85,14 @@ local agenda = wibox.widget {
   {
     {
       {
+        {
           align = "center",
           valign = "top",
-          font = "Sans bold 20",
-          markup = helpers.colorize_text("Agenda", x.color2),
-          widget = wibox.widget.textbox()
+          font = "Sans bold 16",
+          widget = wibox.widget.textclock("%B %d, %H:%M"),
+        },
+        fg = x.color2,
+        widget = wibox.container.background
       },
       {
         align = "center",
@@ -98,6 +101,7 @@ local agenda = wibox.widget {
         markup = helpers.colorize_text("jonathan.dexter@monkeyjumplabs.com", x.color2),
         widget = wibox.widget.textbox()
       },
+      spacing = dpi(4),
       layout = wibox.layout.fixed.vertical
     },
     wibox.widget {
