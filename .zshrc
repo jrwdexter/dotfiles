@@ -168,6 +168,25 @@ if (command -v cmdg > /dev/null); then
   alias cmdgp="cmdg -config ~/.cmdg/cmdg-personal.conf"
 fi
 
+opp() {
+  >&1 echo -ne "Querying for account...\r"
+  matches=`op item list | grep $1`
+  if [[ $? != 0 ]]; then
+    >&1 echo -ne "No matches found\n"
+    return
+  fi
+  if [[ `printf %s "$matches" | wc -l` > 1 ]]; then
+    id=`printf %s "$matches" | fzf | sed -E 's/\s.*//'`
+    op item get $id --fields=password | head | xclip -selection clipboard -r
+    >&1 echo -ne "Password copied to clipboard.\n"
+  else
+    id=`printf %s "$matches" | sed -E 's/\s.*//'`
+    op item get $id --fields=password | head | xclip -selection clipboard -r
+    >&1 echo -ne "Password copied to clipboard.\n"
+  fi
+
+}
+
 lpw() {
   >&1 echo -ne "Querying for account...\r"
   matches=`lpass show -xjG $1`
