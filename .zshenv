@@ -3,13 +3,13 @@ export PATH="$HOME/Dropbox/script/bash:$PATH:$HOME/bin:$HOME/.local/bin:/usr/loc
 export EDITOR=nvim
 
 # Add if windows sometime - maybe?
-export XDG_DOWNLOAD_DIR=/mnt/c/Users/Jonathan/Downloads
-export XDG_DOCUMENTS_DIR=/mnt/c/Users/Jonathan/Documents
-export XDG_MUSIC_DIR=/mnt/c/Users/Jonathan/Music
-export XDG_PICTURES_DIR=/mnt/c/Users/Jonathan/Dropbox/media
-export XDG_VIDEOS_DIR=/mnt/c/Users/Jonathan/Videos
-export XDG_SCREENSHOTS_DIR=/mnt/c/Users/Jonathan/Pictures/Screenshots
-export XDG_DROPBOX_DIR=/mnt/c/Users/Jonathan/Dropbox
+export XDG_DOWNLOAD_DIR=~/Downloads/
+export XDG_DOCUMENTS_DIR=~/Documents/
+export XDG_MUSIC_DIR=~/Music/
+export XDG_PICTURES_DIR=~/Pictures/
+export XDG_VIDEOS_DIR=~/Videos/
+export XDG_SCREENSHOTS_DIR=~/Pictures/Screenshots/
+export XDG_DROPBOX_DIR=~/Dropbox/
 
 # Support for GPG 2
 export GPG_TTY=$(tty)
