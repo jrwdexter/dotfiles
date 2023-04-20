@@ -118,6 +118,13 @@ keys.globalkeys = gears.table.join(
     window_switcher_show(awful.screen.focused())
   end, { description = "activate window switcher", group = "client" }),
 
+  -- X Windows helpers
+  awful.key({ superkey, altkey }, "c", function()
+    awful.spawn.easy_async_with_shell("xprop WM_CLASS", function(stdout)
+      naughty.notification({ title = "Window Class", message = stdout:gsub("^.*=", "") })
+    end)
+  end),
+
   -- Focus client by index (cycle through clients)
   awful.key({ superkey }, "z", function()
     awful.client.focus.byidx(1)
@@ -265,6 +272,7 @@ keys.globalkeys = gears.table.join(
     -- awful.spawn.with_shell("rofi -matching fuzzy -show combi")
     awful.spawn.with_shell("rofi -show combi")
   end, { description = "rofi launcher", group = "launcher" }),
+  awful.key({ superkey, ctrlkey }, "d", apps.docker, { description = "docker", group = "launcher" }),
 
   -- Run
   awful.key({ superkey }, "r", function()
@@ -299,6 +307,9 @@ keys.globalkeys = gears.table.join(
     awful.spawn.with_shell("light -A 10")
   end, { description = "increase brightness", group = "brightness" }),
 
+  -- Select sound device
+  awful.key({ superkey, ctrlkey }, "s", apps.sound_selector),
+
   -- Volume Control with volume keys
   awful.key({}, "XF86AudioMute", function()
     helpers.volume_control(0)
@@ -320,9 +331,6 @@ keys.globalkeys = gears.table.join(
   awful.key({ altkey }, "F3", function()
     helpers.volume_control(5)
   end, { description = "raise volume", group = "volume" }),
-
-  -- Screenkey toggle
-  awful.key({ superkey }, "F12", apps.screenkey, { description = "screen key", group = "volume" }),
 
   -- Microphone (V for voice)
   awful.key({ superkey }, "v", function()
@@ -374,15 +382,6 @@ keys.globalkeys = gears.table.join(
     awful.spawn.with_shell("mpvc toggle")
   end, { description = "mpv toggle pause/play", group = "media" }),
 
-  awful.key({ superkey }, "F8", function()
-    awful.spawn.with_shell("mpvc quit")
-  end, { description = "mpv quit", group = "media" }),
-  awful.key({ superkey }, "F7", function()
-    awful.spawn.with_shell("freeze firefox")
-  end, { description = "send STOP signal to all firefox processes", group = "other" }),
-  awful.key({ superkey, shiftkey }, "F7", function()
-    awful.spawn.with_shell("freeze -u firefox")
-  end, { description = "send CONT signal to all firefox processes", group = "other" }),
   awful.key({ superkey }, "q", function()
     apps.scratchpad()
   end, { description = "scratchpad", group = "launcher" }),
@@ -414,13 +413,51 @@ keys.globalkeys = gears.table.join(
   awful.key({ superkey, shiftkey }, "s", function()
     awful.layout.set(awful.layout.suit.floating)
   end, { description = "set floating layout", group = "tag" }),
+
+  ----------------------------
+  -- FUNCTION KEYS
+  ----------------------------
   -- Dashboard
   awful.key({ superkey }, "F1", function()
     if dashboard_show then
       dashboard_show()
     end
-    -- rofi_show()
   end, { description = "dashboard", group = "custom" }),
+  -- Spawn file manager
+  awful.key({ superkey }, "F2", apps.file_manager, { description = "file manager", group = "launcher" }),
+  awful.key({ superkey, ctrlkey }, "F2", apps.gui_file_manager, { description = "file manager (gui)", group = "launcher" }),
+  -- Spawn cava in a terminal
+  awful.key({ superkey }, "F3", apps.chat, { description = "chat", group = "launcher" }),
+  awful.key({ superkey }, "F4", apps.mail, { description = "mail", group = "launcher" }),
+  awful.key({ superkey }, "F5", apps.browser, { description = "browser", group = "launcher" }),
+  awful.key({ superkey, ctrlkey }, "F5", function()
+    awful.spawn.with_shell("freeze firefox")
+  end, { description = "send STOP signal to all firefox processes", group = "other" }),
+  awful.key({ superkey, ctrlkey, shiftkey }, "F5", function()
+    awful.spawn.with_shell("freeze -u firefox")
+  end, { description = "send CONT signal to all firefox processes", group = "other" }),
+  -- IDE stuff
+  awful.key({ superkey }, "F6", apps.dev_browser, { description = "dev browser", group = "launcher" }),
+  awful.key({ superkey }, "F7", apps.fe_ide, { description = "front-end IDE", group = "launcher" }),
+  awful.key({ superkey }, "F8", apps.be_ide, { description = "back-end IDE", group = "launcher" }),
+  awful.key({ superkey, ctrlkey}, "F8", apps.be_terminal, {description = "back-end terminal", group = "launcher"}),
+  -- Spawn music client
+  awful.key({ superkey }, "F9", apps.music, { description = "music client", group = "launcher" }),
+  -- Spawn ncmpcpp in a terminal, with a special visualizer config
+  awful.key({ superkey, shiftkey }, "F9", function()
+    awful.spawn(user.terminal .. " -e 'ncmpcpp -c ~/.config/ncmpcpp/config_visualizer -s visualizer'")
+  end, { description = "ncmpcpp + visualizer", group = "launcher" }),
+  awful.key({ superkey }, "F10", apps.mpsyt, { description = "mpsyt/yewtube", group = "launcher" }),
+  awful.key({ superkey }, "F11", apps.visualizer, { description = "cava", group = "launcher" }),
+  -- Network dialog: nmapplet rofi frontend
+  awful.key({ superkey, ctrlkey }, "F11", apps.networks, { description = "spawn network dialog", group = "launcher" }),
+  awful.key({ superkey, ctrlkey, shiftkey }, "F11", apps.vpn, { description = "spawn vpn", group = "launcher" }),
+
+  -- Screenkey toggle
+  awful.key({ superkey }, "F12", apps.screenkey, { description = "screen key", group = "volume" }),
+  --awful.key({ superkey }, "F8", function()
+  --awful.spawn.with_shell("mpvc quit")
+  --end, { description = "mpv quit", group = "media" }),
 
   -- App drawer
   awful.key({ superkey }, "a", function()
@@ -428,26 +465,9 @@ keys.globalkeys = gears.table.join(
   end, { description = "App drawer", group = "custom" }),
 
   -- Pomodoro timer
-  awful.key({ superkey }, "slash", function()
-    awful.spawn.with_shell("pomodoro")
+  awful.key({ superkey }, "backslash", function()
+    awful.spawn.with_shell("pomatez")
   end, { description = "pomodoro", group = "launcher" }),
-  -- Spawn file manager
-  awful.key({ superkey }, "F2", apps.file_manager, { description = "file manager", group = "launcher" }),
-  -- Spawn music client
-  awful.key({ superkey }, "F3", apps.music, { description = "music client", group = "launcher" }),
-  -- Spawn cava in a terminal
-  awful.key({ superkey }, "F9", apps.visualizer, { description = "cava", group = "launcher" }),
-  awful.key({ superkey }, "F5", apps.browser, { description = "browser", group = "launcher" }),
-  awful.key({ superkey }, "F6", apps.chat, { description = "chat", group = "launcher" }),
-  awful.key({ superkey }, "F7", apps.mail, { description = "mail", group = "launcher" }),
-  -- Spawn ncmpcpp in a terminal, with a special visualizer config
-  awful.key({ superkey, shiftkey }, "F4", function()
-    awful.spawn(user.terminal .. " -e 'ncmpcpp -c ~/.config/ncmpcpp/config_visualizer -s visualizer'")
-  end, { description = "ncmpcpp", group = "launcher" }),
-  -- Network dialog: nmapplet rofi frontend
-  awful.key({ superkey }, "F11", function()
-    awful.spawn("networks-rofi")
-  end, { description = "spawn network dialog", group = "launcher" }),
   -- Toggle sidebar
   awful.key({ superkey }, "grave", function()
     sidebar_toggle()
