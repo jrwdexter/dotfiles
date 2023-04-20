@@ -11,7 +11,7 @@ local icons = require("icons")
 local class_icons = icons.text.by_class
 
 -- TODO: These variables (and more) should ideally be retrieved through `beautiful`
-local item_font = "icomoon 15"
+local item_font = "icomoon 16"
 local item_bg = x.background
 local item_size = dpi(50)
 local item_shape = helpers.squircle(1.7, 0)
@@ -52,18 +52,18 @@ local dock_recently_focused = {}
 -- to get rid of this redundancy
 ----------------------------------------------------------------------------
 local dock_pinned_classes = {
-    "firefox",
-    "TelegramDesktop",
-    "editor",
-    "email"
+    --"firefox",
+    --"TelegramDesktop",
+    --"editor",
+    --"email"
 }
 -- `dock_pinned_launchers` determines the function that should run when
 -- clicking the dock item of a class when there is no such window open.
 local dock_pinned_launchers = {
-    ["firefox"] = apps.browser,
-    ["TelegramDesktop"] = apps.telegram,
-    ["editor"] = apps.editor,
-    ["email"] = apps.mail
+    --["firefox"] = apps.browser,
+    --["TelegramDesktop"] = apps.telegram,
+    --["editor"] = apps.editor,
+    --["email"] = apps.mail
 }
 
 -- >> Helper functions
@@ -124,7 +124,6 @@ local function generate_dock_icon(c, bg, fg, symbol)
         {
             font = item_font,
             markup = helpers.colorize_text(symbol, fg),
-            -- text = symbol,
             align = "center",
             valign = "center",
             widget = wibox.widget.textbox()
@@ -167,6 +166,8 @@ local function generate_dock_icon(c, bg, fg, symbol)
                 visible = not c.ghost,
                 layout = wibox.layout.stack
             },
+            align = "center",
+            valign = "center",
             spacing = indicator_spacing,
             layout = wibox.layout.fixed.vertical
         },
