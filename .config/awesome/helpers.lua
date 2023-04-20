@@ -454,4 +454,13 @@ function helpers.this_dir()
    return str:match("(.*/)")
 end
 
+-- Move client to same tag across screens
+function helpers.move_client_to_screen (c,s)
+    local index = c.first_tag.index
+    c:move_to_screen(s)
+    local tag = c.screen.tags[index]
+    c:move_to_tag(tag)
+    if tag then tag:view_only() end
+end
+
 return helpers
