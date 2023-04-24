@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if git rev-parse --verify master &> /dev/null; then
+  git checkout master
+else
+  git checkout main
+fi

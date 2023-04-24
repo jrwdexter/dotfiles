@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for k in `git tag -l`;do
+  commits=`git rev-list $k.. --count`
+  cm=`printf "%04d" $commits`
+  subject=`git tag -l $k --format="%(subject)"`
+  echo -e `git show $k --pretty=format:"START %Creset^$cm | %h | %Cgreen$k%Creset | $subject END" --color=always`|sed -E "s/^.*START(.*) END.*$/\1/";
+done|sort

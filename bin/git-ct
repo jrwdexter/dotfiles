@@ -1,0 +1,4 @@
+#!/bin/bash
+
+tag=`git tag -l | fzf`
+git checkout $tag
