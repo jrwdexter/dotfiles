@@ -105,7 +105,7 @@ user = {
   chat_class = "Slack",
   email_client = "wavebox",
   email_client_class = "Wavebox",
-  visualizer = os.getenv("HOME") .. "/bin/visualizer",
+  visualizer = os.getenv("HOME") .. "/.local/bin/visualizer",
   music_client = "kitty -1 --class music -e ncmpcpp",
   mpsyt = "kitty -1 --class music -e mpsyt",
 
