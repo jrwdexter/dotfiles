@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git branch --merged | grep -vE "^\s*main|master|develop$" | grep -v "^*" | sed -E "s/^\s*//g" | xargs git branch -d
