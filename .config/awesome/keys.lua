@@ -307,8 +307,9 @@ keys.globalkeys = gears.table.join(
     awful.spawn.with_shell("light -A 10")
   end, { description = "increase brightness", group = "brightness" }),
 
-  -- Select sound device
+  -- Select sound + input device
   awful.key({ superkey, ctrlkey }, "s", apps.sound_selector),
+  awful.key({ superkey, ctrlkey }, "i", apps.mic_selector),
 
   -- Volume Control with volume keys
   awful.key({}, "XF86AudioMute", function()

@@ -357,7 +357,8 @@ function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
 
     -- Spawn if not found
     if not found then
-        awful.spawn(spawn_cmd, spawn_args)
+        awful.spawn.with_shell(spawn_cmd, spawn_args)
+        --awful.spawn(spawn_cmd, spawn_args)
     end
 end
 

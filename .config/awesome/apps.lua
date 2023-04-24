@@ -47,6 +47,9 @@ end
 apps.sound_selector = function()
   awful.spawn.with_shell('rofi -show rofi-sound -modi "rofi-sound:rofi-sound-output-chooser"')
 end
+apps.mic_selector = function()
+  awful.spawn.with_shell('rofi -show rofi-mic -modi "rofi-mic:rofi-sound-input-chooser"')
+end
 apps.discord = function()
   -- Run or raise Discord running in the browser, spawned with Chromium browser's app mode
   -- >> Ubuntu / Debian
