@@ -86,6 +86,7 @@ user = {
   terminal = "kitty -1",
   floating_terminal = "kitty -1",
   browser = "firefox",
+  todo = "notion-app",
   src_dir = os.getenv("HOME").."/src",
   dev = {
     docker = "kitty -1 --class docker -e lazydocker",

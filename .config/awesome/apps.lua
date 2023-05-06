@@ -9,6 +9,10 @@ local notifications = require("notifications")
 
 local apps = {}
 
+apps.todo = function()
+  helpers.run_or_raise({ instance = user.todo}, false, user.todo, {switchtotag = true})
+end
+
 apps.mpsyt = function()
   helpers.run_or_raise({ instance = "mpsyt" }, false, user.mpsyt, { switchtotag = true })
 end
