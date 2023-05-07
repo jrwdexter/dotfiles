@@ -22,7 +22,6 @@ local keygrabber = require("awful.keygrabber")
 dashboard = wibox({visible = false, ontop = true, type = "dock", screen = screen.primary})
 awful.placement.maximize(dashboard)
 
-dashboard.bg = beautiful.dashboard_bg or beautiful.exit_screen_bg or beautiful.wibar_bg or "#111111"
 dashboard.fg = beautiful.dashboard_fg or beautiful.exit_screen_fg or beautiful.wibar_fg or "#FEFEFE"
 
 -- Add dashboard or mask to each screen
@@ -30,7 +29,7 @@ for s in screen do
     if s == screen.primary then
         s.dashboard = dashboard
     else
-        s.dashboard = helpers.screen_mask(s, dashboard.bg)
+        s.dashboard = helpers.screen_mask(s, beautiful.dashboard_bg or beautiful.exit_screen_bg or beautiful.wibar_bg or "#111111")
     end
 end
 
