@@ -24,7 +24,14 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 * Type `{Superkey}+?` to view hotkey options
   * On windows, the superkey is the windows button
 
+## Other tools
+
+Other tools can be found under `bin/`. These tools should be executable, and allow for some things I find helpful, for example sound switching and network switching via `rofi`.
+
 ### Dependancies (required)
+
+**Supporting Libraries**
+* lub-pam-git (allows usage of lock screen passwords, provided `liblua.so` is in path - eg. in `/usr/lib`)
 
 **Default Programs from rc.lua**
 *Note: You do not need to select these, but if you do not, you will have to change default programs in `rc.lua`*
@@ -46,12 +53,11 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 | [redshift](https://wiki.archlinux.org/title/Redshift)     | Shift monitor to red colors at night |                                                         |
 | [jq](https://stedolan.github.io/jq/)                      | JQ quick command line parsing        |                                                         |
 
-
 ### Dependencies (optional)
 
 **Window Compositor**
 *Note: This will make things look better*
-* Picom
+* picom
 
 **System Tools**
 * htop
@@ -72,14 +78,14 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 **Music + Audio**
 * pulseaudio
   * pavucontrol
-* mopidy-mpd
 * mopidy
-  * mopidy-spotify (not working at time of writing)
-  * mopidy-tidal
+  * mopidy-mpd
+  * mopidy-spotify
 * ncmpcpp
 * cava
 
 **Video**
+* yewtube
 * mpv
 
 **Apps**
@@ -88,7 +94,7 @@ First of all, update configuration located at `~/.config/awesome/rc.lua`. The va
 * Inkscape
 * Steam (via proton)
 * Lutris
-* Notion (via lotion)
+* Notion
 * Chrome
 * Onepassword / opp command line
 
