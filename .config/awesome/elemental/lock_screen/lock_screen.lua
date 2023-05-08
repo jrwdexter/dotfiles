@@ -9,6 +9,13 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local helpers = require("helpers")
 local lock_screen = require("elemental.lock_screen")
+local autolocker = require("evil.autolocker")
+
+-- Listen to lock signal
+awesome.connect_signal("evil::lock", function()
+  lock_screen_show()
+end)
+autolocker.init()
 
 local lock_screen_symbol = ""
 local lock_screen_fail_symbol = ""
