@@ -282,7 +282,7 @@ local mpd_create_decoration = function (c)
                 end),
                 -- Go to list of playlists
                 control_button(c, "", x.color4, dpi(30), function()
-                    helpers.send_key(c, "5")
+                    helpers.send_key(c, "2")
                 end),
                 -- Visualizer button
                 control_button(c, "", x.color5, dpi(30),
