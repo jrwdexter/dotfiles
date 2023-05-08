@@ -1,3 +1,0 @@
-#!/bin/bash
-
-git grep-status -E "\(dll\|pdb\)$" | xargs git checkout HEAD
