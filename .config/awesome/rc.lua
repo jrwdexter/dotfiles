@@ -147,6 +147,7 @@ user = {
   -- as described in the README instructions
   -- Leave it empty in order to unlock with just the Enter key.
   -- lock_screen_custom_password = "",
+  lock_duration = 30,
   lock_screen_custom_password = "",
 
   -- >> Battery <<
