@@ -106,8 +106,15 @@ awesome.connect_signal('evil::github::pr', function(prs)
     for i,w in pairs(bookmarks:get_all_children()) do
       bookmarks:remove_widgets(w)
     end
+    local count = 0
     for i,pr in pairs(prs) do
+      count = count + 1
       bookmarks:add(create_web_bookmark(pr.title, pr.url, x['color'..i], x['color'..(i+8)]))
+    end
+    if count == 0 then
+      -- No PRs, show something nice
+      bookmarks:add(create_web_bookmark('🎉', '', x['color0'], x['color8']))
+      bookmarks:add(create_web_bookmark('All done!', '', x['color1'], x['color9']))
     end
   end
 end)
