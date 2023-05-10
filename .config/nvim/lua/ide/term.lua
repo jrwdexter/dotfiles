@@ -7,6 +7,7 @@ end
 term.init = function()
   require("toggleterm").setup{}
   local Terminal  = require('toggleterm.terminal').Terminal
+  local cur_cwd = vim.fn.getcwd()
 
   local lazygit = Terminal:new({
     cmd = "lazygit",
@@ -26,11 +27,16 @@ term.init = function()
     end,
   })
 
-  function _lazygit_toggle()
+  function ToggleLazygit()   local cwd = vim.fn.getcwd()
+    if cwd ~= cur_cwd then
+      cur_cwd = cwd
+      lazygit:close()
+      lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
+    end
     lazygit:toggle()
   end
 
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua ToggleLazygit()<CR>", {noremap = true, silent = true})
 end
 
 return term
