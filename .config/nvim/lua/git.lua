@@ -11,7 +11,7 @@ git.init = function()
   vim.g.gitgutter_highlight_lines=1
 
   -- mappings
-  vim.api.nvim_set_keymap('n', '<leader>gg', ':GitGutterToggle<CR>', {})
+  vim.api.nvim_set_keymap('n', '<leader>gt', ':GitGutterToggle<CR>', {})
   vim.api.nvim_set_keymap('n', '<leader>gh', ':GitGutterLineHighlightsToggle \\| :GitGutterLineNrHighlightsToggle<CR>', {})
 end
 
