@@ -10,7 +10,7 @@
 -- >> The file that binds everything together.
 --]]
 
-local naughty = require('naughty')
+local naughty = require("naughty")
 
 local gears = require("gears")
 
@@ -87,17 +87,19 @@ user = {
   floating_terminal = "kitty -1",
   browser = "firefox",
   todo = "notion-app",
-  src_dir = os.getenv("HOME").."/src",
+  src_dir = os.getenv("HOME") .. "/src",
   dev = {
     docker = "kitty -1 --class docker -e lazydocker",
-    be_terminal = "kitty -1 --class be_terminal -d="..os.getenv("HOME").."/src/mjl/clients/cam-api -e nuke startservices",
+    be_terminal = "kitty -1 --class be_terminal -d="
+      .. os.getenv("HOME")
+      .. "/src/mjl/clients/cam-api -e nuke startservices",
     browser = "firefox-developer-edition",
     browser_class = "firefoxdeveloperedition",
     fe_ide = "webstorm",
     fe_ide_class = "jetbrains-webstorm",
     be_ide = "rider",
     be_ide_class = "jetbrains-rider",
-    api_explorer = "postman"
+    api_explorer = "postman",
   },
   file_manager = "kitty -1 --class files -e ranger",
   gui_file_manager = "thunar",
@@ -252,9 +254,15 @@ user = {
   ifttt_key = os.getenv("IFTTT_KEY"),
 }
 
-local laptopScreenName = "eDP-1"
---local laptopScreen = awful.screen.outputs[laptopScreenName]
-naughty.notification({ title = "test"})
+local awful = require("awful")
+--local laptopScreenName = "eDP-1"
+local secondScreenIndex = awful.screen.getbycoord(0,0)
+local secondScreen = awful.screen.focused()
+for i, s in ipairs(screen) do
+  if i == secondScreenIndex then
+    secondScreen = s
+  end
+end
 -- ===================================================================
 
 -- Jit
@@ -441,14 +449,25 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- Create tags with seperate configuration for each tag
   for k, v in pairs(tagnames) do
-    awful.tag.add(v, {
-      layout = layouts[k],
-      screen = s,
-      master_width_factor = 0.6,
-      selected = (k == 1),
-      gap_single_client = true,
-      master_fill_policy = "master_width_factor",
-    })
+    if k == 9 then
+      awful.tag.add(v, {
+        layout = layouts[k],
+        screen = s,
+        master_width_factor = 0.5,
+        selected = (k == 1),
+        gap_single_client = true,
+        master_fill_policy = "master_width_factor",
+      })
+    else
+      awful.tag.add(v, {
+        layout = layouts[k],
+        screen = s,
+        master_width_factor = 0.6,
+        selected = (k == 1),
+        gap_single_client = true,
+        master_fill_policy = "master_width_factor",
+      })
+    end
   end
   -- awful.tag.add(tagnames[5], {
   -- layout = layouts[5],
@@ -746,8 +765,8 @@ awful.rules.rules = {
   {
     rule_any = { class = { "visualizer" } },
     properties = {
-      screen = awful.screen.focused(),
-      tag = awful.screen.focused().tags[2],
+      screen = secondScreen,
+      tag = secondScreen.tags[9],
       skip_taskbar = true,
       above = true,
       titlebars_enabled = false,
@@ -1019,7 +1038,7 @@ awful.rules.rules = {
       class = {
         user.dev.browser,
         user.dev.fe_ide_class,
-        "jetbrains-webstorm"
+        "jetbrains-webstorm",
       },
       instance = {
         user.dev.api_explorer,
@@ -1038,7 +1057,7 @@ awful.rules.rules = {
         "jetbrains-pycharm",
       },
       instance = {
-        "be_terminal"
+        "be_terminal",
       },
     },
     properties = { screen = 1, tag = awful.screen.focused().tags[4] },
@@ -1097,8 +1116,8 @@ awful.rules.rules = {
     properties = {
       -- fullscreen = true,
       -- honor_padding = true,
-      screen = "eDP-1",
-      tag = awful.screen.focused().tags[9],
+      screen = secondScreen,
+      tag = secondScreen.tags[9],
       -- floating = true,
       -- width = screen_width * 0.45,
       -- height = screen_height * 0.50
