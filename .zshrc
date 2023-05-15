@@ -341,6 +341,12 @@ clean_wsl_mem() {
   fi
 }
 
+nf() {
+  clear
+  echo ''
+  neofetch
+}
+
 alias vaccines='cat /tmp/awesome.out | tail -n 100 | grep "appointments" | tail -n 1 | sed -E "s/ \(string\)$//" | jq 2> /dev/null'
 
 alias luamake=/home/mandest/src/lua-language-server/3rd/luamake/luamake
