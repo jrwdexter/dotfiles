@@ -360,5 +360,14 @@ if [[ -f /opt/azure-cli/az.completion ]]; then
   source /opt/azure-cli/az.completion
 fi
 
+if type "nuke" > /dev/null; then
+  _nuke_zsh_complete()
+  {
+      local completions=("$(nuke :complete "$words")")
+      reply=( "${(ps:\n:)completions}" )
+  }
+  compctl -K _nuke_zsh_complete nuke
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
