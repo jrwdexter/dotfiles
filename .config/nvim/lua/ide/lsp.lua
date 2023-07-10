@@ -145,6 +145,8 @@ lsp.init = function(capabilities)
     },
   })
 
+  require("lspconfig").terraformls.setup({})
+
   require("lspconfig").yamlls.setup({
     capabilities = capabilities,
     filetypes = { "yaml", "yaml.docker-compose", "helm" },
@@ -158,7 +160,7 @@ lsp.init = function(capabilities)
       cmd = { "yaml-language-server.cmd", "--stdio" },
       yaml = {
         schemas = {
-          ["https://json.schemastore.org/chart.json"] = {"/deployment/helm/*", "**/k8s/**.yaml"},
+          ["https://json.schemastore.org/chart.json"] = { "/deployment/helm/*", "**/k8s/**.yaml" },
           ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
             "/azure-pipeline*.y*l",
