@@ -430,7 +430,8 @@ keys.globalkeys = gears.table.join(
   -- Spawn cava in a terminal
   awful.key({ superkey }, "F3", apps.chat, { description = "chat", group = "launcher" }),
   awful.key({ superkey }, "F4", apps.mail, { description = "mail", group = "launcher" }),
-  awful.key({ superkey, ctrlkey }, "F4", apps.todo, { description = "todos", group = "launcher" }),
+  awful.key({ superkey, ctrlkey }, "F3", apps.todo, { description = "todos", group = "launcher" }),
+  awful.key({ superkey, ctrlkey }, "F4", apps.notes, { description = "notes", group = "launcher" }),
   awful.key({ superkey }, "F5", apps.browser, { description = "browser", group = "launcher" }),
   awful.key({ superkey, ctrlkey }, "F5", function()
     awful.spawn.with_shell("freeze firefox")

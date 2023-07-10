@@ -20,6 +20,7 @@ local themes = {
   "skyfall", -- 3 --
   "ephemeral", -- 4 --
   "amarena", -- 5 --
+  "firstrice"
 }
 -- Change this number to use a different theme
 local theme = themes[5]
@@ -34,11 +35,12 @@ local decoration_theme = decoration_themes[3]
 -- ===================================================================
 -- Statusbar themes. Multiple bars can be declared in each theme.
 local bar_themes = {
-  "manta", -- 1 -- Taglist, client counter, date, time, layout
-  "lovelace", -- 2 -- Start button, taglist, layout
-  "skyfall", -- 3 -- Weather, taglist, window buttons, pop-up tray
+  "manta",     -- 1 -- Taglist, client counter, date, time, layout
+  "lovelace",  -- 2 -- Start button, taglist, layout
+  "skyfall",   -- 3 -- Weather, taglist, window buttons, pop-up tray
   "ephemeral", -- 4 -- Taglist, start button, tasklist, and more buttons
-  "amarena", -- 5 -- Minimal taglist and dock with autohide
+  "amarena",   -- 5 -- Minimal taglist and dock with autohide
+  "firstrice"  -- 6 -- Rounded floating bar with icons
 }
 local bar_theme = bar_themes[5]
 
@@ -86,7 +88,9 @@ user = {
   terminal = "kitty -1",
   floating_terminal = "kitty -1",
   browser = "firefox",
-  todo = "notion-app",
+  meeting_app = "google-chrome-stable",
+  todo = "todoist",
+  notes = "notion-app",
   src_dir = os.getenv("HOME") .. "/src",
   dev = {
     docker = "kitty -1 --class docker -e lazydocker",
@@ -435,9 +439,9 @@ awful.screen.connect_for_each_screen(function(s)
     l.tile,
     l.tile,
     l.tile,
-    l.max,
-    l.max,
-    l.max,
+    l.tile,
+    l.tile,
+    l.tile,
     l.tile,
     l.tile,
   }
@@ -567,6 +571,8 @@ awful.rules.rules = {
         "lotion",
       },
       class = {
+        "Todoist",
+        "todoist",
         "notion",
         "lotion",
       },
@@ -574,7 +580,7 @@ awful.rules.rules = {
     properties = {
       screen = 1,
       tag = awful.screen.focused().tags[9],
-      fullscreen = true,
+      fullscreen = false
     },
   },
 
