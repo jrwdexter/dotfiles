@@ -322,16 +322,16 @@ keys.globalkeys = gears.table.join(
     helpers.volume_control(5)
   end, { description = "raise volume", group = "volume" }),
 
-  -- Volume Control with alt+F1/F2/F3
-  awful.key({ altkey }, "F1", function()
-    helpers.volume_control(0)
-  end, { description = "(un)mute volume", group = "volume" }),
-  awful.key({ altkey }, "F2", function()
-    helpers.volume_control(-5)
-  end, { description = "lower volume", group = "volume" }),
-  awful.key({ altkey }, "F3", function()
-    helpers.volume_control(5)
-  end, { description = "raise volume", group = "volume" }),
+  ---- Volume Control with alt+F1/F2/F3
+  --awful.key({ altkey }, "F1", function()
+    --helpers.volume_control(0)
+  --end, { description = "(un)mute volume", group = "volume" }),
+  --awful.key({ altkey }, "F2", function()
+    --helpers.volume_control(-5)
+  --end, { description = "lower volume", group = "volume" }),
+  --awful.key({ altkey }, "F3", function()
+    --helpers.volume_control(5)
+  --end, { description = "raise volume", group = "volume" }),
 
   -- Microphone (V for voice)
   awful.key({ superkey }, "v", function()
@@ -723,6 +723,9 @@ end
 
 -- Mouse buttons on the client (whole window, not just titlebar)
 keys.clientbuttons = gears.table.join(
+  awful.button({ superkey }, 2, function (c)
+    c:kill()
+  end),
   awful.button({}, 1, function(c)
     client.focus = c
   end),
