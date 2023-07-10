@@ -33,11 +33,11 @@ local function create_link(start_date, end_date, name, link)
 
     agenda_line:buttons(gears.table.join(
         awful.button({ }, 1, function ()
-            awful.spawn(user.browser.." "..link)
+            awful.spawn(user.meeting_app.." "..link)
             dashboard_hide()
         end),
         awful.button({ }, 3, function ()
-            awful.spawn(user.browser.." "..link)
+            awful.spawn(user.meeting_app.." "..link)
             dashboard_hide()
         end)
     ))
