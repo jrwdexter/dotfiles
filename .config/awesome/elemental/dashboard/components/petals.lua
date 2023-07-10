@@ -5,7 +5,7 @@ local wibox   = require("wibox")
 
 local petal_font = "Sans Bold 16"
 
-local function create_widget_petal(widget, bg_color, hover_color, url, tl, tr, br, bl)
+local function create_widget_petal(widget, bg_color, hover_color, url_or_program, tl, tr, br, bl)
     local petal_container = wibox.widget {
         bg = bg_color,
         forced_height = dpi(98),
@@ -25,14 +25,17 @@ local function create_widget_petal(widget, bg_color, hover_color, url, tl, tr, b
         widget = wibox.container.background()
     }
 
+    local command = url_or_program:match("^http") and (user.browser.." "..url_or_program) or url_or_program
+    local right_click_command = url_or_program:match("^http") and (user.browser.." -new-window "..url_or_program) or url_or_program
+
     petal:buttons(
         gears.table.join(
             awful.button({ }, 1, function ()
-                awful.spawn(user.browser.." "..url)
+                awful.spawn(command)
                 dashboard_hide()
             end),
             awful.button({ }, 3, function ()
-                awful.spawn(user.browser.." -new-window "..url, { switch_to_tags = true })
+                awful.spawn(right_click_command)
                 dashboard_hide()
             end)
     ))
@@ -86,10 +89,10 @@ local function create_icon_petal(icon_name, bg_color, hover_color, url, tl, tr, 
 end
 
 -- Create the containers
-local petal_top_left = create_icon_petal("google_drive_2020.png", x.color3, x.color11, "https://drive.google.com/", true, true, false, true)
-local petal_top_right = create_icon_petal("google_mail_2020.png", x.color2, x.color10, "https://mail.google.com/", true, true, true, false)
-local petal_bottom_right = create_icon_petal("trello.png", x.color4, x.color12, "https://trello.com", false, true, true, true)
-local petal_bottom_left = create_text_petal("UP", x.color1, x.color9, "https://ultipro.nerdery.com/", true, false, true, true)
+local petal_top_left = create_icon_petal("rider_bnw.png", x.color3, x.color11, "rider", true, true, false, true)
+local petal_top_right = create_icon_petal("webstorm_bnw.png", x.color2, x.color10, "webstorm", true, true, true, false)
+local petal_bottom_right = create_icon_petal("slack_bnw.png", x.color4, x.color12, "slack", false, true, true, true)
+local petal_bottom_left = create_icon_petal("wavebox_bnw.png", x.color1, x.color9, "wavebox", true, false, true, true)
 
 -- Add clickable effects on hover
 helpers.add_hover_cursor(petal_top_left, "hand1")
