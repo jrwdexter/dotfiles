@@ -1,13 +1,14 @@
-local gears = require("gears")
 local awful = require("awful")
-local wibox = require("wibox")
 local naughty = require("naughty")
-local beautiful = require("beautiful")
 local helpers = require("helpers")
 local icons = require("icons")
 local notifications = require("notifications")
 
 local apps = {}
+
+apps.notes = function()
+  helpers.run_or_raise({ instance = user.notes}, false, user.todo, {switchtotag = true})
+end
 
 apps.todo = function()
   helpers.run_or_raise({ instance = user.todo}, false, user.todo, {switchtotag = true})
