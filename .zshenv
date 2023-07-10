@@ -22,3 +22,10 @@ if [ -f ~/.zshenv-private ]; then
   source ~/.zshenv-private
 fi
 . "$HOME/.cargo/env"
+
+#if [ $RANGER_LEVEL ]; then
+  #if [ -d $HOME/.oh-my-zsh/plugins/z ]; then
+    export ZSHZ_SRC=$HOME/.oh-my-zsh/plugins/z/z.plugin.zsh
+    #export _Z_SRC=$HOME/.oh-my-zsh/plugins/z/z.plugin.zsh
+  #fi
+#fi
