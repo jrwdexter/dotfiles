@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<opml version="1.0">
+  <head>
+    <title>Pocket Casts Feeds</title>
+  </head>
+  <body>
+    <outline text="feeds">
+      <outline type="rss" text="Decoder with Nilay Patel" xmlUrl="https://feeds.megaphone.fm/recodedecode" />
+      <outline type="rss" text="Truer Crime" xmlUrl="https://anchor.fm/s/46bd7838/podcast/rss" />
+      <outline type="rss" text="The Run-Up" xmlUrl="https://feeds.simplecast.com/Kctn1RDB" />
+      <outline type="rss" text="The Vergecast" xmlUrl="https://feeds.megaphone.fm/vergecast" />
+      <outline type="rss" text="Critical Role" xmlUrl="https://feed.podbean.com/geekandsundry/feed.xml" />
+      <outline type="rss" text="Data Engineering Podcast" xmlUrl="https://feeds.fireside.fm/dataengineering/rss" />
+      <outline type="rss" text="Critical Role" xmlUrl="https://feeds.simplecast.com/LXz4Q9rJ" />
+      <outline type="rss" text="The Daily" xmlUrl="https://feeds.simplecast.com/54nAGcIl" />
+      <outline type="rss" text="Reply All" xmlUrl="https://feeds.megaphone.fm/replyall" />
+      <outline type="rss" text="The Coldest Case In Laramie" xmlUrl="https://feeds.simplecast.com/wHqls8d1" />
+      <outline type="rss" text="Behind the Bastards" xmlUrl="https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/e5f91208-cc7e-4726-a312-ae280140ad11/d64f756d-6d5e-4fae-b24f-ae280140ad36/podcast.rss" />
+      <outline type="rss" text="It Could Happen Here" xmlUrl="https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/78d30acb-8463-4c40-a5ae-ae2d0145c9ff/bc7f369b-dce6-43c2-897e-ae2d0145ca12/podcast.rss" />
+      <outline type="rss" text="no dogma podcast" xmlUrl="https://feeds.simplecast.com/EoO4h3Xv" />
+    </outline>
+  </body>
+</opml>
