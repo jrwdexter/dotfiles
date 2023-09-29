@@ -25,6 +25,7 @@ bind ,d  composite tabclosealltoleft | tabclosealltoright
 " *********************************
 " ********* Autocontains **********
 " *********************************
+autocontain app.daily.dev Personal
 autocontain drive.google.com MJL
 autocontain calendar.google.com MJL
 autocontain docs.google.com MJL
