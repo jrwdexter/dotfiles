@@ -174,6 +174,18 @@ screenshot_box:buttons(gears.table.join(
 
 helpers.add_hover_cursor(screenshot_box, "hand1")
 
+-- VPN widget
+local vpn = require("elemental.dashboard.components.vpn")
+local vpn_box = create_boxed_widget(vpn, dpi(225), dpi(117), x.background)
+vpn_box:buttons(gears.table.join(
+    -- Left click - Toggle
+    awful.button({ }, 1, function ()
+        apps.toggle_vpn()
+    end)
+))
+
+helpers.add_hover_cursor(vpn_box, "hand1")
+
 -- Timeslot widget
 local timer = require("elemental.dashboard.components.screenshot")
 local timer_box = create_boxed_widget(timer, dpi(225), dpi(117), x.background)
@@ -208,7 +220,7 @@ dashboard:setup {
                 -- Column 2
                 url_petals_box,
                 notification_state_box,
-                timer_box,
+                vpn_box,
                 disk_box,
                 layout = wibox.layout.fixed.vertical
             },
