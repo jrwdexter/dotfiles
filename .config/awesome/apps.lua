@@ -7,11 +7,11 @@ local notifications = require("notifications")
 local apps = {}
 
 apps.notes = function()
-  helpers.run_or_raise({ instance = user.notes}, false, user.todo, {switchtotag = true})
+  helpers.run_or_raise({ instance = user.notes }, false, user.notes, { switchtotag = true })
 end
 
 apps.todo = function()
-  helpers.run_or_raise({ instance = user.todo}, false, user.todo, {switchtotag = true})
+  helpers.run_or_raise({ instance = user.todo }, false, user.todo, { switchtotag = true })
 end
 
 apps.mpsyt = function()
@@ -19,7 +19,7 @@ apps.mpsyt = function()
 end
 
 apps.docker = function()
-  helpers.run_or_raise({ instance = "docker", class = "docker" }, true, user.dev.docker, {switchtotag = true })
+  helpers.run_or_raise({ instance = "docker", class = "docker" }, true, user.dev.docker, { switchtotag = true })
 end
 
 apps.browser = function()
@@ -29,7 +29,7 @@ apps.dev_browser = function()
   helpers.run_or_raise({ class = user.dev.browser_class }, false, user.dev.browser)
 end
 apps.api_explorer = function()
-  helpers.run_or_raise({ instance = user.dev.api_explorer }, true, user.dev.api_explorer, {switchtotag = true})
+  helpers.run_or_raise({ instance = user.dev.api_explorer }, true, user.dev.api_explorer, { switchtotag = true })
 end
 apps.fe_ide = function()
   helpers.run_or_raise({ class = user.dev.fe_ide_class }, false, user.dev.fe_ide)
@@ -38,7 +38,7 @@ apps.be_ide = function()
   helpers.run_or_raise({ class = user.dev.be_ide_class }, false, user.dev.be_ide)
 end
 apps.be_terminal = function()
-  helpers.run_or_raise({ instance = 'be_terminal'}, false, user.dev.be_terminal)
+  helpers.run_or_raise({ instance = "be_terminal" }, false, user.dev.be_terminal)
 end
 apps.file_manager = function()
   awful.spawn(user.file_manager)
@@ -92,6 +92,20 @@ apps.networks = function()
 end
 apps.vpn = function()
   awful.spawn.with_shell("mozillavpn")
+end
+apps.toggle_vpn = function()
+  local script = [=[
+    if [[ $(mozillavpn status | grep "VPN state: off") ]]; then
+      if [[ $(mozillavpn activate) ]]; then
+        awesome-client "awesome.emit_signal('evil::vpn::enabled')"
+      fi
+    else
+      if [[ $(mozillavpn deactivate) ]]; then
+        awesome-client "awesome.emit_signal('evil::vpn::disabled')"
+      fi
+    fi
+  ]=]
+  awful.spawn.with_shell(script)
 end
 apps.passwords = function()
   helpers.run_or_raise({ class = "1password" }, true, "1password")
