@@ -274,6 +274,14 @@ keys.globalkeys = gears.table.join(
   end, { description = "rofi launcher", group = "launcher" }),
   awful.key({ superkey, ctrlkey }, "d", apps.docker, { description = "docker", group = "launcher" }),
 
+  awful.key({ }, "XF86Calculator", function()
+    awful.spawn.with_shell("rofi -show calc")
+  end, { description = "rofi calculator", group = "client" }),
+
+  awful.key({ ctrlkey, superkey }, "b", function()
+    awful.spawn.with_shell("rofi-bluetooth")
+  end, { description = "rofi bluetooth selector", group = "client" }),
+
   -- Run
   awful.key({ superkey }, "r", function()
     -- Not all sidebars have a prompt
