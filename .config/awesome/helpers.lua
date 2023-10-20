@@ -401,7 +401,7 @@ end
 -- Saves output in `output_file` and checks its last modification
 -- time to determine whether to run the command again or not.
 -- Passes the output of `command` to `callback` function.
-function helpers.remote_watch(command_or_func, interval, output_file, callback)
+function helpers.remote_watch(command_or_func, interval, output_file, callback, optional_signal)
     local command = command_or_func
     local run_the_thing = function()
         if (type(command_or_func) == 'function') then
@@ -412,6 +412,10 @@ function helpers.remote_watch(command_or_func, interval, output_file, callback)
             awful.spawn.easy_async_with_shell(command.." | tee "..output_file, function(out, err, exitreason, exitcode) callback(out, err, exitreason, exitcode) end)
         end
         -- awful.spawn.easy_async_with_shell(command, function(out) callback(out) end)
+    end
+
+    if (not (optional_signal == nil)) then
+      awesome.connect_signal(optional_signal, run_the_thing)
     end
 
     local timer
