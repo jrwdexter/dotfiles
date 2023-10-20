@@ -79,6 +79,7 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   macos
+  conda-zsh-completion
   gcloud
   virtualenv
   fzf
