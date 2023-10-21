@@ -28,4 +28,4 @@ vim.api.nvim_set_keymap('i', '<C-A>', '<C-O>yiW<End>=<C-R>=<C-R>0<CR>', {})
 -- Vim Editing / Reloading
 vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>eh', ':e C:\\Windows\\System32\\drivers\\etc\\hosts<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ":lua globals.reload_vimrc()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sv', ":lua Globals.reload_vimrc()<CR>", { noremap = true, silent = true })
