@@ -1,29 +1,24 @@
-local ide = {}
+local plugins = {}
+local n=0
 
-ide.startup = function(use)
-  require('ide.tree').startup(use)
-  require('ide.status').startup(use)
-  require('ide.autocomplete').startup(use)
-  require('ide.lsp').startup(use)
-  require('ide.fzf').startup(use)
-  require('ide.copilot').startup(use)
-  require('ide.term').startup(use)
+for _, t in ipairs(require('ide.tree')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.status')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.autocomplete')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.lsp')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.fzf')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.copilot')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.term')) do n=n+1; plugins[n]=t end
 
-  use { 'vim-scripts/DrawIt' }
-end
+local local_modules = {
+  {
+    'vim-scripts/DrawIt', config = function()
 
-ide.init = function()
-  require('ide.tree').init()
-  require('ide.status').init()
-  require('ide.fzf').init()
-  local capabilities = require('ide.autocomplete').init()
-  require('ide.lsp').init()
-  require('ide.copilot').init()
-  require('ide.term').init()
+vim.api.nvim_set_keymap('n', '<localleader>di', ':call DrawIt#DrawItStart()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<localleader>ds', ':call DrawIt#DrawItStop()<CR>', { noremap = true })
+    end
+  }
+}
 
+for _, t in ipairs(local_modules) do n=n+1; plugins[n]=t end
 
-  vim.api.nvim_set_keymap('n', '<localleader>di', ':call DrawIt#DrawItStart()<CR>', { noremap = true })
-  vim.api.nvim_set_keymap('n', '<localleader>ds', ':call DrawIt#DrawItStop()<CR>', { noremap = true })
-end
-
-return ide
+return plugins
