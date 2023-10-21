@@ -1,29 +1,37 @@
 -- Setup package manager
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-require('settings')
-require('hotkeys')
+require 'globals'
+require 'settings'
+require 'hotkeys'
 
-vim.cmd [[packadd packer.nvim]]
+require('lazy').setup({
+  spec = {
+    { import = 'utils'},
+    { import = 'style'},
+    { import = 'git'},
+    { import = 'language'},
+    { import = 'ide'},
+  }
+})
 
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+--lazy.setup("utils")
+--lazy.setup("style")
+--lazy.setup("git")
+--lazy.setup("language")
+--lazy.setup("ide")
 
-  -- Load plugins in a nice way
-  require('style').startup(use)
-  require('git').startup(use)
-  require('language').startup(use)
-  require('utils').startup(use)
-  require('ide').startup(use)
-end)
-
-require('style').init()
-require('git').init()
-require('language').init()
-require('utils').init()
-require('ide').init()
-globals = require('globals').init()
+--require('settings')
+--require('hotkeys')
+--require('globals').init()

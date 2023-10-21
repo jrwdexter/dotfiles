@@ -1,18 +1,23 @@
-local git = {}
+local plugins = {
 
-git.startup = function(use)
-  use { 'tpope/vim-fugitive' } -- Git utils
-  use { 'airblade/vim-gitgutter' }
-end
+  { "tpope/vim-fugitive" }, -- Git utils
+  {
+    "airblade/vim-gitgutter",
+    config = function()
+      -- plugin settings
+      vim.g.gitgutter_enabled = 1
+      vim.g.gitgutter_highlight_lines = 1
 
-git.init = function()
-  -- plugin settings
-  vim.g.gitgutter_enabled = 1
-  vim.g.gitgutter_highlight_lines=1
+      -- mappings
+      vim.api.nvim_set_keymap("n", "<leader>gt", ":GitGutterToggle<CR>", {})
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>gh",
+        ":GitGutterLineHighlightsToggle \\| :GitGutterLineNrHighlightsToggle<CR>",
+        {}
+      )
+    end,
+  },
+}
 
-  -- mappings
-  vim.api.nvim_set_keymap('n', '<leader>gt', ':GitGutterToggle<CR>', {})
-  vim.api.nvim_set_keymap('n', '<leader>gh', ':GitGutterLineHighlightsToggle \\| :GitGutterLineNrHighlightsToggle<CR>', {})
-end
-
-return git
+return plugins

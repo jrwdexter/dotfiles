@@ -1,29 +1,30 @@
---local paq = require('paq-nvim').paq
-local style = {}
-
-style.startup = function(use)
+local plugins = {
   -- Colors
-  use { 'norcalli/nvim-colorizer.lua' }
-  use { 'norcalli/nvim-base16.lua' }
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      --require'colorizer'.setup() -- remove me?
+
+      vim.api.nvim_set_keymap("n", "<leader>co", ":ColorizerToggle<CR>", {})
+    end,
+  },
+  {
+    "norcalli/nvim-base16.lua",
+    config = function()
+      local base16 = require("base16")
+      base16(base16.themes.onedark, true)
+    end,
+  },
 
   -- Emoji
-  use { 'junegunn/vim-emoji' }
+  { "junegunn/vim-emoji" },
 
   -- Line indentations
-  use {"lukas-reineke/indent-blankline.nvim" }
-end
+  { "lukas-reineke/indent-blankline.nvim" },
+}
 
+vim.o.termguicolors = true
 
-style.init = function()
-  vim.o.termguicolors=true
-  require'colorizer'.setup()
+vim.g.indent_blankline_char = "│"
 
-  vim.g.indent_blankline_char='│'
-
-  vim.api.nvim_set_keymap('n', '<leader>co', ':ColorizerToggle<CR>', { })
-
-  local base16 = require 'base16'
-  base16(base16.themes.onedark, true)
-end
-
-return style
+return plugins
