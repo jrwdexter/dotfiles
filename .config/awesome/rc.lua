@@ -290,7 +290,8 @@ awesome.connect_signal("evil::profile::change", function()
   active_profile = math.fmod(active_profile, profile_count) + 1
   naughty.notification({ message = "new profile: " .. active_profile })
   awesome.emit_signal("evil::profile::change_complete", active_profile)
-  awful.spawn.with_shell('cat '..user.dirs.home..'/.fehbg.'..(user.profiles[active_profile].name)..' | grep ^feh | sed "s/ --no-fehbg//" | sh')
+  awful.spawn.with_shell('sh '..user.dirs.home..'/.fehbg.'..(user.profiles[active_profile].name))
+  awful.spawn.with_shell('cp '..user.dirs.home..'/.fehbg.'..(user.profiles[active_profile].name)..' '..user.dirs.home..'/.fehbg')
 end)
 
 user.get_active_profile = function()
