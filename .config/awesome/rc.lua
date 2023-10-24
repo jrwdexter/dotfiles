@@ -11,6 +11,8 @@
 --]]
 
 local naughty = require("naughty")
+local awful = require("awful")
+local file_helpers = require("file_helpers")
 
 local gears = require("gears")
 
@@ -20,7 +22,7 @@ local themes = {
   "skyfall", -- 3 --
   "ephemeral", -- 4 --
   "amarena", -- 5 --
-  "firstrice"
+  "firstrice",
 }
 -- Change this number to use a different theme
 local theme = themes[5]
@@ -35,12 +37,12 @@ local decoration_theme = decoration_themes[3]
 -- ===================================================================
 -- Statusbar themes. Multiple bars can be declared in each theme.
 local bar_themes = {
-  "manta",     -- 1 -- Taglist, client counter, date, time, layout
-  "lovelace",  -- 2 -- Start button, taglist, layout
-  "skyfall",   -- 3 -- Weather, taglist, window buttons, pop-up tray
+  "manta", -- 1 -- Taglist, client counter, date, time, layout
+  "lovelace", -- 2 -- Start button, taglist, layout
+  "skyfall", -- 3 -- Weather, taglist, window buttons, pop-up tray
   "ephemeral", -- 4 -- Taglist, start button, tasklist, and more buttons
-  "amarena",   -- 5 -- Minimal taglist and dock with autohide
-  "firstrice"  -- 6 -- Rounded floating bar with icons
+  "amarena", -- 5 -- Minimal taglist and dock with autohide
+  "firstrice", -- 6 -- Rounded floating bar with icons
 }
 local bar_theme = bar_themes[5]
 
@@ -78,8 +80,16 @@ local exit_screen_themes = {
 local exit_screen_theme = exit_screen_themes[2]
 
 local local_profile_pic = os.getenv("HOME") .. "/profile.png"
+local personal_profile_pic = os.getenv("HOME") .. "/personal-profile.png"
 local profile_picture = gears.filesystem.file_readable(local_profile_pic) and local_profile_pic
   or os.getenv("HOME") .. "/.config/awesome/profile.png"
+
+local personal_profile_picture = gears.filesystem.file_readable(personal_profile_pic) and personal_profile_pic
+  or os.getenv("HOME") .. "/.config/awesome/profile.png"
+local active_profile = gears.filesystem.file_readable("/tmp/awesome-evil-profile")
+    and tonumber(file_helpers.first_line_from("/tmp/awesome-evil-profile"))
+  or 1
+
 -- ===================================================================
 -- User variables and preferences
 user = {
@@ -120,11 +130,25 @@ user = {
   web_search_cmd = "xdg-open https://duckduckgo.com/?q=",
 
   -- >> User profile <<
-  profile_picture = profile_picture,
-  calendar_email = "jonathan.dexter@monkeyjumplabs.com",
-  google_oauth = {
-    client_id = os.getenv("GCAL_CLIENT_ID"),
-    client_secret = os.getenv("GCAL_CLIENT_SECRET"),
+  profiles = {
+    {
+      name = "mjl",
+      profile_picture = profile_picture,
+      calendar_email = "jonathan.dexter@monkeyjumplabs.com",
+      google_oauth = {
+        client_id = os.getenv("GCAL_CLIENT_ID"),
+        client_secret = os.getenv("GCAL_CLIENT_SECRET"),
+      },
+    },
+    {
+      name = "personal",
+      profile_picture = personal_profile_picture,
+      calendar_email = "jonathan.dexter@monkeyjumplabs.com",
+      google_oauth = {
+        client_id = os.getenv("GCAL_CLIENT_ID"),
+        client_secret = os.getenv("GCAL_CLIENT_SECRET"),
+      },
+    },
   },
 
   -- Directories with fallback values
@@ -258,9 +282,26 @@ user = {
   ifttt_key = os.getenv("IFTTT_KEY"),
 }
 
+awesome.connect_signal("evil::profile::change", function()
+  local profile_count = 0
+  for _ in pairs(user.profiles) do
+    profile_count = profile_count + 1
+  end
+  active_profile = math.fmod(active_profile, profile_count) + 1
+  naughty.notification({ message = "new profile: " .. active_profile })
+  awesome.emit_signal("evil::profile::change_complete", active_profile)
+  awful.spawn.with_shell('cat '..user.dirs.home..'/.fehbg.'..(user.profiles[active_profile].name)..' | grep ^feh | sed "s/ --no-fehbg//" | sh')
+end)
+
+user.get_active_profile = function()
+  return user.profiles[active_profile]
+end
+
+naughty.notification({ message = user.profiles[1].name })
+
 local awful = require("awful")
 --local laptopScreenName = "eDP-1"
-local secondScreenIndex = awful.screen.getbycoord(0,0)
+local secondScreenIndex = awful.screen.getbycoord(0, 0)
 local secondScreen = awful.screen.focused()
 for i, s in ipairs(screen) do
   if i == secondScreenIndex then
@@ -580,7 +621,7 @@ awful.rules.rules = {
     properties = {
       screen = 1,
       tag = awful.screen.focused().tags[9],
-      fullscreen = false
+      fullscreen = false,
     },
   },
 
