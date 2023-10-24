@@ -8,11 +8,11 @@ local gears = require("gears")
 local json = require("json")
 
 local update_interval = 60 * 15 -- 15 minutes
-local calendar_email = user.get_active_profile().calendar_email
-local client_id = user.get_active_profile().google_oauth.client_id
-local client_secret = user.get_active_profile().google_oauth.client_secret
 local temp_file = "/tmp/awesomewm-evil-gcal"
 local gcal_script = function()
+  local calendar_email = user.get_active_profile().calendar_email
+  local client_id = user.get_active_profile().google_oauth.client_id
+  local client_secret = user.get_active_profile().google_oauth.client_secret
   local start_date = os.date("%Y-%m-%dT%H:%M:%S", os.time())
   local end_time = {
     year = os.date("%Y"),
@@ -53,4 +53,4 @@ helpers.remote_watch(gcal_script, update_interval, temp_file, function(stdout)
     awful.spawn.with_shell("rm " .. temp_file)
     awesome.emit_signal("evil::gcal", -1, -1, -1, -1)
   end
-end)
+end, "evil::profile::change_complete")
