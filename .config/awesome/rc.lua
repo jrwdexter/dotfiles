@@ -143,7 +143,7 @@ user = {
     {
       name = "personal",
       profile_picture = personal_profile_picture,
-      calendar_email = "jonathan.dexter@monkeyjumplabs.com",
+      calendar_email = "mandest@gmail.com",
       google_oauth = {
         client_id = os.getenv("GCAL_CLIENT_ID"),
         client_secret = os.getenv("GCAL_CLIENT_SECRET"),
