@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require 'globals'
 require 'settings'
-require 'hotkeys'
 
 require('lazy').setup({
   spec = {
@@ -25,6 +24,8 @@ require('lazy').setup({
     { import = 'ide'},
   }
 })
+
+require 'hotkeys'
 
 --lazy.setup("utils")
 --lazy.setup("style")
