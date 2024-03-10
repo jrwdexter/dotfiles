@@ -16,6 +16,7 @@ local watch_repos = {
   org .. "/george-admin-fe",
   org .. "/george-k8s-cluster",
   org .. "/george-slackbot",
+  org .. "/agencio-rfp-builder",
 }
 local repo_filter = ""
 for _, v in ipairs(watch_repos) do
