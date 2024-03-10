@@ -349,6 +349,10 @@ nf() {
   neofetch
 }
 
+xpid() {
+  xprop _NET_WM_PID | awk '/_NET_WM_PID\(CARDINAL\)/{print $3}' >&2
+}
+
 alias vaccines='cat /tmp/awesome.out | tail -n 100 | grep "appointments" | tail -n 1 | sed -E "s/ \(string\)$//" | jq 2> /dev/null'
 
 alias luamake=/home/mandest/src/lua-language-server/3rd/luamake/luamake
