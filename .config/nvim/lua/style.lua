@@ -12,7 +12,8 @@ local plugins = {
     "norcalli/nvim-base16.lua",
     config = function()
       local base16 = require("base16")
-      base16(base16.themes.onedark, true)
+      --base16(base16.themes.dracula, true)
+      base16(base16.themes['gruvbox-dark-hard'], true)
     end,
   },
 
