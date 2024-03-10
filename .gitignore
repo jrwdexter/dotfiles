@@ -10,3 +10,5 @@
 
 # LibLUA (must be compiled per-platform if we're using it)
 **/liblua_pam.so
+
+.fonts/**/.uuid
