@@ -28,6 +28,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
+      local coq = require("coq")
 
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -66,23 +67,7 @@ local plugins = {
           buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
         end
 
-        ---- Set autocommands conditional on server_capabilities
-        --if client.resolved_capabilities.document_highlight then
-        --vim.api.nvim_exec([[
-        --hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkGray
-        --hi LspReferenceText cterm=bold ctermbg=red guibg=DarkGray
-        --hi LspReferenceWrite cterm=bold ctermbg=red guibg=DarkGray
-        --augroup lsp_document_highlight
-        --autocmd! * <buffer>
-        --autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        --autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        --augroup END
-        --]], false)
-        --end
       end
-
-      --local capabilities = vim.lsp.protocol.make_client_capabilities()
-      --capabilities.textDocument.completion.completionItem.snippetSupport = true
 
       -- LSP: C#
       local omnisharp_bin, success, _ = find_file("omnisharp")
@@ -102,6 +87,7 @@ local plugins = {
             return dir
           end,
         })
+        lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities())
       end
 
       -- LSP: Typescript
@@ -148,7 +134,7 @@ local plugins = {
 
       require("lspconfig").yamlls.setup({
         capabilities = capabilities,
-        filetypes = { "yaml", "yaml.docker-compose", "helm" },
+        filetypes = { "yaml", "yaml.docker-compose" },
         on_attach = function(client, bufnr)
           on_attach(client, bufnr)
           if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
@@ -159,7 +145,7 @@ local plugins = {
           cmd = { "yaml-language-server.cmd", "--stdio" },
           yaml = {
             schemas = {
-              ["https://json.schemastore.org/chart.json"] = { "/deployment/helm/*", "**/k8s/**.yaml" },
+              --["https://json.schemastore.org/chart.json"] = { "/deployment/helm/*", "**/k8s/**.yaml" },
               ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
               ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
                 "/azure-pipeline*.y*l",
@@ -178,6 +164,12 @@ local plugins = {
           on_attach = on_attach,
         })
       end
+
+      -- LSP: Go
+      require'lspconfig'.gopls.setup{}
+
+      -- LSP: toml
+      require'lspconfig'.taplo.setup{}
 
       -- LSP: LUA
       local luals_bin, lua_success, _ = find_file("lua-language-server")
@@ -215,6 +207,7 @@ local plugins = {
           },
           on_attach = on_attach,
         })
+        lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities())
       end
     end,
   },

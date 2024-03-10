@@ -3,7 +3,8 @@ local n=0
 
 for _, t in ipairs(require('ide.tree')) do n=n+1; plugins[n]=t end
 for _, t in ipairs(require('ide.status')) do n=n+1; plugins[n]=t end
-for _, t in ipairs(require('ide.autocomplete')) do n=n+1; plugins[n]=t end
+--for _, t in ipairs(require('ide.autocomplete')) do n=n+1; plugins[n]=t end
+for _, t in ipairs(require('ide.coq')) do n=n+1; plugins[n]=t end
 for _, t in ipairs(require('ide.lsp')) do n=n+1; plugins[n]=t end
 for _, t in ipairs(require('ide.fzf')) do n=n+1; plugins[n]=t end
 for _, t in ipairs(require('ide.copilot')) do n=n+1; plugins[n]=t end
