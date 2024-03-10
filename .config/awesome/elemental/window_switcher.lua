@@ -133,7 +133,9 @@ window_switcher_hide = function()
         end
     end
     -- Resume recording focus history
-    awful.client.focus.history.enable_tracking()
+    if not awful.client.focus.history.is_enabled() then
+        awful.client.focus.history.enable_tracking()
+    end
     -- Stop and hide window_switcher
     local s = awful.screen.focused()
     awful.keygrabber.stop(window_switcher_grabber)

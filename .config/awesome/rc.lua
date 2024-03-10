@@ -143,7 +143,7 @@ user = {
     {
       name = "personal",
       profile_picture = personal_profile_picture,
-      calendar_email = "mandest@gmail.com",
+      calendar_email = "jonathan.dexter@monkeyjumplabs.com",
       google_oauth = {
         client_id = os.getenv("GCAL_CLIENT_ID"),
         client_secret = os.getenv("GCAL_CLIENT_SECRET"),
@@ -288,10 +288,11 @@ awesome.connect_signal("evil::profile::change", function()
     profile_count = profile_count + 1
   end
   active_profile = math.fmod(active_profile, profile_count) + 1
-  naughty.notification({ message = "new profile: " .. active_profile })
   awesome.emit_signal("evil::profile::change_complete", active_profile)
-  awful.spawn.with_shell('sh '..user.dirs.home..'/.fehbg.'..(user.profiles[active_profile].name))
-  awful.spawn.with_shell('cp '..user.dirs.home..'/.fehbg.'..(user.profiles[active_profile].name)..' '..user.dirs.home..'/.fehbg')
+  awful.spawn.with_shell("sh " .. user.dirs.home .. "/.fehbg." .. user.profiles[active_profile].name)
+  awful.spawn.with_shell(
+    "cp " .. user.dirs.home .. "/.fehbg." .. user.profiles[active_profile].name .. " " .. user.dirs.home .. "/.fehbg"
+  )
 end)
 
 user.get_active_profile = function()
@@ -304,10 +305,12 @@ local awful = require("awful")
 --local laptopScreenName = "eDP-1"
 local secondScreenIndex = awful.screen.getbycoord(0, 0)
 local secondScreen = awful.screen.focused()
-for i, s in ipairs(screen) do
-  if i == secondScreenIndex then
+local screenIndex = 1
+for s in screen do
+  if screenIndex == secondScreenIndex then
     secondScreen = s
   end
+  screenIndex = screenIndex + 1
 end
 -- ===================================================================
 
@@ -1101,7 +1104,6 @@ awful.rules.rules = {
       class = {
         user.dev.be_ide_class,
         "jetbrains-rider",
-        "jetbrains-datagrip",
         "jetbrains-pycharm",
       },
       instance = {
@@ -1132,6 +1134,16 @@ awful.rules.rules = {
       },
     },
     properties = { screen = 1, tag = awful.screen.focused().tags[6] },
+  },
+
+  -- Data editing
+  {
+    rule_any = {
+      class = {
+        "jetbrains-datagrip",
+      },
+    },
+    properties = { screen = 1, tag = awful.screen.focused().tags[7] },
   },
 
   -- Game clients/launchers
