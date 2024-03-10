@@ -377,3 +377,8 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Enable direnv
+if type "direnv" > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
