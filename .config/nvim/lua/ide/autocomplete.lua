@@ -64,7 +64,6 @@ local plugins = {
         mapping = {
           ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
           ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
@@ -131,76 +130,5 @@ local plugins = {
     end,
   },
 }
-
------------------
--- Compe
------------------
--- Setup lspconfig.
----- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
---require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
---capabilities = capabilities
---}
-
---require("nvim-autopairs.completion.compe").setup({
---map_cr = true, --  map <CR> on insert mode
---map_complete = true -- it will auto insert `(` after select function or method item
---})
--- TODO: Update w/ nvim-cmp
-
----------------------
--- Keyboard functions
----------------------
-
----- Tab completion
---local t = function(str)
---return vim.api.nvim_replace_termcodes(str, true, true, true)
---end
-
---local check_back_space = function()
---local col = vim.fn.col('.') - 1
---return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
---end
-
----- Use (s-)tab to:
----- move to prev/next item in completion menuone
----- jump to prev/next snippet's placeholder
---_G.tab_complete = function()
---if cmp.visible() == 1 then
---print('1')
---return t "<C-n>"
-----elseif vim.fn['vsnip#available'](1) == 1 then
-----return t "<Plug>(vsnip-expand-or-jump)"
---elseif check_back_space() then
---print('2')
---return t "<Tab>"
---else
---print('3')
---cmp.complete({
---config = {
---sources = {
---{ name = 'nvim_lsp' }
---}
---}
---})
---end
---end
---_G.s_tab_complete = function()
---if cmp.visible() == 1 then
---return t "<C-p>"
-----elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-----return t "<Plug>(vsnip-jump-prev)"
---else
----- If <S-Tab> is not working in your terminal, change it to <C-h>
---return t "<S-Tab>"
---end
---end
-
---vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true})
---vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm(luaeval(\"require 'nvim-autopairs'.autopairs_cr()\"))", {expr = true, silent=true})
---vim.api.nvim_set_keymap("i", "<C-space>", "compe#complete()", {expr = true})
 
 return plugins
