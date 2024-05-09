@@ -99,6 +99,7 @@ user = {
   floating_terminal = "kitty -1",
   browser = "firefox",
   meeting_app = "google-chrome-stable",
+  disk_app = "kitty -1 --class disk -d / -e ncdu",
   todo = "todoist",
   notes = "notion-app",
   src_dir = os.getenv("HOME") .. "/src",
@@ -594,6 +595,7 @@ awful.rules.rules = {
         "floating",
       },
       name = {
+        "Android Emulator",
         "Event Tester", -- xev
         "MetaMask Notification",
       },
@@ -727,6 +729,7 @@ awful.rules.rules = {
         "^editor$",
         "markdown_input",
         "todo_input",
+        "qemu-system",
       },
       class = {
         "qutebrowser",
@@ -751,6 +754,7 @@ awful.rules.rules = {
         "splash",
       },
       name = {
+        "Android Emulator",
         "^discord.com is sharing your screen.$", -- Discord (running in browser) screen sharing popup
       },
     },
@@ -903,13 +907,14 @@ awful.rules.rules = {
 
   {
     rule_any = {
-      class = { "files" },
+      class = { "files", "disk" },
     },
     properties = {
       floating = true,
       ontop = true,
       width = screen_width * 0.4,
       height = screen_height * 0.4,
+      titlebars_enabled = false
     },
   },
 
