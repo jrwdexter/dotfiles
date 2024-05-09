@@ -115,10 +115,10 @@ local calendar_box = create_boxed_widget(agenda, dpi(450), dpi(600), x.backgroun
 local disk = require("elemental.dashboard.components.disk")
 local disk_box = create_boxed_widget(disk, dpi(225), dpi(225), x.background)
 
--- File system bookmarks
+-- Github PRs
 
-local bookmarks = require("elemental.dashboard.components.bookmarks")
-local bookmarks_box = create_boxed_widget(bookmarks, dpi(300), dpi(450), x.background)
+local github_prs = require("elemental.dashboard.components.github_prs")
+local github_prs_box = create_boxed_widget(github_prs, dpi(300), dpi(450), x.background)
 
 -- Corona
 
@@ -226,7 +226,7 @@ dashboard:setup {
             },
             {
                 -- Column 3
-                bookmarks_box,
+                github_prs_box,
                 corona_box,
                 layout = wibox.layout.fixed.vertical
             },

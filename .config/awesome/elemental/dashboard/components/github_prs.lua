@@ -67,14 +67,14 @@ local function create_bookmark(name, path, color, hover_color)
   return bookmark
 end
 
--- local bookmarks = wibox.widget {
+-- local github_prs = wibox.widget {
 -- spacing = dpi(15),
 -- layout = wibox.layout.fixed.vertical
 -- }
 
 -- function update_git_repos(git_output)
--- for i,w in pairs(bookmarks:get_all_children()) do
--- bookmarks:remove_widgets(w)
+-- for i,w in pairs(github_prs:get_all_children()) do
+-- github_prs:remove_widgets(w)
 -- end
 -- end
 
@@ -82,21 +82,32 @@ awesome.connect_signal("evil::git_repos", function(git_repos)
   -- Do something with git repos
 end)
 
-local bookmarks = wibox.widget({
-  create_web_bookmark("trello", "https://trello.com/jonathandexter4/boards", x.color1, x.color9),
-  create_web_bookmark("kumai", "https://kimai.monkeyjumplabs.com", x.color2, x.color10),
-  create_web_bookmark("node-red", "https://node-red.monkeyjumplabs.com/ui", x.color6, x.color14),
-  create_web_bookmark("hubspot", "https://app.hubspot.com", x.color4, x.color12),
-  create_web_bookmark("quickbooks", "https://app.qbo.intuit.com/app", x.color5, x.color13),
+local github_prs = wibox.widget({
+  --create_web_bookmark("trello", "https://trello.com/jonathandexter4/boards", x.color1, x.color9),
+  --create_web_bookmark("kumai", "https://kimai.monkeyjumplabs.com", x.color2, x.color10),
+  --create_web_bookmark("node-red", "https://node-red.monkeyjumplabs.com/ui", x.color6, x.color14),
+  --create_web_bookmark("hubspot", "https://app.hubspot.com", x.color4, x.color12),
+  --create_web_bookmark("quickbooks", "https://app.qbo.intuit.com/app", x.color5, x.color13),
   --create_bookmark("home", os.getenv("HOME"), x.color1, x.color9),
   --create_bookmark("downloads", user.dirs.downloads, x.color2, x.color10),
   --create_bookmark("music", user.dirs.music, x.color6, x.color14),
   --create_bookmark("pictures", user.dirs.pictures, x.color4, x.color12),
   --create_bookmark("wallpapers", user.dirs.wallpapers, x.color5, x.color13),
   --create_bookmark("screenshots", user.dirs.screenshots, x.color3, x.color11),
-  margins = dpi(30),
-  spacing = dpi(15),
+  spacing = box_gap,
   layout = wibox.layout.fixed.vertical,
+})
+
+local github_box = wibox.widget({
+  {
+    github_prs,
+    margins = box_gap,
+    spacing = dpi(15),
+    widget = wibox.container.margin
+  },
+  height = dpi(360),
+  strategy = "max",
+  widget = wibox.container.constraint
 })
 
 local refresh_button = wibox.widget({
@@ -125,6 +136,13 @@ local refresh_button = wibox.widget({
   top = box_gap,
   widget = wibox.container.margin,
 })
+
+local refresh_box = wibox.widget({
+  refresh_button,
+  forced_height = dpi(12),
+  strategy = "exact",
+  widget = wibox.container.constraint
+})
 helpers.add_hover_cursor(refresh_button, "hand1")
 refresh_button:buttons(gears.table.join(awful.button({}, 1, function()
   awesome.emit_signal('evil::github::pr::refresh')
@@ -132,18 +150,18 @@ end)))
 
 awesome.connect_signal("evil::github::pr", function(prs)
   if prs then
-    for i, w in pairs(bookmarks:get_all_children()) do
-      bookmarks:remove_widgets(w)
+    for i, w in pairs(github_prs:get_all_children()) do
+      github_prs:remove_widgets(w)
     end
     local count = 0
     for i, pr in pairs(prs) do
       count = count + 1
-      bookmarks:add(create_web_bookmark(pr.title, pr.url, x["color" .. i], x["color" .. (i + 8)]))
+      github_prs:add(create_web_bookmark(pr.title, pr.url, x["color" .. i], x["color" .. (i + 8)]))
     end
     if count == 0 then
       -- No PRs, show something nice
-      bookmarks:add(create_web_bookmark("🎉", "", x["color0"], x["color8"]))
-      bookmarks:add(create_web_bookmark("All done!", "", x["color1"], x["color9"]))
+      github_prs:add(create_web_bookmark("🎉", "", x["color0"], x["color8"]))
+      github_prs:add(create_web_bookmark("All done!", "", x["color1"], x["color9"]))
     end
   end
 end)
@@ -158,10 +176,15 @@ local rg_cmd = "rg --files --hidden --no-messages -g HEAD " .. src_dir .. " | rg
 helpers.remote_watch(rg_cmd, update_interval, temp_file, update_git_repos)
 -- End pull
 
-local align_layout = wibox.layout.align.vertical({
+local align_layout = wibox.widget({
+  github_box,
+  refresh_button,
+  layout = wibox.layout.align.vertical
 })
-align_layout.forced_height = dpi(396)
-align_layout:set_top(bookmarks)
-align_layout:set_bottom(refresh_button)
+
+--awful.placement.maximize(align_layout, { margins = { top = 0, bottom = 0} })
+--align_layout.forced_height = dpi(396)
+--align_layout:set_top(github_box)
+--align_layout:set_bottom(refresh_button)
 
 return align_layout
