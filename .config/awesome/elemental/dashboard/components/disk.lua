@@ -1,5 +1,7 @@
 local wibox   = require ("wibox")
 local helpers = require("helpers")
+local gears = require("gears")
+local awful = require("awful")
 
 local disk_arc = wibox.widget {
     start_angle = 3 * math.pi / 2,
@@ -60,6 +62,13 @@ local disk = wibox.widget {
     top_only = false,
     layout = wibox.layout.stack
 }
+
+disk:buttons(gears.table.join(
+  awful.button({}, 1, function()
+    awful.spawn(user.disk_app)
+    dashboard_hide()
+  end)
+))
 
 disk:connect_signal("mouse::enter", function ()
     disk_icon.visible = false
