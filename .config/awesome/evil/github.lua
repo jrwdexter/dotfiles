@@ -16,6 +16,10 @@ local watch_repos = {
   org .. "/george-admin-fe",
   org .. "/george-k8s-cluster",
   org .. "/george-slackbot",
+  org .. "/fareway-be",
+  org .. "/fareway-cloud",
+  org .. "/fareway-crawler",
+  org .. "/fareway-fe",
   org .. "/agencio-rfp-builder",
 }
 local repo_filter = ""
@@ -26,7 +30,7 @@ local gh_script = function()
   return [[
     sh -c '
     prs=`gh api graphql -f query='"'"'query {
-      search(first: 6, query: "is:pr draft:false is:open ]] .. repo_filter .. [[", type:ISSUE) {
+      search(first: 5, query: "is:pr draft:false is:open ]] .. repo_filter .. [[", type:ISSUE) {
         issueCount,
         edges {
           node {
