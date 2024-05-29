@@ -389,3 +389,7 @@ fi
 if type "direnv" > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
+
+if [ -f '/opt/anaconda/bin/activate' ]; then
+  source /opt/anaconda/bin/activate
+fi
