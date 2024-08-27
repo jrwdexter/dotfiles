@@ -132,13 +132,15 @@ local plugins = {
 
       require("lspconfig").terraformls.setup({})
 
+      require("lspconfig").helm_ls.setup({})
+
       require("lspconfig").yamlls.setup({
         capabilities = capabilities,
         filetypes = { "yaml", "yaml.docker-compose" },
         on_attach = function(client, bufnr)
           on_attach(client, bufnr)
           if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-            vim.diagnostic.disable()
+            vim.diagnostic.enable(false)
           end
         end,
         settings = {
