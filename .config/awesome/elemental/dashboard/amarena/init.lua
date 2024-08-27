@@ -108,6 +108,7 @@ local url_petals_box = create_boxed_widget(url_petals, dpi(225), dpi(225), "#000
 -- Agenda
 
 local agenda = require("elemental.dashboard.components.agenda")
+local calendar = require("elemental.dashboard.components.calendar")
 local calendar_box = create_boxed_widget(agenda, dpi(450), dpi(600), x.background)
 
 -- Disk arc
@@ -174,9 +175,21 @@ screenshot_box:buttons(gears.table.join(
 
 helpers.add_hover_cursor(screenshot_box, "hand1")
 
+-- Screensaver
+local screensaver = require("elemental.dashboard.components.screensaver")
+local screensaver_box = create_boxed_widget(screensaver, dpi(117), dpi(117), x.background)
+screensaver_box:buttons(gears.table.join(
+    -- Left click - Toggle
+    awful.button({ }, 1, function ()
+        awesome.emit_signal("evil::screensaver::toggle")
+    end)
+))
+
+helpers.add_hover_cursor(screensaver_box, "hand1")
+
 -- VPN widget
 local vpn = require("elemental.dashboard.components.vpn")
-local vpn_box = create_boxed_widget(vpn, dpi(225), dpi(117), x.background)
+local vpn_box = create_boxed_widget(vpn, dpi(117), dpi(117), x.background)
 vpn_box:buttons(gears.table.join(
     -- Left click - Toggle
     awful.button({ }, 1, function ()
@@ -220,7 +233,11 @@ dashboard:setup {
                 -- Column 2
                 url_petals_box,
                 notification_state_box,
-                vpn_box,
+                {
+                    vpn_box,
+                    screensaver_box,
+                    layout = wibox.layout.fixed.horizontal
+                },
                 disk_box,
                 layout = wibox.layout.fixed.vertical
             },
