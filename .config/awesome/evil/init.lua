@@ -10,6 +10,7 @@ require("evil.vpn")
 -- User controlled
 require("evil.volume")
 require("evil.mpd")
+require("evil.screensaver")
 -- require("evil.brightness")
 -- require("evil.spotify")
 
