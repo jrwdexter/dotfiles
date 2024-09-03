@@ -1,0 +1,13 @@
+#!/bin/bash
+user=mandest_
+player=mpv
+browser= # choose a browser if you want to open twitch chat alongside the stream
+
+# alias most watched channels for quick launching
+# eg. `rofi-twitch tftv` will open teamfortresstv, etc
+case "$1" in
+    tftv) channel=teamfortresstv;;
+    dist) channel=distortion2;;
+    gdq) channel=gamesdonequick;;
+    $1) channel=$1;;
+esac
