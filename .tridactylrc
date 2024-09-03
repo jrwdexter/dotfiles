@@ -23,22 +23,6 @@ bind <C-d> tabclosealltoright
 bind ,d  composite tabclosealltoleft | tabclosealltoright
 
 " *********************************
-" ********* Autocontains **********
-" *********************************
-autocontain app.daily.dev Personal
-autocontain drive.google.com MJL
-autocontain calendar.google.com MJL
-autocontain docs.google.com MJL
-autocontain jamboard.google.com MJL
-autocontain trello.com MJL
-autocontain miro.com MJL
-autocontain acloudguru.com MJL
-autocontain acloud.guru MJL
-autocontain hubspot.com MJL
-autocontain intuit.com MJL
-autocontain monkeyjumplabs.com MJL
-
-" *********************************
 " ********* Page-Specific *********
 " *********************************
 " Reddit
@@ -64,3 +48,7 @@ bindurl www.google.com F hint -Jbc #rso .g a
 " Highlight right content on DDG
 bindurl ^https://duckduckgo.com f hint -Jc [data-nrn=result]
 bindurl ^https://duckduckgo.com F hint -Jbc [data-nrn=result]
+
+bindurl ^https://github.com/search f hint -Jc .search-title a
+set searchurls { "google": "https://www.google.com/search?q=", "scholar": "https://scholar.google.com/scholar?q=", "arch": "https://wiki.archlinux.org/index.php?search=", "gh": "https://github.com/search?type=repositories&q=", "bing": "https://www.bing.com/search?q=", "duckduckgo": "https://duckduckgo.com/?q=", "youtube": "https://www.youtube.com/results?search_query=", "amazon": "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=", "amazonuk": "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=", "cnrtl": "http://www.cnrtl.fr/lexicographie/", "gentoo_wiki": "https://wiki.gentoo.org/index.php?title=Special%3ASearch&profile=default&fulltext=Search&search=", "github": "https://github.com/search?utf8=?&q=", "googlelucky": "https://www.google.com/search?btnI=I'm+Feeling+Lucky&q=", "googleuk": "https://www.google.co.uk/search?q=", "mdn": "https://developer.mozilla.org/en-US/search?q=", "netsuite": "https://5547939.app.netsuite.com/app/common/search/ubersearchresults.nl?quicksearch=T&searchtype=Uber&frame=be&Uber_NAMEtype=KEYWORDSTARTSWITH&Uber_NAME=", "osm": "https://www.openstreetmap.org/search?query=", "qwant": "https://www.qwant.com/?q=", "searx": "https://searx.me/?category_general=on&q=", "startpage": "https://startpage.com/do/search?language=english&cat=web&query=", "twitter": "https://twitter.com/search?q=", "wikipedia": "https://en.wikipedia.org/wiki/Special:Search/", "yahoo": "https://search.yahoo.com/search?p=" }
+
