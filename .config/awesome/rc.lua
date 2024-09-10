@@ -1376,3 +1376,6 @@ end)
 
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
+
+-- Spawn Autorun script
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
