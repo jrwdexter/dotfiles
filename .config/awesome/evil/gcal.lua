@@ -32,14 +32,14 @@ local gcal_script = function()
         event_json=$(
           gcalcli --calendar $calendar_email search "*" $start_date $end_date --details all --nodeclined --tsv 2>/dev/null | jq -Rs '\''
             split("\n") | map(split("\t")) |
-              map(select(.[0] != null) | {
-                "start_date": (.[0] + "T" + .[1]),
-                "end_date": (.[2] + "T" + .[3]),
-                "link": .[4],
-                "video": .[5],
-                "description": .[8]
+              map(select(.[0] != null and .[0] != "id") | {
+                "start_date": (.[1] + "T" + .[2]),
+                "end_date": (.[3] + "T" + .[4]),
+                "link": .[5],
+                "video": .[6],
+                "description": .[9]
               })
-          '\''
+          '\'' | jq '\''[.[] | select(.start_date | test("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}"))]'\''
         )
         echo $event_json ' ]]
 end
