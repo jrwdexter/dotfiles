@@ -21,7 +21,7 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 if [ -f ~/.zshenv-private ]; then
   source ~/.zshenv-private
 fi
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 #if [ $RANGER_LEVEL ]; then
   #if [ -d $HOME/.oh-my-zsh/plugins/z ]; then
