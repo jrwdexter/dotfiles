@@ -107,7 +107,7 @@ user = {
     docker = "kitty -1 --class docker -e lazydocker",
     be_terminal = "kitty -1 --class be_terminal -d="
       .. os.getenv("HOME")
-      .. "/src/mjl/clients/cam-api -e nuke startservices",
+      .. "/src/mjl/clients/smart-management/cam-api -e nuke startservices",
     browser = "firefox-developer-edition",
     browser_class = "firefoxdeveloperedition",
     fe_ide = "webstorm",
