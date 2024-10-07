@@ -2,8 +2,9 @@
 # SSH Agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -s > "${HOME}/.ssh/ssh-agent-ssh"
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(cat "${HOME}/.ssh/ssh-agent-ssh")"
+    ssh-add
+elif [[ ! "$SSH_AUTH_SOCK" ]]; then
     eval "$(cat "${HOME}/.ssh/ssh-agent-ssh")"
 fi
 
