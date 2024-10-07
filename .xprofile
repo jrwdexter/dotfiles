@@ -1,0 +1,5 @@
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
+
+if [[ -x "$(command -v autorandr)" ]]; then
+  autorandr --change &
+fi
