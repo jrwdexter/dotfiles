@@ -91,7 +91,7 @@ local plugins = {
       end
 
       -- LSP: Typescript
-      require("lspconfig").tsserver.setup({
+      require("lspconfig").ts_ls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
@@ -131,6 +131,7 @@ local plugins = {
       })
 
       require("lspconfig").terraformls.setup({})
+      require("lspconfig").tflint.setup({})
 
       require("lspconfig").helm_ls.setup({})
 
