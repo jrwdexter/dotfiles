@@ -11,7 +11,7 @@ require("evil.vpn")
 require("evil.volume")
 require("evil.mpd")
 require("evil.screensaver")
--- require("evil.brightness")
+require("evil.brightness")
 -- require("evil.spotify")
 
 -- Internet access required
