@@ -1108,6 +1108,7 @@ awful.rules.rules = {
     rule_any = {
       class = {
         user.dev.be_ide_class,
+        "cursor",
         "jetbrains-rider",
         "jetbrains-pycharm",
       },
