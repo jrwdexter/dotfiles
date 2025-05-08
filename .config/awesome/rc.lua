@@ -593,6 +593,7 @@ awful.rules.rules = {
         "fst",
         "Nvidia-settings",
         "floating",
+        "Emulator"
       },
       name = {
         "Android Emulator",
