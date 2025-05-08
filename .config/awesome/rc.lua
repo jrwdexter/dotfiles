@@ -1224,6 +1224,14 @@ awful.rules.rules = {
     },
     properties = { screen = 1, tag = awful.screen.focused().tags[10] },
   },
+
+  -- Modals
+  {
+    rule_any = {
+      role = "bubble"
+    },
+    properties = { floating = true, ontop = true, focusable = false, titlebars_enabled = false }
+  }
 }
 -- (Rules end here) ..................................................
 -- ===================================================================
