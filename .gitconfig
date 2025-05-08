@@ -1,0 +1,22 @@
+[user]
+        email = jonathan.dexter@monkeyjumplabs.com
+        name = Jonathan Dexter
+        signingkey = AC36CC22BC5AB2FF
+[commit]
+        gpgsign = true
+[gpg]
+        program = /usr/bin/gpg
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+        tool = bc
+[difftool "bc"]
+        trustExitCode = true
+[merge]
+        tool = bc
+[mergetool "bc"]
+        trustExitCode = true
+[init]
+	defaultBranch = main
