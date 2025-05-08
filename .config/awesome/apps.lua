@@ -3,6 +3,7 @@ local naughty = require("naughty")
 local helpers = require("helpers")
 local icons = require("icons")
 local notifications = require("notifications")
+local json = require("json")
 
 local apps = {}
 
@@ -94,7 +95,7 @@ apps.vpn = function()
   awful.spawn.with_shell("mozillavpn")
 end
 apps.toggle_vpn = function()
-  local script = [=[
+  local mozilla_script = [=[
     if [[ $(mozillavpn status | grep "VPN state: off") ]]; then
       if [[ $(mozillavpn activate) ]]; then
         awesome-client "awesome.emit_signal('evil::vpn::enabled')"
@@ -105,7 +106,11 @@ apps.toggle_vpn = function()
       fi
     fi
   ]=]
-  awful.spawn.with_shell(script)
+  local tailscale_script = [=[
+    if [[ $(tailscale status | grep "stopped") ]]; then
+      if [[ $(tailscale )]]
+  ]=]
+  awful.spawn.with_shell(mozilla_script)
 end
 apps.passwords = function()
   helpers.run_or_raise({ class = "1password" }, true, "1password")
