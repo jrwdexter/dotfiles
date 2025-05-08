@@ -73,6 +73,7 @@ local plugins = {
               return ""
             end,
             separator = " ",
+            separator_highlight = { colors.lightbg, colors.bg },
             highlight = { colors.lightbg, colors.bg },
           },
         }
@@ -149,16 +150,27 @@ local plugins = {
         }
 
         gls.right[1] = {
+          lspClient = {
+            provider = require("galaxyline.provider_lsp").get_lsp_client,
+            separator = " ",
+            separator_highlight = { colors.line_bg, colors.line_bg },
+            highlight = { colors.green, colors.line_bg }
+          }
+        }
+
+        gls.right[2] = {
           GitIcon = {
             provider = function()
-              return "   "
+              return "  "
             end,
+            separator = " ",
+            separator_highlight = { colors.line_bg, colors.line_bg },
             condition = require("galaxyline.provider_vcs").check_git_workspace,
             highlight = { colors.green, colors.line_bg },
           },
         }
 
-        gls.right[2] = {
+        gls.right[3] = {
           GitBranch = {
             provider = "GitBranch",
             condition = require("galaxyline.provider_vcs").check_git_workspace,
@@ -166,7 +178,7 @@ local plugins = {
           },
         }
 
-        gls.right[3] = {
+        gls.right[4] = {
           right_LeftRounded = {
             provider = function()
               return ""
@@ -177,7 +189,7 @@ local plugins = {
           },
         }
 
-        gls.right[4] = {
+        gls.right[5] = {
           ViMode = {
             provider = function()
               local alias = {
@@ -195,7 +207,7 @@ local plugins = {
           },
         }
 
-        gls.right[5] = {
+        gls.right[6] = {
           PerCent = {
             provider = "LinePercent",
             separator = " ",
@@ -204,7 +216,18 @@ local plugins = {
           },
         }
 
-        gls.right[6] = {
+        gls.right[7] = {
+          LineCol = {
+            provider = function()
+              local line = vim.fn.line(".")
+              local col = vim.fn.col(".")
+              return string.format("%d:%d", line, col)
+            end,
+            highlight = { colors.bg, colors.fg },
+          },
+        }
+
+        gls.right[8] = {
           rightRounded = {
             provider = function()
               return ""
