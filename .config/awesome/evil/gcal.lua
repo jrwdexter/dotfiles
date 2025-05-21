@@ -8,7 +8,7 @@ local gears = require("gears")
 local json = require("json")
 
 local update_interval = 60 * 15 -- 15 minutes
-local temp_file = "/tmp/awesomewm-evil-gcal"
+local temp_file = "/tmp/awesome-evil-gcal"
 local gcal_script = function()
   local calendar_email = user.get_active_profile().calendar_email
   local client_id = user.get_active_profile().google_oauth.client_id
