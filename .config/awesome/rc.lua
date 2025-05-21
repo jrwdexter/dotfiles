@@ -13,6 +13,7 @@
 local naughty = require("naughty")
 local awful = require("awful")
 local file_helpers = require("file_helpers")
+require("signals.init")
 
 local gears = require("gears")
 
