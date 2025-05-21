@@ -95,10 +95,10 @@ end
 local user_widget = require('elemental.dashboard.components.user')
 local user_box = create_boxed_widget(user_widget, dpi(450), dpi(510), x.background)
 
--- Fortune
+-- Packages
 
-local fortune_widget = require("elemental.dashboard.components.fortune")
-local fortune_box = create_boxed_widget(fortune_widget, dpi(450), dpi(210), x.background)
+local package_widget = require("elemental.dashboard.components.packages")
+local package_box = create_boxed_widget(package_widget, dpi(450), dpi(210), x.background)
 
 -- URL launcher petals
 
@@ -226,7 +226,7 @@ dashboard:setup {
             {
                 -- Column 1
                 user_box,
-                fortune_box,
+                package_box,
                 layout = wibox.layout.fixed.vertical
             },
             {
