@@ -10,7 +10,7 @@ local helpers = require("helpers")
 local update_interval = 60 * 60 * 4 -- 4 hours
 local country = user.coronavirus_country or "usa"
 local state = user.coronavirus_state or "mn"
-local temp_file = "/tmp/awesomewm-evil-coronavirus-"..country
+local temp_file = "/tmp/awesome-evil-coronavirus-"..country
 local coronavirus_script
 
 if not (state == nil) then

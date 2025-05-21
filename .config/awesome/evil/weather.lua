@@ -12,7 +12,7 @@ local city_id = user.openweathermap_city_id
 local units = user.weather_units
 -- Don't update too often, because your requests might get blocked for 24 hours
 local update_interval = 1200
-local temp_file = "/tmp/awesomewm-evil-weather-"..city_id.."-"..units
+local temp_file = "/tmp/awesome-evil-weather-"..city_id.."-"..units
 
 local weather_details_script = [[
     bash -c '
