@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.0"
+   width="144"
+   height="144"
+   id="svg2424"
+   sodipodi:docname="arch-linux.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="1.200903"
+     inkscape:cx="151.55262"
+     inkscape:cy="144.47461"
+     inkscape:window-width="1991"
+     inkscape:window-height="1297"
+     inkscape:window-x="3285"
+     inkscape:window-y="57"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g2424" />
+  <defs
+     id="defs2426">
+    <linearGradient
+       x1="112.49854"
+       y1="6.1372099"
+       x2="112.49853"
+       y2="129.3468"
+       id="path1082_2_"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(287,-83)">
+      <stop
+         id="stop193"
+         style="stop-color:#ffffff;stop-opacity:0"
+         offset="0" />
+      <stop
+         id="stop195"
+         style="stop-color:#ffffff;stop-opacity:0.27450982"
+         offset="1" />
+      <midPointStop
+         offset="0"
+         style="stop-color:#FFFFFF"
+         id="midPointStop197" />
+      <midPointStop
+         offset="0.5"
+         style="stop-color:#FFFFFF"
+         id="midPointStop199" />
+      <midPointStop
+         offset="1"
+         style="stop-color:#000000"
+         id="midPointStop201" />
+    </linearGradient>
+    <linearGradient
+       x1="541.33502"
+       y1="104.50665"
+       x2="606.91248"
+       y2="303.14029"
+       id="linearGradient2544"
+       xlink:href="#path1082_2_"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.3937741,0,0,0.393752,357.51969,122.00151)" />
+    <linearGradient
+       id="linearGradient3388">
+      <stop
+         id="stop3390"
+         style="stop-color:#000000;stop-opacity:0"
+         offset="0" />
+      <stop
+         id="stop3392"
+         style="stop-color:#000000;stop-opacity:0.37113401"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="490.72305"
+       y1="237.72447"
+       x2="490.72305"
+       y2="183.9644"
+       id="linearGradient4416"
+       xlink:href="#linearGradient3388"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.749107,0,0,0.749107,-35.459862,91.44108)" />
+  </defs>
+  <g
+     transform="translate(-34.777313,-129.80241)"
+     id="layer1">
+    <g
+       transform="matrix(0.8746356,0,0,0.8746356,14.730518,23.408954)"
+       id="g2424">
+      <path
+         d="m 105.2247,121.64318 c -7.329368,17.96967 -11.750094,29.72394 -19.910392,47.15943 5.003285,5.30349 11.144579,11.47965 21.118022,18.45505 -10.722432,-4.41221 -18.036442,-8.84197 -23.502314,-13.43874 -10.443622,21.79222 -26.805772,52.83427 -60.009848,112.49524 26.097289,-15.06642 46.327442,-24.35503 65.180971,-27.89931 -0.809576,-3.48199 -1.269848,-7.24843 -1.238587,-11.17831 l 0.03094,-0.83605 c 0.414105,-16.71984 9.111754,-29.5774 19.414948,-28.7044 10.30321,0.873 18.31177,15.14297 17.89767,31.86282 -0.0779,3.14614 -0.43275,6.1727 -1.0528,8.9798 18.64884,3.64804 38.66267,12.91287 64.40685,27.77545 -5.07624,-9.34573 -9.60724,-17.77022 -13.93417,-25.79371 -6.81562,-5.28256 -13.92465,-12.15783 -28.42571,-19.60074 9.96719,2.58991 17.10358,5.57796 22.66625,8.91788 C 123.8734,167.93007 120.3109,157.04625 105.22467,121.64318 Z"
+         id="path2518"
+         style="fill:#1793d1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.990872" />
+    </g>
+  </g>
+  <xhtml:iframe
+     class="cleanslate hidden"
+     src="moz-extension://d304e2a6-c3d6-45c8-af1b-8530580fa89b/static/commandline.html"
+     id="cmdline_iframe"
+     loading="lazy"
+     style="height: 0px !important;" />
+</svg>

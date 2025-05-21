@@ -176,5 +176,6 @@ function icons.init(theme_name)
 
     -- Set symbols and accent colors for text icons
 end
+icons.image['arch-linux'] = gears.filesystem.get_configuration_dir().."icons/arch-linux.svg"
 
 return icons
