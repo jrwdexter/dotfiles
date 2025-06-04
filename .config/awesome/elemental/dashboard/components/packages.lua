@@ -33,14 +33,16 @@ local aur = wibox.widget({
 })
 
 awesome.connect_signal("evil::packages::official", function(count)
-  local color = count == 0 and x.color8 or count > 50 and x.color1 or x.color2
-  official.markup = helpers.colorize_text(count, color)
+  local safe_count = count == nil and 0 or count
+  local color = safe_count and x.color8 or count > 50 and x.color1 or x.color2
+  official.markup = helpers.colorize_text(safe_count, color)
   official_title.markup = helpers.colorize_text("Official Packages: ", color)
 end)
 
 awesome.connect_signal("evil::packages::aur", function(count)
-  local color = count == 0 and x.color8 or count > 50 and x.color1 or x.color2
-  aur.markup = helpers.colorize_text(count, color)
+  local safe_count = count == nil and 0 or count
+  local color = safe_count and x.color8 or count > 50 and x.color1 or x.color2
+  aur.markup = helpers.colorize_text(safe_count, color)
   aur_title.markup = helpers.colorize_text("AUR Packages: ", color)
 end)
 
