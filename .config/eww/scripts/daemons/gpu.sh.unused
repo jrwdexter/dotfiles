@@ -1,0 +1,28 @@
+#!/bin/bash
+# Not sure if this works on NVIDIA cards
+update() {
+  # Run the command and capture output
+  raw_json=$(timeout 0.6 intel_gpu_top -J -s 100 -o - 2>/dev/null)
+
+  # Check if we got any output
+  echo $raw_json
+  if [[ -n "$raw_json" ]]; then
+      usage=$(echo "$raw_json" | jq -s '.[0].engines | map(.busy // 0) | add | round')
+      echo "Intel GPU Usage: ${usage}%"
+  else
+      echo "Intel GPU Usage: 0%"
+  fi
+    #eww update gpu="$(cat /sys/class/drm/card0/device/gpu_busy_percent)"
+
+    # Alternatively: With amdgpu_top
+    # eww update gpu="$(amdgpu_top -gm --single | awk '/average_gfx_activity/ {print substr($2, 1, length($2)-1)}')"
+}
+
+if [[ $1 == "oneshot" ]]; then
+    update
+fi
+
+while true; do
+    update
+    sleep 10
+done
