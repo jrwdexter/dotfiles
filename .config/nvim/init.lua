@@ -12,20 +12,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require 'globals'
-require 'settings'
+require("globals")
+require("settings")
 
-require('lazy').setup({
+require("lazy").setup({
   spec = {
-    { import = 'utils'},
-    { import = 'style'},
-    { import = 'git'},
-    { import = 'language'},
-    { import = 'ide'},
-  }
+    { import = "utils" },
+    { import = "style" },
+    { import = "git" },
+    { import = "language" },
+    { import = "ide" },
+  },
 })
 
-require 'hotkeys'
+vim.api.nvim_set_keymap("n", "<leader>l", ":Lazy<CR>", { noremap = true, silent = true })
+
+require("hotkeys")
 
 --lazy.setup("utils")
 --lazy.setup("style")
