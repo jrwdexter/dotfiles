@@ -27,8 +27,8 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
       local coq = require("coq")
+      local util = require('lspconfig.util')
 
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -66,19 +66,25 @@ local plugins = {
         if client.server_capabilities.document_range_formatting then
           buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
         end
-
       end
 
       -- LSP: C#
       local omnisharp_bin, success, _ = find_file("omnisharp")
       if success then
         omnisharp_bin = omnisharp_bin:gsub("^%s*(.-)%s*$", "%1") -- trim
-        local util = lspconfig.util
+        local util = vim.lsp.util
         local pid = vim.fn.getpid()
-        lspconfig.omnisharp.setup({
-          capabilities = capabilities,
+        local cmd = {
+          omnisharp_bin,
+          "-z",
+          "--hostPID",
+          tostring(pid),
+          "--languageserver",
+        }
+
+        vim.lsp.config('omnisharp', coq.lsp_ensure_capabilities({
           filetypes = { "cs", "csx", "fs", "fsx", "vb" },
-          cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+          cmd = cmd,
           on_attach = on_attach,
           root_dir = function(fname)
             local dir = util.root_pattern("*.sln")(fname)
@@ -86,36 +92,41 @@ local plugins = {
               or util.root_pattern("omnisharp.json")(fname)
             return dir
           end,
-        })
-        lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities())
+        }))
+        vim.lsp.enable('omnisharp')
       end
 
       -- LSP: Typescript
-      require("lspconfig").ts_ls.setup({
+      vim.lsp.config('ts_ls', {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      vim.lsp.enable('ts_ls')
 
       -- LSP: CSS
-      require("lspconfig").cssls.setup({
+      vim.lsp.config('cssls', {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      vim.lsp.enable('cssls')
 
       -- LSP: Docker
-      require("lspconfig").dockerls.setup({
+      vim.lsp.config('dockerls', {
         capabilities = capabilities,
         on_attach = on_attach,
+        root_dir = util.root_pattern('Dockerfile', '.git'),
       })
+      vim.lsp.enable('dockerls')
 
       -- LSP: PYTHON
       -- Python has an automatic cmd
-      lspconfig.pylsp.setup({
+      vim.lsp.config('pylsp', {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      vim.lsp.enable('pylsp')
 
-      require("lspconfig").azure_pipelines_ls.setup({
+      vim.lsp.config('azure_pipelines_ls', {
         settings = {
           yaml = {
             schemas = {
@@ -129,13 +140,17 @@ local plugins = {
           },
         },
       })
+      vim.lsp.enable('azure_pipelines_ls')
 
-      require("lspconfig").terraformls.setup({})
-      require("lspconfig").tflint.setup({})
+      vim.lsp.config('terraformls', {})
+      vim.lsp.enable('terraformls')
+      vim.lsp.config('tflint', {})
+      vim.lsp.enable('tflint')
 
-      require("lspconfig").helm_ls.setup({})
+      vim.lsp.config('helm_ls', {})
+      vim.lsp.enable('helm_ls')
 
-      require("lspconfig").yamlls.setup({
+      vim.lsp.config('yamlls', {
         capabilities = capabilities,
         filetypes = { "yaml", "yaml.docker-compose" },
         on_attach = function(client, bufnr)
@@ -158,21 +173,25 @@ local plugins = {
           },
         },
       })
+      vim.lsp.enable('yamlls')
 
       -- LSP: Haskell
       -- TODO
       local hls_bin, hls_success, _ = find_file("haskell-language-server-wrapper")
       if hls_success then
-        require("lspconfig").hls.setup({
+        vim.lsp.config('hls', {
           on_attach = on_attach,
         })
+        vim.lsp.enable('hls')
       end
 
       -- LSP: Go
-      require'lspconfig'.gopls.setup{}
+      vim.lsp.config('gopls', {})
+      vim.lsp.enable('gopls')
 
       -- LSP: toml
-      require'lspconfig'.taplo.setup{}
+      vim.lsp.config('taplo', {})
+      vim.lsp.enable('taplo')
 
       -- LSP: LUA
       local luals_bin, lua_success, _ = find_file("lua-language-server")
@@ -181,7 +200,7 @@ local plugins = {
         local luals_bin_dir, _, _ = run_command("dirname " .. luals_bin)
         luals_bin_dir = luals_bin_dir:gsub("%s+$", "")
 
-        lspconfig.lua_ls.setup({
+        vim.lsp.config('lua_ls', coq.lsp_ensure_capabilities({
           capabilities = capabilities,
           settings = {
             Lua = {
@@ -209,8 +228,8 @@ local plugins = {
             },
           },
           on_attach = on_attach,
-        })
-        lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities())
+        }))
+        vim.lsp.enable('lua_ls')
       end
     end,
   },
