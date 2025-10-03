@@ -180,7 +180,7 @@ apps.visualizer = function()
 end
 
 apps.process_monitor = function()
-  helpers.run_or_raise({ instance = "htop" }, false, user.terminal .. " --class htop -e htop", { switchtotag = true })
+  helpers.run_or_raise({ instance = "btop" }, false, user.terminal .. " --class btop -e btop", { switchtotag = true })
 end
 
 apps.process_monitor_gui = function()

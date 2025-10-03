@@ -57,6 +57,7 @@ icons.text.by_class = {
     ['Gucharmap'] = { symbol = "", color = x.color6 },
     ['Pavucontrol'] = { symbol = "", color = x.color4 },
     ['htop'] = { symbol = "", color = x.color2 },
+    ['btop'] = { symbol = "", color = x.color2 },
     ['Screenruler'] = { symbol = "", color = x.color3 },
     ['Galculator'] = { symbol = "", color = x.color2 },
     ['Zathura'] = { symbol = "", color = x.color2 },

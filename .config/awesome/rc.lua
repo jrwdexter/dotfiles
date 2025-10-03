@@ -494,7 +494,7 @@ awful.screen.connect_for_each_screen(function(s)
   }
 
   -- Tag names
-  local tagnames = beautiful.tagnames or { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }
+  local tagnames = { " 1  ", " 2 󰭹 ", " 3  ", " 4  ", " 5  ", " 6  ", " 7  ", " 8  ", " 9  ", " 10 " }
   -- Create all tags at once (without seperate configuration for each tag)
   -- awful.tag(tagnames, s, layouts)
 
@@ -1110,7 +1110,7 @@ awful.rules.rules = {
     rule_any = {
       class = {
         user.dev.be_ide_class,
-        "cursor",
+        "Cursor",
         "jetbrains-rider",
         "jetbrains-pycharm",
       },
@@ -1161,6 +1161,7 @@ awful.rules.rules = {
         "Steam",
         "battle.net.exe",
         "Lutris",
+        "discord",
       },
       name = {
         "Steam",
@@ -1219,9 +1220,11 @@ awful.rules.rules = {
     rule_any = {
       class = {
         "htop",
+        "btop",
       },
       instance = {
         "htop",
+        "btop",
       },
     },
     properties = { screen = 1, tag = awful.screen.focused().tags[10] },
