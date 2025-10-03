@@ -1,8 +1,11 @@
+-- DEPRECATED: This galaxyline configuration has been replaced by lualine.nvim
+-- See lua/ide/lualine.lua for the new statusline configuration
 local plugins = {
   {
     {
       "dsych/galaxyline.nvim",
       branch = "bugfix/diagnostics",
+      enabled = false, -- Disabled in favor of lualine.nvim
       config = function()
         ---- Tagbar BROKEN
         --vim.api.nvim_set_keymap('n', '<F8>', ':TagbarToggle<CR>', {})
