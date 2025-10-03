@@ -4,7 +4,7 @@
 " *********************************
 " *********** Settings ************
 " *********************************
-set theme dark
+set theme catppuccin-mocha
 set hintchars 0123456789
 set hintfiltermode vimperator-reflow
 set hintnames numeric
@@ -22,33 +22,37 @@ bind <A-∂> composite tabclosealltoleft | tabclosealltoright " For OSX
 bind <C-d> tabclosealltoright
 bind ,d  composite tabclosealltoleft | tabclosealltoright
 
+" Used by sidebery
+unbind <C-e>
+
 " *********************************
 " ********* Page-Specific *********
 " *********************************
 " Reddit
-bindurl reddit.com gu urlparent 3 " Make gu take you back to subreddit from comments
-unbindurl ^https://(www\.)?reddit\.com <esc> " Esc out of posts
-unbindurl ^https://(www\.)?reddit\.com j " Leave j as reddit 'down'
-unbindurl ^https://(www\.)?reddit\.com k " Leave k as reddit 'up'
-unbindurl ^https://(www\.)?reddit\.com n " Leave n as reddit 'next post'
-unbindurl ^https://(www\.)?reddit\.com p " Leave n as reddit 'prev post'
+bindurl reddit.com gu urlparent 3
 
-" If browsing a comment, only hint appropriate links
-bindurl ^https://(www\.)?reddit\.com.*comments f hint -Jc [data-test-id=post-content] a,.Comment a
-bindurl ^https://(www\.)?reddit\.com.*comments F hint -Jbc [data-test-id=post-content] a,.Comment a
-bindurl ^https://(www\.)?reddit\.com.*comments ;i hint -ic [data-test-id=post-content] img
-bindurl ^https://(www\.)?reddit\.com.*comments ;I hint -Ic [data-test-id=post-content] img
-" Auto-focus on right div
-autocmd DocLoad reddit.com hint -; -c '#SHORTCUT_FOCUSABLE_DIV'
-
-" Only hint search results on Google and DDG
+" Google
+unbind url www.google.com f
+unbind url www.google.com F
 bindurl www.google.com f hint -Jc #rso .g a
 bindurl www.google.com F hint -Jbc #rso .g a
 
-" Highlight right content on DDG
-bindurl ^https://duckduckgo.com f hint -Jc [data-nrn=result]
-bindurl ^https://duckduckgo.com F hint -Jbc [data-nrn=result]
+" DuckDuckGo
+unbind duckduckgo.com f
+unbind duckduckgo.com F
+bindurl duckduckgo.com f hint -Jc [data-nrn=result]
+bindurl duckduckgo.com F hint -Jbc [data-nrn=result]
 
-bindurl ^https://github.com/search f hint -Jc .search-title a
+" Youtube
+unbindurl www.youtube.com f
+unbindurl www.youtube.com F
+unbindurl www.youtube.com <A-Enter>
+bindurl www.youtube.com f hint -Jc a[href^="/watch"], a[href^="/@"], a[href^="/channel"], a[href^="/user"], a[href^="/results"], a[href^="/feed"]
+bindurl www.youtube.com F hint -Jcf a[href^="/watch"], a[href^="/@"], a[href^="/channel"], a[href^="/user"], a[href^="/results"], a[href^="/feed"]
+bindurl www.youtube.com <A-Enter> js document.querySelector('button.ytp-fullscreen-button')?.click()
+
+" GitHub search
+unbindurl github.com/search f
+bindurl github.com/search f hint -Jc .search-title a
 set searchurls { "google": "https://www.google.com/search?q=", "scholar": "https://scholar.google.com/scholar?q=", "arch": "https://wiki.archlinux.org/index.php?search=", "gh": "https://github.com/search?type=repositories&q=", "bing": "https://www.bing.com/search?q=", "duckduckgo": "https://duckduckgo.com/?q=", "youtube": "https://www.youtube.com/results?search_query=", "amazon": "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=", "amazonuk": "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=", "cnrtl": "http://www.cnrtl.fr/lexicographie/", "gentoo_wiki": "https://wiki.gentoo.org/index.php?title=Special%3ASearch&profile=default&fulltext=Search&search=", "github": "https://github.com/search?utf8=?&q=", "googlelucky": "https://www.google.com/search?btnI=I'm+Feeling+Lucky&q=", "googleuk": "https://www.google.co.uk/search?q=", "mdn": "https://developer.mozilla.org/en-US/search?q=", "netsuite": "https://5547939.app.netsuite.com/app/common/search/ubersearchresults.nl?quicksearch=T&searchtype=Uber&frame=be&Uber_NAMEtype=KEYWORDSTARTSWITH&Uber_NAME=", "osm": "https://www.openstreetmap.org/search?query=", "qwant": "https://www.qwant.com/?q=", "searx": "https://searx.me/?category_general=on&q=", "startpage": "https://startpage.com/do/search?language=english&cat=web&query=", "twitter": "https://twitter.com/search?q=", "wikipedia": "https://en.wikipedia.org/wiki/Special:Search/", "yahoo": "https://search.yahoo.com/search?p=" }
 
