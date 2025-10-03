@@ -1,5 +1,6 @@
 #!/bin/sh
 date_file=/tmp/eww-days-of-the-week
+env > /tmp/dotw-env.log # Let's check our env - it might not be set correctly
 
 old_index=-1
 update() {
