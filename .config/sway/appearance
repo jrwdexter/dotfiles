@@ -119,8 +119,8 @@ client.placeholder        "$xbg"  "$xbg"  "$x8"   "$xbg"  "$xbg"
 client.background                 "$xbg"
 
 # >> Gaps
-gaps outer 0
-gaps inner 10
+gaps outer 10
+gaps inner 20
 
 # >> Cursor
 # Name of the cursor theme directory in ~/.icons

@@ -39,6 +39,15 @@ window_information = {
     "gimp": { "symbol": "", "color": "4" },
     "org.inkscape.Inkscape": { "symbol": "", "color": "2" },
     "deluge": { "symbol": "", "color": "1" },
+    "Slack": { "symbol": "", "color": "1" },
+    "Microsoft Teams - Preview": { "symbol": "󰊻", "color": "1" },
+    "Wavebox": { "symbol": "", "color": "1" },
+    "org.remmina.Remmina": { "symbol": "󰢹", "color": "1" },
+    "jetbrains-webstorm": { "symbol": "", "color": "5" },
+    "jetbrains-rider": { "symbol": "", "color": "5" },
+    "jetbrains-datagrip": { "symbol": "", "color": "5" },
+    "jetbrains-pycharm": { "symbol": "", "color": "5" },
+    "cursor": { "symbol": "", "color": "5" },
     "___default___": { "symbol": "", "color": "10" },
 }
 

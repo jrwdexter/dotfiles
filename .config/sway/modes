@@ -59,14 +59,14 @@ mode "move" {
 mode "apps" {
     bindsym --to-code {
         w exec $sway/window-do "[app_id=firefox] focus" "firefox"; mode default
-        m exec $sway/window-do "[app_id=chrome-mail.proton.me__-Default] focus" "protonmail"; mode default
+        m exec $sway/window-do "[class=Wavebox] focus" "wavebox"; mode default
         # m exec $sway/window-do "[app_id=email] focus" "$term --class email -e neomutt"; mode default
         d exec $sway/window-do "[app_id=chrome-discordapp.com__channels_@me-Default] focus" "chromium --app='https://discordapp.com/channels/@me'"; mode default
         c exec $sway/window-do "[app_id=chrome-chatgpt.com__-Default] focus" "chatgpt"; mode default
         # c exec $sway/window-do "[app_id=weechat] focus" "$term --class weechat -e weechat"; mode default
         t exec $sway/window-do "[app_id=telegramdesktop] focus" "telegram"; mode default
         l exec $sway/window-do "[app_id=lutris] focus" "lutris"; mode default
-        s exec $sway/window-do '[class="^steam$"] focus' "steam"; mode default
+        s exec $sway/window-do '[app_id="slack"] focus' "slack"; mode default
         # s exec $sway/window-do '[app_id="Signal Beta"] focus' "signal-desktop"; mode default
         # s exec $sway/window-do '[app_id="Signal"] focus' "signal-desktop"; mode default
         g exec $sway/window-do '[class="^Gimp$"] focus' "gimp"; mode default

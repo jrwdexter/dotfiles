@@ -14,9 +14,9 @@ bindsym --to-code {
     $mod+Return exec $term
 
     # Reload sway only
-    $mod+Shift+r reload
+    # $mod+Shift+r reload
     # Reload sway and eww
-    #$mod+Shift+r reload, exec eww reload
+    $mod+Shift+r reload, exec eww reload
 
     # Force eww daemons to update their respective variables
     $mod+Control+Shift+r exec '$eww/daemons-force-update'
