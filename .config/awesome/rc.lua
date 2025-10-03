@@ -10,6 +10,15 @@
 -- >> The file that binds everything together.
 --]]
 
+local lgi = require("lgi")
+local Gio = lgi.Gio
+local GioUnix = lgi.GioUnix
+
+if not Gio.UnixInputStream and GioUnix then
+Gio.UnixInputStream = GioUnix.InputStream
+Gio.UnixOutputStream = GioUnix.OutputStream
+end
+
 local naughty = require("naughty")
 local awful = require("awful")
 local file_helpers = require("file_helpers")
