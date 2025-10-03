@@ -75,6 +75,7 @@ local plugins = {
   { "tridactyl/vim-tridactyl" },
   { "mrk21/yaml-vim" },
   { "mattn/emmet-vim" },
+  { "elkowar/yuck.vim" },
 }
 
 --************ C# shortcuts ************
