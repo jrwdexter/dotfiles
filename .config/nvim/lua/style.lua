@@ -9,12 +9,27 @@ local plugins = {
     end,
   },
   {
-    "norcalli/nvim-base16.lua",
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
     config = function()
-      local base16 = require("base16")
-      --base16(base16.themes.dracula, true)
-      base16(base16.themes['gruvbox-dark-hard'], true)
+      vim.cmd.colorscheme("catppuccin-macchiato")
     end,
+  },
+  {
+    -- I love this theme, but it's pretty much only for vscode/neovim
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "norcalli/nvim-base16.lua",
+    --config = function()
+    --local base16 = require("base16")
+    --base16(base16.themes.dracula, true)
+    --base16(base16.themes['gruvbox-dark-hard'], true)
+    --end,
   },
 
   -- Emoji
