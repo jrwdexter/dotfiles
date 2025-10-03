@@ -369,8 +369,8 @@ alias lg=lazygit
 source ~/.kubectl_aliases
 
 # Azure completion
-if [[ -f /opt/azure-cli/az.completion ]]; then
-  source /opt/azure-cli/az.completion
+if [[ -f /opt/azure-cli/bin/az.completion.sh ]]; then
+  source /opt/azure-cli/bin/az.completion.sh
 fi
 
 if type "nuke" > /dev/null; then
