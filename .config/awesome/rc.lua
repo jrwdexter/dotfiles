@@ -15,8 +15,8 @@ local Gio = lgi.Gio
 local GioUnix = lgi.GioUnix
 
 if not Gio.UnixInputStream and GioUnix then
-Gio.UnixInputStream = GioUnix.InputStream
-Gio.UnixOutputStream = GioUnix.OutputStream
+  Gio.UnixInputStream = GioUnix.InputStream
+  Gio.UnixOutputStream = GioUnix.OutputStream
 end
 
 local naughty = require("naughty")
@@ -503,7 +503,8 @@ awful.screen.connect_for_each_screen(function(s)
   }
 
   -- Tag names
-  local tagnames = { " 1  ", " 2 󰭹 ", " 3  ", " 4  ", " 5  ", " 6  ", " 7  ", " 8  ", " 9  ", " 10 " }
+  local tagnames =
+    { " 1  ", " 2 󰭹 ", " 3  ", " 4  ", " 5  ", " 6  ", " 7  ", " 8  ", " 9  ", " 10 " }
   -- Create all tags at once (without seperate configuration for each tag)
   -- awful.tag(tagnames, s, layouts)
 
@@ -603,7 +604,7 @@ awful.rules.rules = {
         "fst",
         "Nvidia-settings",
         "floating",
-        "Emulator"
+        "Emulator",
       },
       name = {
         "Android Emulator",
@@ -842,6 +843,19 @@ awful.rules.rules = {
     end,
   },
 
+  -- Project Management
+  {
+    rule_any = { class = { "clickup", "ClickUp" } },
+    properties = {
+      screen = secondScreen,
+      tag = secondScreen.tags[10],
+      skip_taskbar = true,
+      above = true,
+      titlebars_enabled = false,
+      fullscreen = true,
+    },
+  },
+
   -- File chooser dialog
   {
     rule_any = { role = { "GtkFileChooserDialog" } },
@@ -925,7 +939,7 @@ awful.rules.rules = {
       ontop = true,
       width = screen_width * 0.4,
       height = screen_height * 0.4,
-      titlebars_enabled = false
+      titlebars_enabled = false,
     },
   },
 
@@ -1242,10 +1256,10 @@ awful.rules.rules = {
   -- Modals
   {
     rule_any = {
-      role = "bubble"
+      role = "bubble",
     },
-    properties = { floating = true, ontop = true, focusable = false, titlebars_enabled = false }
-  }
+    properties = { floating = true, ontop = true, focusable = false, titlebars_enabled = false },
+  },
 }
 -- (Rules end here) ..................................................
 -- ===================================================================
