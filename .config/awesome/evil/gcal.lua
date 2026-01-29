@@ -27,8 +27,6 @@ local gcal_script = function()
         calendar_email="]] .. calendar_email .. [["
         start_date="]] .. start_date .. [["
         end_date="]] .. end_date .. [["
-        client_id="]] .. client_id .. [["
-        client_secret="]] .. client_secret .. [["
         event_json=$(
           gcalcli --calendar $calendar_email search "*" $start_date $end_date --details all --nodeclined --tsv 2>/dev/null | jq -Rs '\''
             split("\n") | map(split("\t")) |
