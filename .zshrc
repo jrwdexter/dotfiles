@@ -393,3 +393,5 @@ fi
 if [ -f '/opt/anaconda/bin/activate' ]; then
   source /opt/anaconda/bin/activate
 fi
+
+eval $(thefuck --alias)
