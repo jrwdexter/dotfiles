@@ -192,6 +192,14 @@ local plugins = {
       -- LSP: toml
       vim.lsp.config('taplo', {})
       vim.lsp.enable('taplo')
+      -- LSP: zizmor
+      vim.lsp.config("zizmor", {
+        cmd = { "zizmor", "--lsp" },
+        filetypes = { "yaml" },
+        root_dir = util.root_pattern(".github"),
+        single_file_support = true,
+      })
+      vim.lsp.enable("zizmor")
 
       -- LSP: LUA
       local luals_bin, lua_success, _ = find_file("lua-language-server")
