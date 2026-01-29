@@ -12,3 +12,5 @@
 **/liblua_pam.so
 
 .fonts/**/.uuid
+
+.config/nvim/lazy-lock.json
