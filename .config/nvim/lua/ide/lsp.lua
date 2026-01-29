@@ -28,7 +28,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     config = function()
       local coq = require("coq")
-      local util = require('lspconfig.util')
+      local util = require("lspconfig.util")
 
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -82,75 +82,62 @@ local plugins = {
           "--languageserver",
         }
 
-        vim.lsp.config('omnisharp', coq.lsp_ensure_capabilities({
-          filetypes = { "cs", "csx", "fs", "fsx", "vb" },
-          cmd = cmd,
-          on_attach = on_attach,
-          root_dir = function(fname)
-            local dir = util.root_pattern("*.sln")(fname)
-              or util.root_pattern("*.csproj")(fname)
-              or util.root_pattern("omnisharp.json")(fname)
-            return dir
-          end,
-        }))
-        vim.lsp.enable('omnisharp')
+        vim.lsp.config(
+          "omnisharp",
+          coq.lsp_ensure_capabilities({
+            filetypes = { "cs", "csx", "fs", "fsx", "vb" },
+            cmd = cmd,
+            on_attach = on_attach,
+            root_dir = function(fname)
+              local dir = util.root_pattern("*.sln")(fname)
+                or util.root_pattern("*.csproj")(fname)
+                or util.root_pattern("omnisharp.json")(fname)
+              return dir
+            end,
+          })
+        )
+        vim.lsp.enable("omnisharp")
       end
 
       -- LSP: Typescript
-      vim.lsp.config('ts_ls', {
+      vim.lsp.config("ts_ls", {
         capabilities = capabilities,
         on_attach = on_attach,
       })
-      vim.lsp.enable('ts_ls')
+      vim.lsp.enable("ts_ls")
 
       -- LSP: CSS
-      vim.lsp.config('cssls', {
+      vim.lsp.config("cssls", {
         capabilities = capabilities,
         on_attach = on_attach,
       })
-      vim.lsp.enable('cssls')
+      vim.lsp.enable("cssls")
 
       -- LSP: Docker
-      vim.lsp.config('dockerls', {
+      vim.lsp.config("dockerls", {
         capabilities = capabilities,
         on_attach = on_attach,
-        root_dir = util.root_pattern('Dockerfile', '.git'),
+        root_dir = util.root_pattern("Dockerfile", ".git"),
       })
-      vim.lsp.enable('dockerls')
+      vim.lsp.enable("dockerls")
 
       -- LSP: PYTHON
       -- Python has an automatic cmd
-      vim.lsp.config('pylsp', {
+      vim.lsp.config("pylsp", {
         capabilities = capabilities,
         on_attach = on_attach,
       })
-      vim.lsp.enable('pylsp')
+      vim.lsp.enable("pylsp")
 
-      vim.lsp.config('azure_pipelines_ls', {
-        settings = {
-          yaml = {
-            schemas = {
-              ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
-                "/azure-pipeline*.y*l",
-                "/*.azure*",
-                "Azure-Pipelines/**/*.y*l",
-                "Pipelines/*.y*l",
-              },
-            },
-          },
-        },
-      })
-      vim.lsp.enable('azure_pipelines_ls')
+      vim.lsp.config("terraformls", {})
+      vim.lsp.enable("terraformls")
+      vim.lsp.config("tflint", {})
+      vim.lsp.enable("tflint")
 
-      vim.lsp.config('terraformls', {})
-      vim.lsp.enable('terraformls')
-      vim.lsp.config('tflint', {})
-      vim.lsp.enable('tflint')
+      vim.lsp.config("helm_ls", {})
+      vim.lsp.enable("helm_ls")
 
-      vim.lsp.config('helm_ls', {})
-      vim.lsp.enable('helm_ls')
-
-      vim.lsp.config('yamlls', {
+      vim.lsp.config("yamlls", {
         capabilities = capabilities,
         filetypes = { "yaml", "yaml.docker-compose" },
         on_attach = function(client, bufnr)
@@ -173,25 +160,26 @@ local plugins = {
           },
         },
       })
-      vim.lsp.enable('yamlls')
+      vim.lsp.enable("yamlls")
 
       -- LSP: Haskell
       -- TODO
       local hls_bin, hls_success, _ = find_file("haskell-language-server-wrapper")
       if hls_success then
-        vim.lsp.config('hls', {
+        vim.lsp.config("hls", {
           on_attach = on_attach,
         })
-        vim.lsp.enable('hls')
+        vim.lsp.enable("hls")
       end
 
       -- LSP: Go
-      vim.lsp.config('gopls', {})
-      vim.lsp.enable('gopls')
+      vim.lsp.config("gopls", {})
+      vim.lsp.enable("gopls")
 
       -- LSP: toml
-      vim.lsp.config('taplo', {})
-      vim.lsp.enable('taplo')
+      vim.lsp.config("taplo", {})
+      vim.lsp.enable("taplo")
+
       -- LSP: zizmor
       vim.lsp.config("zizmor", {
         cmd = { "zizmor", "--lsp" },
@@ -208,36 +196,39 @@ local plugins = {
         local luals_bin_dir, _, _ = run_command("dirname " .. luals_bin)
         luals_bin_dir = luals_bin_dir:gsub("%s+$", "")
 
-        vim.lsp.config('lua_ls', coq.lsp_ensure_capabilities({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = "LuaJIT",
-                -- Setup your lua path
-                path = vim.split(package.path, ";"),
-              },
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-              },
-              workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = {
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        vim.lsp.config(
+          "lua_ls",
+          coq.lsp_ensure_capabilities({
+            capabilities = capabilities,
+            settings = {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                  version = "LuaJIT",
+                  -- Setup your lua path
+                  path = vim.split(package.path, ";"),
+                },
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = { "vim" },
+                },
+                workspace = {
+                  -- Make the server aware of Neovim runtime files
+                  library = {
+                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                  },
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                  enable = false,
                 },
               },
-              -- Do not send telemetry data containing a randomized but unique identifier
-              telemetry = {
-                enable = false,
-              },
             },
-          },
-          on_attach = on_attach,
-        }))
-        vim.lsp.enable('lua_ls')
+            on_attach = on_attach,
+          })
+        )
+        vim.lsp.enable("lua_ls")
       end
     end,
   },
