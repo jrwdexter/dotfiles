@@ -1,4 +1,5 @@
 [ -f "$HOME/.profile" ] && source "$HOME/.profile"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
 
 if [[ -x "$(command -v autorandr)" ]]; then
   autorandr --change &
