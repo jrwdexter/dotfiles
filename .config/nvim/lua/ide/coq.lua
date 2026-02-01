@@ -1,4 +1,4 @@
-vim.g.coq_settings = { auto_start = true, keymap = { jump_to_mark = "c-\\", manual_complete = "c-space" } }
+vim.g.coq_settings = { auto_start = "shut-up", keymap = { jump_to_mark = "c-\\", manual_complete = "c-space" } }
 return {
   {
     "ms-jpq/coq_nvim",
