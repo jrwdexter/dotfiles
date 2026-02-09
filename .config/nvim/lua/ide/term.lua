@@ -3,6 +3,9 @@ local plugins = {
 
     {
       "akinsho/toggleterm.nvim",
+      keys = {
+        { "<leader>gg", desc = "Lazygit" },
+      },
       config = function()
         require("toggleterm").setup({})
         local Terminal = require("toggleterm.terminal").Terminal
@@ -18,15 +21,15 @@ local plugins = {
           -- function to run on opening the terminal
           on_open = function(term)
             vim.cmd("startinsert!")
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+            vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = term.bufnr, silent = true, desc = "Close lazygit" })
           end,
           -- function to run on closing the terminal
-          on_close = function(term)
+          on_close = function()
             vim.cmd("startinsert!")
           end,
         })
 
-        function ToggleLazygit()
+        local function toggle_lazygit()
           local cwd = vim.fn.getcwd()
           if cwd ~= cur_cwd then
             cur_cwd = cwd
@@ -36,7 +39,7 @@ local plugins = {
           lazygit:toggle()
         end
 
-        vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua ToggleLazygit()<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>gg", toggle_lazygit, { silent = true, desc = "Lazygit" })
       end,
     },
   },

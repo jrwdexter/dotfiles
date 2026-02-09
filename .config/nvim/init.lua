@@ -1,6 +1,6 @@
 -- Setup package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -25,16 +25,6 @@ require("lazy").setup({
   },
 })
 
-vim.api.nvim_set_keymap("n", "<leader>l", ":Lazy<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>l", ":Lazy<CR>", { silent = true, desc = "Open Lazy" })
 
 require("hotkeys")
-
---lazy.setup("utils")
---lazy.setup("style")
---lazy.setup("git")
---lazy.setup("language")
---lazy.setup("ide")
-
---require('settings')
---require('hotkeys')
---require('globals').init()
