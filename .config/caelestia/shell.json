@@ -34,10 +34,18 @@
   "general": {
     "logo": "",
     "apps": {
-      "terminal": ["kitty"],
-      "audio": ["pavucontrol"],
-      "playback": ["mpv"],
-      "explorer": ["thunar"]
+      "terminal": [
+        "kitty"
+      ],
+      "audio": [
+        "pavucontrol"
+      ],
+      "playback": [
+        "mpv"
+      ],
+      "explorer": [
+        "thunar"
+      ]
     },
     "idle": {
       "lockBeforeSleep": true,
@@ -53,7 +61,10 @@
           "timeout": 300
         },
         {
-          "idleAction": ["systemctl", "suspend-then-hibernate"],
+          "idleAction": [
+            "systemctl",
+            "suspend-then-hibernate"
+          ],
           "timeout": 600
         }
       ]
@@ -264,7 +275,10 @@
     },
     "actions": [
       {
-        "command": ["autocomplete", "calc"],
+        "command": [
+          "autocomplete",
+          "calc"
+        ],
         "dangerous": false,
         "description": "Do simple math equations (powered by Qalc)",
         "enabled": true,
@@ -272,7 +286,10 @@
         "name": "Calculator"
       },
       {
-        "command": ["autocomplete", "scheme"],
+        "command": [
+          "autocomplete",
+          "scheme"
+        ],
         "dangerous": false,
         "description": "Change the current colour scheme",
         "enabled": true,
@@ -280,7 +297,10 @@
         "name": "Scheme"
       },
       {
-        "command": ["autocomplete", "wallpaper"],
+        "command": [
+          "autocomplete",
+          "wallpaper"
+        ],
         "dangerous": false,
         "description": "Change the current wallpaper",
         "enabled": true,
@@ -288,7 +308,10 @@
         "name": "Wallpaper"
       },
       {
-        "command": ["autocomplete", "variant"],
+        "command": [
+          "autocomplete",
+          "variant"
+        ],
         "dangerous": false,
         "description": "Change the current scheme variant",
         "enabled": true,
@@ -296,7 +319,10 @@
         "name": "Variant"
       },
       {
-        "command": ["autocomplete", "transparency"],
+        "command": [
+          "autocomplete",
+          "transparency"
+        ],
         "dangerous": false,
         "description": "Change shell transparency",
         "enabled": false,
@@ -304,7 +330,11 @@
         "name": "Transparency"
       },
       {
-        "command": ["caelestia", "wallpaper", "-r"],
+        "command": [
+          "caelestia",
+          "wallpaper",
+          "-r"
+        ],
         "dangerous": false,
         "description": "Switch to a random wallpaper",
         "enabled": true,
@@ -312,7 +342,10 @@
         "name": "Random"
       },
       {
-        "command": ["setMode", "light"],
+        "command": [
+          "setMode",
+          "light"
+        ],
         "dangerous": false,
         "description": "Change the scheme to light mode",
         "enabled": true,
@@ -320,7 +353,10 @@
         "name": "Light"
       },
       {
-        "command": ["setMode", "dark"],
+        "command": [
+          "setMode",
+          "dark"
+        ],
         "dangerous": false,
         "description": "Change the scheme to dark mode",
         "enabled": true,
@@ -364,7 +400,10 @@
         "name": "Logout"
       },
       {
-        "command": ["loginctl", "lock-session"],
+        "command": [
+          "loginctl",
+          "lock-session"
+        ],
         "dangerous": false,
         "description": "Lock the current session",
         "enabled": true,
@@ -372,7 +411,10 @@
         "name": "Lock"
       },
       {
-        "command": ["systemctl", "suspend"],
+        "command": [
+          "systemctl",
+          "suspend"
+        ],
         "dangerous": false,
         "description": "Suspend the system",
         "enabled": true,
@@ -380,7 +422,12 @@
         "name": "Sleep"
       },
       {
-        "command": ["caelestia", "shell", "controlCenter", "open"],
+        "command": [
+          "caelestia",
+          "shell",
+          "controlCenter",
+          "open"
+        ],
         "dangerous": false,
         "description": "Configure the shell",
         "enabled": true,
@@ -427,13 +474,15 @@
         "-c",
         "command -v hyprshutdown &>/dev/null && exec hyprshutdown -t 'Shutting down...' --post-cmd 'systemctl poweroff' || exec systemctl poweroff"
       ],
+      "hibernate": [
+        "systemctl",
+        "hibernate"
+      ],
       "reboot": [
         "bash",
         "-c",
         "command -v hyprshutdown &>/dev/null && exec hyprshutdown -t 'Restarting...' --post-cmd 'systemctl reboot' || exec systemctl reboot"
-      ],
-      "suspend": ["systemctl", "suspend"],
-      "hibernate": ["systemctl", "hibernate"]
+      ]
     },
     "sizes": {
       "button": 80
@@ -483,11 +532,6 @@
           "enabled": false,
           "interface": "your-connection-name",
           "name": "wireguard"
-        },
-        {
-          "displayName": "Tailscale",
-          "interface": "tailscale0",
-          "name": "tailscale"
         },
         {
           "displayName": "Tailscale",
