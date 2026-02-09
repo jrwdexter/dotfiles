@@ -189,7 +189,7 @@ lpw() {
     return
   fi
   if [[ `printf %s "$matches" | jq '. | length'` > 1 ]]; then
-    
+
     id=`printf %s "$matches" | jq -r '.[] | "\u001B[1;34m" + .fullname + " \u001B[1;32m[id: " + .id + "]" + " \u001B[2;37m{" + .username + "}\u001B[0m"' | fzf --ansi | sed -E "s/^.*id: ([0-9]+).*$/\1/"`
     lpass show -pc $id
     >&1 echo -ne "Password copied to clipboard.\n"
@@ -229,12 +229,12 @@ t=$'"'"'\e[0m'"'"'
 v=$'"'"'\e[7m'"'"'
 
 cat << EOF
- 
- $f1██████$d██$t $f2██████$d██$t $f3██████$d██$t $f4██████$d██$t $f5██████$d██$t $f6██████$d██$t 
- $f1██████$d██$t $f2██████$d██$t $f3██████$d██$t $f4██████$d██$t $f5██████$d██$t $f6██████$d██$t 
- $f1██████$d██$t $f2██████$d██$t $f3██████$d██$t $f4██████$d██$t $f5██████$d██$t $f6██████$d██$t 
- $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t 
- 
+
+ $f1██████$d██$t $f2██████$d██$t $f3██████$d██$t $f4██████$d██$t $f5██████$d██$t $f6██████$d██$t
+ $f1██████$d██$t $f2██████$d██$t $f3██████$d██$t $f4██████$d██$t $f5██████$d██$t $f6██████$d██$t
+ $f1██████$d██$t $f2██████$d██$t $f3██████$d██$t $f4██████$d██$t $f5██████$d██$t $f6██████$d██$t
+ $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t $ft██████$d$f7██$t
+
 EOF'
   /bin/sh -c $command
 }
@@ -324,7 +324,7 @@ clean_wsl_mem() {
     else
       echo -e "\e[093mFailure\e[0m: could not drop cache"
     fi
-    
+
     echo -e "Compacting memory..."
     if (sudo sh -c 'echo 1 > /proc/sys/vm/compact_memory'); then
       echo -e "\e[092mSuccess\e[0m: compacted memory"
