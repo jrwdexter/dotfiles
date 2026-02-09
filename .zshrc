@@ -77,6 +77,8 @@ plugins=(
   git
   github
   nvm
+  poetry
+  poetry-env
   thefuck
   z
 )
