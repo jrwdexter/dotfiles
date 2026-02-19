@@ -40,6 +40,9 @@ local plugins = {
         { "<leader>e", group = "Edit config" },
         { "<leader>h", group = "Git hunks" },
         { "<leader>g", group = "Git" },
+        { "<leader>d", group = "Debug" },
+        { "<leader>o", group = "Notes" },
+        { "<leader>oj", group = "Journal" },
         { "<leader>s", group = "Source" },
         { "<leader>x", group = "Trouble" },
 
@@ -110,6 +113,32 @@ local plugins = {
         { "<leader>cwr", desc = "Remove workspace folder" },
         { "<leader>cwl", desc = "List workspace folders" },
 
+        -- Debug (leader d prefix)
+        { "<leader>dc", desc = "Continue / Start" },
+        { "<leader>db", desc = "Toggle breakpoint" },
+        { "<leader>dB", desc = "Conditional breakpoint" },
+        { "<leader>dl", desc = "Log point" },
+        { "<leader>do", desc = "Step over" },
+        { "<leader>di", desc = "Step into" },
+        { "<leader>dO", desc = "Step out" },
+        { "<leader>dr", desc = "Toggle REPL" },
+        { "<leader>dL", desc = "Run last" },
+        { "<leader>du", desc = "Toggle DAP UI" },
+        { "<leader>dt", desc = "Terminate" },
+        { "<leader>dk", desc = "Hover / Evaluate" },
+        { "<F5>", desc = "Debug: Continue" },
+        { "<F10>", desc = "Debug: Step over" },
+        { "<F11>", desc = "Debug: Step into" },
+        { "<F12>", desc = "Debug: Step out" },
+
+        -- Notes (leader o prefix)
+        { "<leader>ow", desc = "Switch workspace" },
+        { "<leader>oi", desc = "Open workspace index" },
+        { "<leader>ojt", desc = "Journal today" },
+        { "<leader>ojy", desc = "Journal yesterday" },
+        { "<leader>ojm", desc = "Journal tomorrow" },
+        { "<leader>or", desc = "Return to previous buffer" },
+
         -- Diagnostics navigation
         { "[d", desc = "Previous diagnostic" },
         { "]d", desc = "Next diagnostic" },
@@ -148,6 +177,11 @@ local plugins = {
 
         -- Formatting & Linting
         { "<leader>ll", desc = "Trigger linting" },
+
+        -- Folds
+        { "zR", desc = "Open all folds" },
+        { "zM", desc = "Close all folds" },
+        { "zK", desc = "Peek fold or hover" },
 
         -- Repeat moves
         { ";", desc = "Repeat last move (next)" },
