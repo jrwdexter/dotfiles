@@ -103,6 +103,10 @@ local plugins = {
 
       -- Capabilities enhanced by blink.cmp
       local capabilities = require("blink.cmp").get_lsp_capabilities()
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       -- Helper to find root directory
       -- Neovim 0.11+ root_dir receives (bufnr, on_dir) and must call on_dir()
