@@ -11,6 +11,7 @@ end
 
 -- Map leader!
 vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 -- Stop error bells, dammit!
 vim.o.vb = true
@@ -44,6 +45,11 @@ vim.o.hidden=true
 vim.o.wildmode='longest,list,full'
 vim.o.updatetime=300
 vim.o.swapfile=false
+
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
 vim.o.showbreak=' »'
 
