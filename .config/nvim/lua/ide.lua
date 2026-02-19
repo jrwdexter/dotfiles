@@ -21,6 +21,10 @@ for _, t in ipairs(require("ide.term")) do
   n = n + 1
   plugins[n] = t
 end
+for _, t in ipairs(require("ide.debug")) do
+  n = n + 1
+  plugins[n] = t
+end
 for _, t in ipairs(require("ide.whichkey")) do
   n = n + 1
   plugins[n] = t
