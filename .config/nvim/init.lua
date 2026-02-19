@@ -21,6 +21,7 @@ require("lazy").setup({
     { import = "style" },
     { import = "git" },
     { import = "language" },
+    { import = "notes" },
     { import = "ide" },
   },
 })
