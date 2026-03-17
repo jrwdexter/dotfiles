@@ -93,10 +93,14 @@
               })
 
               # ── Git ──
-              (lib.mkIf cfg.git {
-                ".gitconfig".source      = mkLink ".gitconfig";
-                ".local/bin".source      = mkLink ".local/bin";
-              })
+              (lib.mkIf cfg.git ({
+                ".gitconfig".source = mkLink ".gitconfig";
+              } // lib.mapAttrs'
+                (name: _: lib.nameValuePair ".local/bin/${name}" {
+                  source = mkLink ".local/bin/${name}";
+                })
+                (builtins.readDir (self + "/.local/bin"))
+              ))
 
               # ── Hyprland / Wayland WM ──
               (lib.mkIf cfg.hyprland {
