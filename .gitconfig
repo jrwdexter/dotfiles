@@ -4,8 +4,6 @@
         signingkey = AC36CC22BC5AB2FF
 [commit]
         gpgsign = true
-[gpg]
-        program = /usr/bin/gpg
 [diff]
         algorithm = histogram
         colorMoved = plain
