@@ -90,16 +90,11 @@
                 ".zshenv".source         = mkLink ".zshenv";
                 ".p10k.zsh".source       = mkLink ".p10k.zsh";
                 ".kubectl_aliases".source = mkLink ".kubectl_aliases";
-                ".oh-my-zsh".source = "${pkgs.buildEnv {
-                  name = "oh-my-zsh-with-plugins";
-                  paths = [
-                    "${pkgs.oh-my-zsh}/share/oh-my-zsh"
-                  ];
-                  postBuild = ''
-                    mkdir -p $out/custom/themes
-                    ln -s ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k $out/custom/themes/powerlevel10k
-                  '';
-                }}";
+                ".oh-my-zsh".source = "${pkgs.runCommand "oh-my-zsh-with-plugins" {} ''
+                  cp -rs --no-preserve=mode ${pkgs.oh-my-zsh}/share/oh-my-zsh $out
+                  mkdir -p $out/custom/themes
+                  ln -s ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k $out/custom/themes/powerlevel10k
+                ''}";
               })
 
               # ── Git ──
