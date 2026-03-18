@@ -89,6 +89,14 @@
           };
 
           config = lib.mkIf cfg.enable {
+            home.pointerCursor = lib.mkIf cfg.hyprland {
+              name = "Adwaita";
+              package = pkgs.adwaita-icon-theme;
+              size = 24;
+              gtk.enable = true;
+              hyprcursor.enable = true;
+            };
+
             home.file = lib.mkMerge [
               # ── Shell ──
               (lib.mkIf cfg.shell {
