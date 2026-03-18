@@ -42,7 +42,13 @@
             git = lib.mkOption {
               type = lib.types.bool;
               default = true;
-              description = "Link .gitconfig and git helper scripts";
+              description = "Link .gitconfig";
+            };
+
+            scripts = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+              description = "Link ~/.local/bin scripts (raise, rofi helpers, git aliases, etc.)";
             };
 
             hyprland = lib.mkOption {
@@ -98,9 +104,12 @@
               })
 
               # ── Git ──
-              (lib.mkIf cfg.git ({
+              (lib.mkIf cfg.git {
                 ".gitconfig".source = mkLink ".gitconfig";
-              } // lib.mapAttrs'
+              })
+
+              # ── Scripts (~/.local/bin) ──
+              (lib.mkIf cfg.scripts (lib.mapAttrs'
                 (name: _: lib.nameValuePair ".local/bin/${name}" {
                   source = mkLink ".local/bin/${name}";
                 })

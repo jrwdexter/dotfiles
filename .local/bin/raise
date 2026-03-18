@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Usage: raise -c <window-class> -e <command>
+
+while getopts "c:e:" opt; do
+  case $opt in
+    c) class="$OPTARG" ;;
+    e) cmd="$OPTARG" ;;
+  esac
+done
+
+if hyprctl clients -j | jq -e ".[] | select(.class == \"$class\")" > /dev/null 2>&1; then
+  hyprctl dispatch focuswindow "class:$class"
+else
+  exec $cmd &
+fi
