@@ -90,6 +90,7 @@
                 ".zshenv".source         = mkLink ".zshenv";
                 ".p10k.zsh".source       = mkLink ".p10k.zsh";
                 ".kubectl_aliases".source = mkLink ".kubectl_aliases";
+                ".oh-my-zsh".source      = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
               })
 
               # ── Git ──
