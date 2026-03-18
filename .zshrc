@@ -79,7 +79,6 @@ plugins=(
   nvm
   poetry
   poetry-env
-  thefuck
   z
 )
 
@@ -380,4 +379,4 @@ if [ -f '/opt/anaconda/bin/activate' ]; then
   source /opt/anaconda/bin/activate
 fi
 
-eval $(thefuck --alias)
+eval "$(pay-respects zsh --alias fuck)"

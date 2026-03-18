@@ -138,7 +138,6 @@
                 ".ripgreprc".source      = mkLink ".ripgreprc";
                 ".config/ranger".source  = mkLink ".config/ranger";
                 ".config/neofetch".source = mkLink ".config/neofetch";
-                ".config/thefuck".source = mkLink ".config/thefuck";
               })
 
               # ── Editor ──
