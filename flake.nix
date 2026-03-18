@@ -123,6 +123,10 @@
                 ".config/rofi".source       = mkLink ".config/rofi";
                 ".config/rofi-twitch".source = mkLink ".config/rofi-twitch";
                 ".config/caelestia".source  = mkLink ".config/caelestia";
+                ".config/gtk-3.0".source    = mkLink ".config/gtk-3.0";
+                ".config/gtk-4.0".source    = mkLink ".config/gtk-4.0";
+                ".gtkrc-2.0".source         = mkLink ".gtkrc-2.0";
+                ".config/dconf".source      = mkLink ".config/dconf";
               })
 
               # ── X11 / Awesome ──
