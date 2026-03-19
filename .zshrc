@@ -26,7 +26,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # ╔═══════════════════════════════════════════════╗
-# ║  Tool integrations                             ║
+# ║  Tool integrations                            ║
 # ╚═══════════════════════════════════════════════╝
 
 # NVM
@@ -70,7 +70,7 @@ if type nuke &> /dev/null; then
 fi
 
 # ╔═══════════════════════════════════════════════╗
-# ║  Aliases                                       ║
+# ║  Aliases                                      ║
 # ╚═══════════════════════════════════════════════╝
 
 alias g=git
@@ -94,7 +94,7 @@ if type docker &> /dev/null; then
 fi
 
 # ╔═══════════════════════════════════════════════╗
-# ║  Functions                                     ║
+# ║  Functions                                    ║
 # ╚═══════════════════════════════════════════════╝
 
 # ── 1Password (search + copy password to clipboard) ──
@@ -208,6 +208,6 @@ elif command -v cowsay &> /dev/null; then
 fi
 
 # ╔═══════════════════════════════════════════════╗
-# ║  Powerlevel10k config (must be last)           ║
+# ║  Powerlevel10k config (must be last)          ║
 # ╚═══════════════════════════════════════════════╝
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
