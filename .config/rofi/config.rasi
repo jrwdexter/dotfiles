@@ -1,5 +1,5 @@
 configuration {
-    modi: "combi,windowcd,calc";
+    modi: "combi,window,calc";
     lines: 10;
     columns: 2;
     font: "monospace 24";
