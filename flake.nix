@@ -1,6 +1,8 @@
 {
   description = "Jonathan Dexter's dotfiles";
 
+  # These inputs exist so consumers can override them via `follows`.
+  # This flake does not use them directly.
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
@@ -9,11 +11,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-    let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    in
+  outputs = { self, ... }:
     {
       # ── Reusable Home Manager module ──
       # Import this from another flake:
@@ -21,28 +19,29 @@
       homeManagerModules.default = { config, lib, pkgs, ... }:
         let
           cfg = config.dotfiles;
-          mkLink = path: config.lib.file.mkOutOfStoreSymlink "${cfg.path}/${path}";
+          dotfilesPath = "/home/${cfg.username}/src/dotfiles";
+          mkLink = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${path}";
         in
         {
           options.dotfiles = {
             enable = lib.mkEnableOption "mandest dotfiles";
 
-            path = lib.mkOption {
-              type = lib.types.path;
-              description = "Absolute path to the dotfiles checkout on disk";
-              example = "/home/mandest/src/dotfiles";
+            username = lib.mkOption {
+              type = lib.types.str;
+              description = "Username whose home directory contains the dotfiles checkout (expects ~/src/dotfiles)";
+              example = "mandest";
             };
 
             shell = lib.mkOption {
               type = lib.types.bool;
               default = true;
-              description = "Link shell configs (.zshrc, .zshenv, .p10k.zsh)";
+              description = "Link shell configs (.zshrc, .zshenv, .p10k.zsh, .kubectl_aliases)";
             };
 
             git = lib.mkOption {
               type = lib.types.bool;
-              default = true;
-              description = "Link .gitconfig";
+              default = false;
+              description = "Link .gitconfig (contains personal signing key and identity — override or disable for other users)";
             };
 
             scripts = lib.mkOption {
@@ -72,13 +71,19 @@
             terminal = lib.mkOption {
               type = lib.types.bool;
               default = true;
-              description = "Link kitty, tmux, and terminal-related configs";
+              description = "Link kitty, tmux, ranger, neofetch, and ripgrep configs";
             };
 
             editor = lib.mkOption {
               type = lib.types.bool;
               default = true;
-              description = "Link neovim config and supporting files";
+              description = "Link neovim config and supporting lua files (.luarc.json, .stylua.toml)";
+            };
+
+            browser = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "Link browser-related configs (.tridactylrc for Firefox vim bindings)";
             };
 
             media = lib.mkOption {
@@ -86,15 +91,41 @@
               default = true;
               description = "Link media configs (cava, mopidy, ncmpcpp)";
             };
+
+            cursor = {
+              enable = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                description = "Configure pointer cursor theme";
+              };
+
+              name = lib.mkOption {
+                type = lib.types.str;
+                default = "Adwaita";
+                description = "Cursor theme name";
+              };
+
+              package = lib.mkOption {
+                type = lib.types.package;
+                default = pkgs.adwaita-icon-theme;
+                description = "Package providing the cursor theme";
+              };
+
+              size = lib.mkOption {
+                type = lib.types.int;
+                default = 24;
+                description = "Cursor size in pixels";
+              };
+            };
           };
 
           config = lib.mkIf cfg.enable {
-            home.pointerCursor = lib.mkIf cfg.hyprland {
-              name = "Adwaita";
-              package = pkgs.adwaita-icon-theme;
-              size = 24;
+            home.pointerCursor = lib.mkIf cfg.cursor.enable {
+              name = cfg.cursor.name;
+              package = cfg.cursor.package;
+              size = cfg.cursor.size;
               gtk.enable = true;
-              hyprcursor.enable = true;
+              hyprcursor.enable = cfg.hyprland;
             };
 
             home.file = lib.mkMerge [
@@ -166,6 +197,10 @@
                 ".config/nvim".source    = mkLink ".config/nvim";
                 ".luarc.json".source     = mkLink ".luarc.json";
                 ".stylua.toml".source    = mkLink ".stylua.toml";
+              })
+
+              # ── Browser ──
+              (lib.mkIf cfg.browser {
                 ".tridactylrc".source    = mkLink ".tridactylrc";
               })
 
@@ -181,35 +216,5 @@
           };
         };
 
-      # ── Standalone homeConfiguration for direct use ──
-      # Apply with: home-manager switch --flake .
-      homeConfigurations."mandest" =
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            self.homeManagerModules.default
-            {
-              home = {
-                username = "mandest";
-                homeDirectory = "/home/mandest";
-                stateVersion = "24.11";
-              };
-              dotfiles = {
-                enable = true;
-                path = "/home/mandest/src/dotfiles";
-                hyprland = true;
-                x11 = true;
-                sway = true;
-              };
-            }
-          ];
-        };
-
-      # ── Dev shell ──
-      devShells = forAllSystems (system: {
-        default = nixpkgs.legacyPackages.${system}.mkShell {
-          packages = [ home-manager.packages.${system}.home-manager ];
-        };
-      });
     };
 }
