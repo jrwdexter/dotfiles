@@ -41,7 +41,7 @@ local plugins = {
       {
         "<C-g>",
         function()
-          Snacks.picker.projects({ dev = { vim.g.src_dir }, max_depth = 4 })
+          Snacks.picker.projects({ dev = { vim.g.src_dir }, max_depth = 6 })
         end,
         desc = "Find Git Projects",
       },
