@@ -21,6 +21,8 @@
       }
     },
     "anim": {
+      "mediaGifSpeedAdjustment": 300,
+      "sessionGifSpeed": 0.7,
       "durations": {
         "scale": 1
       }
@@ -33,11 +35,20 @@
   },
   "general": {
     "logo": "",
+    "excludedScreens": [],
     "apps": {
-      "terminal": ["kitty"],
-      "audio": ["pavucontrol"],
-      "playback": ["mpv"],
-      "explorer": ["thunar"]
+      "terminal": [
+        "kitty"
+      ],
+      "audio": [
+        "pavucontrol"
+      ],
+      "playback": [
+        "mpv"
+      ],
+      "explorer": [
+        "thunar"
+      ]
     },
     "idle": {
       "lockBeforeSleep": true,
@@ -53,7 +64,10 @@
           "timeout": 300
         },
         {
-          "idleAction": ["systemctl", "suspend-then-hibernate"],
+          "idleAction": [
+            "systemctl",
+            "suspend-then-hibernate"
+          ],
           "timeout": 600
         }
       ]
@@ -85,6 +99,7 @@
   },
   "background": {
     "enabled": true,
+    "wallpaperEnabled": true,
     "desktopClock": {
       "enabled": false,
       "scale": 1,
@@ -129,6 +144,7 @@
       "occupiedBg": false,
       "showWindows": true,
       "showWindowsOnSpecialWorkspaces": true,
+      "maxWindowIcons": 0,
       "activeTrail": false,
       "perMonitorWorkspaces": true,
       "label": "  ",
@@ -140,13 +156,25 @@
           "icon": "sports_esports",
           "name": "steam"
         }
+      ],
+      "windowIcons": [
+        {
+          "icon": "sports_esports",
+          "regex": "steam(_app_(default|[0-9]+))?"
+        }
       ]
+    },
+    "activeWindow": {
+      "compact": false,
+      "inverted": false,
+      "showOnHover": true
     },
     "tray": {
       "background": false,
       "recolour": false,
       "compact": false,
-      "iconSubs": []
+      "iconSubs": [],
+      "hiddenIcons": []
     },
     "status": {
       "showAudio": false,
@@ -160,13 +188,6 @@
     },
     "clock": {
       "showIcon": true
-    },
-    "sizes": {
-      "innerWidth": 40,
-      "windowPreviewSize": 400,
-      "trayMenuWidth": 300,
-      "batteryWidth": 250,
-      "networkWidth": 320
     },
     "entries": [
       {
@@ -205,7 +226,8 @@
         "enabled": true,
         "id": "power"
       }
-    ]
+    ],
+    "excludedScreens": []
   },
   "border": {
     "thickness": 10,
@@ -215,29 +237,18 @@
     "enabled": true,
     "showOnHover": true,
     "mediaUpdateInterval": 500,
+    "resourceUpdateInterval": 1000,
     "dragThreshold": 50,
-    "sizes": {
-      "tabIndicatorHeight": 3,
-      "tabIndicatorSpacing": 5,
-      "infoWidth": 200,
-      "infoIconSize": 25,
-      "dateTimeWidth": 110,
-      "mediaWidth": 200,
-      "mediaProgressSweep": 180,
-      "mediaProgressThickness": 8,
-      "resourceProgessThickness": 10,
-      "weatherWidth": 250,
-      "mediaCoverArtSize": 150,
-      "mediaVisualiserSize": 80,
-      "resourceSize": 200
+    "performance": {
+      "showBattery": true,
+      "showGpu": true,
+      "showCpu": true,
+      "showMemory": true,
+      "showStorage": true,
+      "showNetwork": true
     }
   },
-  "controlCenter": {
-    "sizes": {
-      "heightMult": 0.7,
-      "ratio": 1.7777777777777777
-    }
-  },
+  "controlCenter": {},
   "launcher": {
     "enabled": true,
     "showOnHover": false,
@@ -248,6 +259,7 @@
     "enableDangerousActions": false,
     "dragThreshold": 50,
     "vimKeybinds": true,
+    "favouriteApps": [],
     "hiddenApps": [],
     "useFuzzy": {
       "apps": false,
@@ -256,15 +268,12 @@
       "variants": false,
       "wallpapers": false
     },
-    "sizes": {
-      "itemWidth": 600,
-      "itemHeight": 57,
-      "wallpaperWidth": 280,
-      "wallpaperHeight": 200
-    },
     "actions": [
       {
-        "command": ["autocomplete", "calc"],
+        "command": [
+          "autocomplete",
+          "calc"
+        ],
         "dangerous": false,
         "description": "Do simple math equations (powered by Qalc)",
         "enabled": true,
@@ -272,7 +281,10 @@
         "name": "Calculator"
       },
       {
-        "command": ["autocomplete", "scheme"],
+        "command": [
+          "autocomplete",
+          "scheme"
+        ],
         "dangerous": false,
         "description": "Change the current colour scheme",
         "enabled": true,
@@ -280,7 +292,10 @@
         "name": "Scheme"
       },
       {
-        "command": ["autocomplete", "wallpaper"],
+        "command": [
+          "autocomplete",
+          "wallpaper"
+        ],
         "dangerous": false,
         "description": "Change the current wallpaper",
         "enabled": true,
@@ -288,7 +303,10 @@
         "name": "Wallpaper"
       },
       {
-        "command": ["autocomplete", "variant"],
+        "command": [
+          "autocomplete",
+          "variant"
+        ],
         "dangerous": false,
         "description": "Change the current scheme variant",
         "enabled": true,
@@ -296,7 +314,10 @@
         "name": "Variant"
       },
       {
-        "command": ["autocomplete", "transparency"],
+        "command": [
+          "autocomplete",
+          "transparency"
+        ],
         "dangerous": false,
         "description": "Change shell transparency",
         "enabled": false,
@@ -304,7 +325,11 @@
         "name": "Transparency"
       },
       {
-        "command": ["caelestia", "wallpaper", "-r"],
+        "command": [
+          "caelestia",
+          "wallpaper",
+          "-r"
+        ],
         "dangerous": false,
         "description": "Switch to a random wallpaper",
         "enabled": true,
@@ -312,7 +337,10 @@
         "name": "Random"
       },
       {
-        "command": ["setMode", "light"],
+        "command": [
+          "setMode",
+          "light"
+        ],
         "dangerous": false,
         "description": "Change the scheme to light mode",
         "enabled": true,
@@ -320,7 +348,10 @@
         "name": "Light"
       },
       {
-        "command": ["setMode", "dark"],
+        "command": [
+          "setMode",
+          "dark"
+        ],
         "dangerous": false,
         "description": "Change the scheme to dark mode",
         "enabled": true,
@@ -364,7 +395,10 @@
         "name": "Logout"
       },
       {
-        "command": ["loginctl", "lock-session"],
+        "command": [
+          "loginctl",
+          "lock-session"
+        ],
         "dangerous": false,
         "description": "Lock the current session",
         "enabled": true,
@@ -372,7 +406,10 @@
         "name": "Lock"
       },
       {
-        "command": ["systemctl", "suspend"],
+        "command": [
+          "systemctl",
+          "suspend"
+        ],
         "dangerous": false,
         "description": "Suspend the system",
         "enabled": true,
@@ -380,7 +417,12 @@
         "name": "Sleep"
       },
       {
-        "command": ["caelestia", "shell", "controlCenter", "open"],
+        "command": [
+          "caelestia",
+          "shell",
+          "controlCenter",
+          "open"
+        ],
         "dangerous": false,
         "description": "Configure the shell",
         "enabled": true,
@@ -395,27 +437,24 @@
     "clearThreshold": 0.3,
     "expandThreshold": 20,
     "actionOnClick": false,
-    "groupPreviewNum": 3,
-    "sizes": {
-      "width": 400,
-      "image": 41,
-      "badge": 20
-    }
+    "groupPreviewNum": 3
   },
   "osd": {
     "enabled": true,
     "hideDelay": 2000,
     "enableBrightness": true,
-    "enableMicrophone": false,
-    "sizes": {
-      "sliderWidth": 30,
-      "sliderHeight": 150
-    }
+    "enableMicrophone": false
   },
   "session": {
     "enabled": true,
     "dragThreshold": 30,
     "vimKeybinds": true,
+    "icons": {
+      "logout": "logout",
+      "shutdown": "power_settings_new",
+      "hibernate": "downloading",
+      "reboot": "cached"
+    },
     "commands": {
       "logout": [
         "bash",
@@ -427,40 +466,27 @@
         "-c",
         "command -v hyprshutdown &>/dev/null && exec hyprshutdown -t 'Shutting down...' --post-cmd 'systemctl poweroff' || exec systemctl poweroff"
       ],
-      "hibernate": ["systemctl", "hibernate"],
+      "hibernate": [
+        "systemctl",
+        "hibernate"
+      ],
       "reboot": [
         "bash",
         "-c",
         "command -v hyprshutdown &>/dev/null && exec hyprshutdown -t 'Restarting...' --post-cmd 'systemctl reboot' || exec systemctl reboot"
       ]
-    },
-    "sizes": {
-      "button": 80
     }
   },
-  "winfo": {
-    "sizes": {
-      "heightMult": 0.7,
-      "detailsWidth": 500
-    }
-  },
+  "winfo": {},
   "lock": {
     "recolourLogo": false,
     "enableFprint": true,
     "maxFprintTries": 3,
-    "sizes": {
-      "heightMult": 0.7,
-      "ratio": 1.7777777777777777,
-      "centerWidth": 600
-    }
+    "hideNotifs": false
   },
   "utilities": {
     "enabled": true,
     "maxToasts": 4,
-    "sizes": {
-      "width": 430,
-      "toastWidth": 430
-    },
     "toasts": {
       "configLoaded": true,
       "chargingChanged": true,
@@ -478,33 +504,63 @@
       "enabled": true,
       "provider": [
         {
-          "displayName": "Wireguard (Your VPN)",
+          "displayName": "Wireguard (Mozilla)",
           "enabled": false,
-          "interface": "your-connection-name",
+          "interface": "us-chi",
           "name": "wireguard"
         },
         {
-          "displayName": "Tailscale",
+          "displayName": "Tailscale (Home)",
+          "enabled": true,
           "interface": "tailscale0",
           "name": "tailscale"
         }
       ]
-    }
+    },
+    "quickToggles": [
+      {
+        "enabled": true,
+        "id": "wifi"
+      },
+      {
+        "enabled": true,
+        "id": "bluetooth"
+      },
+      {
+        "enabled": true,
+        "id": "mic"
+      },
+      {
+        "enabled": true,
+        "id": "settings"
+      },
+      {
+        "enabled": true,
+        "id": "gameMode"
+      },
+      {
+        "enabled": true,
+        "id": "dnd"
+      },
+      {
+        "enabled": false,
+        "id": "vpn"
+      }
+    ]
   },
   "sidebar": {
     "enabled": true,
-    "dragThreshold": 80,
-    "sizes": {
-      "width": 430
-    }
+    "dragThreshold": 80
   },
   "services": {
     "weatherLocation": "",
     "useFahrenheit": true,
+    "useFahrenheitPerformance": true,
     "useTwelveHourClock": false,
     "gpuType": "",
     "visualiserBars": 45,
     "audioIncrement": 0.1,
+    "brightnessIncrement": 0.1,
     "maxVolume": 1,
     "smartScheme": true,
     "defaultPlayer": "Spotify",
