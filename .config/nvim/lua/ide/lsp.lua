@@ -68,14 +68,8 @@ local plugins = {
         vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, opts)
-        vim.keymap.set("n", "[d", function()
-          vim.diagnostic.jump({ count = -1 })
-        end, opts)
-        vim.keymap.set("n", "]d", function()
-          vim.diagnostic.jump({ count = 1 })
-        end, opts)
-        vim.keymap.set("n", "<leader>cq", vim.diagnostic.setloclist, opts)
+        -- NOTE: Diagnostic keybindings (<leader>ce, [d, ]d, <leader>cq) are set
+        -- globally below on_attach so they work with linters too, not just LSP.
 
         -- Formatting keybinds
         if client.server_capabilities.documentFormattingProvider then
@@ -275,5 +269,11 @@ local plugins = {
     end,
   },
 }
+
+-- Global diagnostic keybindings (work with both LSP and linters)
+vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Open diagnostics float" })
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Set loclist" })
 
 return plugins
