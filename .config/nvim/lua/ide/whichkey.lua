@@ -42,7 +42,6 @@ local plugins = {
         { "<leader>g", group = "Git" },
         { "<leader>d", group = "Debug" },
         { "<leader>o", group = "Notes" },
-        { "<leader>oj", group = "Journal" },
         { "<leader>s", group = "Source" },
         { "<leader>x", group = "Trouble" },
 
@@ -132,12 +131,21 @@ local plugins = {
         { "<F12>", desc = "Debug: Step out" },
 
         -- Notes (leader o prefix)
-        { "<leader>ow", desc = "Switch workspace" },
-        { "<leader>oi", desc = "Open workspace index" },
-        { "<leader>ojt", desc = "Journal today" },
-        { "<leader>ojy", desc = "Journal yesterday" },
-        { "<leader>ojm", desc = "Journal tomorrow" },
-        { "<leader>or", desc = "Return to previous buffer" },
+        { "<leader>oi", desc = "Open vault index" },
+        { "<leader>on", desc = "New note" },
+        { "<leader>oo", desc = "Quick switch" },
+        { "<leader>of", desc = "Search notes" },
+        { "<leader>od", desc = "Daily notes" },
+        { "<leader>ot", desc = "Today's daily note" },
+        { "<leader>oy", desc = "Yesterday's daily note" },
+        { "<leader>om", desc = "Tomorrow's daily note" },
+        { "<leader>ob", desc = "Backlinks" },
+        { "<leader>ol", desc = "Links in note" },
+        { "<leader>oT", desc = "Search tags" },
+        { "<leader>or", desc = "Rename note" },
+        { "<leader>ox", desc = "Toggle checkbox" },
+        { "<leader>oe", desc = "Extract to note", mode = "v" },
+        { "<leader>ok", desc = "Link selection", mode = "v" },
 
         -- Diagnostics navigation
         { "[d", desc = "Previous diagnostic" },
