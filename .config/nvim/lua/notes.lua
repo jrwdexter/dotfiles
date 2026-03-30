@@ -1,73 +1,121 @@
 local plugins = {
-  -- Neorg: Notes, todos, and knowledge management
   {
-    "nvim-neorg/neorg",
-    lazy = false,
+    "epwalsh/obsidian.nvim",
     version = "*",
-    dependencies = {
-      "benlubas/neorg-interim-ls",
+    lazy = true,
+    ft = "markdown",
+    cmd = {
+      "ObsidianNew",
+      "ObsidianQuickSwitch",
+      "ObsidianSearch",
+      "ObsidianDailies",
+      "ObsidianToday",
+      "ObsidianYesterday",
+      "ObsidianTomorrow",
+      "ObsidianBacklinks",
+      "ObsidianLinks",
+      "ObsidianTags",
+      "ObsidianRename",
     },
-    config = function()
-      require("neorg").setup({
-        load = {
-          ["core.defaults"] = {},
-          ["core.concealer"] = {},
-          ["core.dirman"] = {
-            config = {
-              workspaces = {
-                notes = "~/notes",
-                todos = "~/notes/todos",
-                work = "~/notes/work",
-              },
-              default_workspace = "notes",
-              index = "index.norg",
-            },
-          },
-          ["core.completion"] = {
-            config = {
-              engine = { module_name = "external.lsp-completion" },
-            },
-          },
-          ["core.summary"] = {},
-          ["external.interim-ls"] = {
-            config = {
-              completion_provider = {
-                enable = true,
-                documentation = true,
-                categories = false,
-              },
-            },
-          },
+    keys = {
+      {
+        "<leader>oi",
+        function()
+          vim.cmd("cd " .. vim.fn.expand("~/notes"))
+          vim.cmd("edit " .. vim.fn.expand("~/notes/Home.md"))
+        end,
+        desc = "Open vault index",
+      },
+      { "<leader>on", ":ObsidianNew<CR>", desc = "New note" },
+      { "<leader>oo", ":ObsidianQuickSwitch<CR>", desc = "Quick switch" },
+      { "<leader>of", ":ObsidianSearch<CR>", desc = "Search notes" },
+      { "<leader>od", ":ObsidianDailies<CR>", desc = "Daily notes" },
+      { "<leader>ot", ":ObsidianToday<CR>", desc = "Today's daily note" },
+      { "<leader>oy", ":ObsidianYesterday<CR>", desc = "Yesterday's daily note" },
+      { "<leader>om", ":ObsidianTomorrow<CR>", desc = "Tomorrow's daily note" },
+      { "<leader>ob", ":ObsidianBacklinks<CR>", desc = "Backlinks" },
+      { "<leader>ol", ":ObsidianLinks<CR>", desc = "Links in note" },
+      { "<leader>oT", ":ObsidianTags<CR>", desc = "Search tags" },
+      { "<leader>or", ":ObsidianRename<CR>", desc = "Rename note" },
+      { "<leader>oe", ":ObsidianExtractNote<CR>", mode = "v", desc = "Extract to note" },
+      { "<leader>ok", ":ObsidianLink<CR>", mode = "v", desc = "Link selection" },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "ibhagwan/fzf-lua", opts = {} },
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "~/notes",
         },
-      })
-
-      -- Quick-access keybindings under <leader>o
-      vim.keymap.set("n", "<leader>ow", ":Neorg workspace<CR>", { desc = "Switch workspace" })
-      vim.keymap.set("n", "<leader>oi", ":Neorg index<CR>", { desc = "Open workspace index" })
-      vim.keymap.set("n", "<leader>ojt", ":Neorg journal today<CR>", { desc = "Journal today" })
-      vim.keymap.set("n", "<leader>ojy", ":Neorg journal yesterday<CR>", { desc = "Journal yesterday" })
-      vim.keymap.set("n", "<leader>ojm", ":Neorg journal tomorrow<CR>", { desc = "Journal tomorrow" })
-      vim.keymap.set("n", "<leader>or", ":Neorg return<CR>", { desc = "Return to previous buffer" })
+      },
+      daily_notes = {
+        folder = "daily",
+        date_format = "%Y-%m-%d",
+        template = "daily.md",
+      },
+      templates = {
+        folder = "templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+      },
+      completion = {
+        nvim_cmp = false,
+        min_chars = 2,
+      },
+      new_notes_location = "current_dir",
+      note_id_func = function(title)
+        if title ~= nil then
+          return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+        else
+          return tostring(os.time())
+        end
+      end,
+      wiki_link_func = "prepend_note_id",
+      preferred_link_style = "wiki",
+      -- UI rendering is handled by render-markdown.nvim (avante dependency)
+      -- to avoid conflicting conceal/extmarks on checkboxes and other elements.
+      ui = { enable = false },
+      picker = { name = "fzf-lua" },
+      mappings = {
+        ["gf"] = {
+          action = function()
+            return require("obsidian").util.gf_passthrough()
+          end,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
+        ["<leader>ox"] = {
+          action = function()
+            return require("obsidian").util.toggle_checkbox()
+          end,
+          opts = { buffer = true },
+        },
+        ["<cr>"] = {
+          action = function()
+            return require("obsidian").util.smart_action()
+          end,
+          opts = { buffer = true, expr = true },
+        },
+      },
+    },
+    config = function(_, opts)
+      require("obsidian").setup(opts)
     end,
   },
 }
 
-local group = vim.api.nvim_create_augroup("NeorgConceal", { clear = true })
+-- Set conceallevel for markdown files in the vault
+local group = vim.api.nvim_create_augroup("ObsidianConceal", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   group = group,
+  pattern = "*.md",
   callback = function()
-    if vim.bo.filetype == "norg" then
+    local path = vim.fn.expand("%:p")
+    if path:match(vim.fn.expand("~/notes")) then
       vim.opt_local.conceallevel = 2
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufLeave", {
-  group = group,
-  callback = function()
-    if vim.bo.filetype == "norg" then
-      vim.cmd("setlocal conceallevel<")
     end
   end,
 })
