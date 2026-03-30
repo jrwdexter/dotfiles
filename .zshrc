@@ -213,6 +213,13 @@ elif command -v cowsay &> /dev/null; then
 fi
 
 # ╔═══════════════════════════════════════════════╗
+# ║  gogcli for Google Access                     ║
+# ╚═══════════════════════════════════════════════╝
+if command -v gog &> /dev/null; then
+  eval "$(gog completion zsh)"
+fi
+
+# ╔═══════════════════════════════════════════════╗
 # ║  NixOS Aliases                                ║
 # ╚═══════════════════════════════════════════════╝
 alias nrs="sudo nixos-rebuild switch --flake .#mjl-0001"
