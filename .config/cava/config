@@ -16,21 +16,20 @@ source = auto
 [output]
 # Output method: ncurses, terminal, raw, or circle
 method = ncurses
-# Terminal color scheme
-style = stereo
+channels = mono
 
 [color]
 # Color gradient for bars using template variables
 gradient = 1
 gradient_count = 8
-gradient_color_1 = '#c8e3ff'
-gradient_color_2 = '#d0e0ff'
-gradient_color_3 = '#ccdbff'
-gradient_color_4 = '#b1c6ff'
-gradient_color_5 = '#aab9ff'
-gradient_color_6 = '#c2c9ff'
-gradient_color_7 = '#b9baff'
-gradient_color_8 = '#c4b7ee'
+gradient_color_1 = '#2b1055'
+gradient_color_2 = '#5b2a86'
+gradient_color_3 = '#9d2db5'
+gradient_color_4 = '#ff2a6d'
+gradient_color_5 = '#ff6ec7'
+gradient_color_6 = '#ff9ecb'
+gradient_color_7 = '#7afcff'
+gradient_color_8 = '#00e5ff'
 
 [smoothing]
 # Noise reduction (0-100) - higher = smoother but less responsive
