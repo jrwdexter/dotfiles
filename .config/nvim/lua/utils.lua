@@ -11,8 +11,22 @@ local plugins = {
     "folke/flash.nvim",
     opts = {},
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
     },
   },
   {
@@ -21,12 +35,6 @@ local plugins = {
       { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle undotree" },
     },
   },
-  {
-    "moll/vim-bbye",
-    keys = {
-      { "<leader>q", ":Bdelete!<CR>", desc = "Close buffer" },
-    },
-  }, -- Close buffers
 }
 
 return plugins

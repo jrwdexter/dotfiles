@@ -75,8 +75,8 @@ local plugins = {
       end,
       wiki_link_func = "prepend_note_id",
       preferred_link_style = "wiki",
-      -- UI rendering is handled by render-markdown.nvim (avante dependency)
-      -- to avoid conflicting conceal/extmarks on checkboxes and other elements.
+      -- UI rendering is handled by render-markdown.nvim to avoid conflicting
+      -- conceal/extmarks on checkboxes and other elements.
       ui = { enable = false },
       picker = { name = "fzf-lua" },
       mappings = {
@@ -103,6 +103,14 @@ local plugins = {
     config = function(_, opts)
       require("obsidian").setup(opts)
     end,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    opts = {
+      file_types = { "markdown" },
+      latex = { enabled = false },
+    },
   },
 }
 
