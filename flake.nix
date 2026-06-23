@@ -155,17 +155,20 @@
                 (builtins.readDir (self + "/.local/bin"))
               ))
 
-              # ── Hyprland / Wayland WM ──
+              # ── Hyprland / Wayland WM (personal extras only) ──
+              # The MJL desktop chrome — the Hyprland layout, rofi, GTK theming,
+              # caelestia config, and dconf — is now company-owned and ships via
+              # base.homeManagerModules.desktop. Only personal-only widgets stay
+              # here. (Don't re-link the company-owned paths, or both modules
+              # would fight over the same ~/.config entries.)
               (lib.mkIf cfg.hyprland {
-                ".config/hypr".source       = mkLink ".config/hypr";
                 ".config/eww".source        = mkLink ".config/eww";
-                ".config/rofi".source       = mkLink ".config/rofi";
                 ".config/rofi-twitch".source = mkLink ".config/rofi-twitch";
-                ".config/caelestia".source  = mkLink ".config/caelestia";
-                ".config/gtk-3.0".source    = mkLink ".config/gtk-3.0";
-                ".config/gtk-4.0".source    = mkLink ".config/gtk-4.0";
-                ".gtkrc-2.0".source         = mkLink ".gtkrc-2.0";
-                ".config/dconf".source      = mkLink ".config/dconf";
+                # Personal Hyprland overrides layered on top of the company
+                # baseline. The base config sources ~/.config/hypr-local/*.conf
+                # last, so these win — personal app launchers, keybinds, and
+                # window rules that aren't part of the MJL baseline.
+                ".config/hypr-local".source = mkLink ".config/hypr-local";
               })
 
               # ── X11 / Awesome ──
