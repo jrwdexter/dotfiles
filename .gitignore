@@ -21,6 +21,11 @@
 # Binary / generated configs
 .config/dconf/user
 
+# Caelestia is managed by mjl-nix-base (base.homeManagerModules.desktop); its
+# runtime state lives in ~/.local/state/caelestia and ~/.cache/caelestia. Never
+# track anything that lands in the config dir here.
+.config/caelestia/
+
 # Editor swap / backup files
 *.swp
 *.swo
