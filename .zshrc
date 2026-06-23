@@ -230,3 +230,7 @@ alias nfua="nix flake update && sudo nixos-rebuild switch --flake .#mjl-0001"
 # ║  Powerlevel10k config (must be last)          ║
 # ╚═══════════════════════════════════════════════╝
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# peon-ping quick controls
+alias peon="bash /home/mandest/.claude/hooks/peon-ping/peon.sh"
+[ -f /home/mandest/.claude/hooks/peon-ping/completions.bash ] && source /home/mandest/.claude/hooks/peon-ping/completions.bash
