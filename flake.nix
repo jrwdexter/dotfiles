@@ -212,8 +212,33 @@
                 ".config/cava".source    = mkLink ".config/cava";
                 ".config/mopidy".source  = mkLink ".config/mopidy";
                 ".config/ncmpcpp".source = mkLink ".config/ncmpcpp";
+                ".config/rmpc".source    = mkLink ".config/rmpc";
               })
             ];
+
+            # Personal MPD daemon feeding rmpc + a cava visualizer fifo.
+            services.mpd = lib.mkIf cfg.media {
+              enable = true;
+              musicDirectory = "${config.home.homeDirectory}/mus";
+              network.port = 6601;
+              extraConfig =
+                let
+                  dataDir = "${config.home.homeDirectory}/.local/share/mpd";
+                in
+                ''
+                  bind_to_address "${dataDir}/socket"
+                  audio_output {
+                      type   "fifo"
+                      name   "rmpc_visualizer"
+                      path   "/tmp/mpd.fifo"
+                      format "44100:16:2"
+                  }
+                  audio_output {
+                    type "pipewire"
+                    name "PipeWire Output"
+                  }
+                '';
+            };
 
             programs.home-manager.enable = true;
           };
