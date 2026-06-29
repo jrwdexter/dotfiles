@@ -224,7 +224,7 @@ fi
 # ╚═══════════════════════════════════════════════╝
 alias nrs="sudo nixos-rebuild switch --flake .#mjl-0001"
 alias nfu="nix flake update"
-alias nfua="nix flake update && sudo nixos-rebuild switch --flake .#mjl-0001"
+alias nfua="nix flake update && nixos-rebuild switch --sudo --flake .#mjl-0001"
 
 # ╔═══════════════════════════════════════════════╗
 # ║  Powerlevel10k config (must be last)          ║
