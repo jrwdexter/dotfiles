@@ -226,7 +226,7 @@ alias nrs="sudo nixos-rebuild switch --flake .#mjl-0001"
 alias nfu="nix flake update"
 alias nfua="nix flake update && nixos-rebuild switch --sudo --flake .#mjl-0001"
 if [ -d /etc/zoneinfo ]; then
-  export TZINFO=/etc/zoneinfo
+  export TZDIR=/etc/zoneinfo
 fi
 
 # ╔═══════════════════════════════════════════════╗
