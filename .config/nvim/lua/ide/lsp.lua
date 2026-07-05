@@ -35,6 +35,7 @@ local plugins = {
           "gopls",
           "taplo",
           "omnisharp",
+          "nil_ls",
         },
         -- Auto-install servers configured via lspconfig
         automatic_installation = true,
@@ -87,10 +88,7 @@ local plugins = {
         if vim.lsp.inlay_hint then
           vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
           vim.keymap.set("n", "<leader>ci", function()
-            vim.lsp.inlay_hint.enable(
-              not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
-              { bufnr = bufnr }
-            )
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
           end, vim.tbl_extend("force", opts, { desc = "Toggle inlay hints" }))
         end
       end
@@ -272,8 +270,12 @@ local plugins = {
 
 -- Global diagnostic keybindings (work with both LSP and linters)
 vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Open diagnostics float" })
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = -1 })
+end, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = 1 })
+end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Set loclist" })
 
 return plugins
