@@ -216,29 +216,14 @@
               })
             ];
 
-            # Personal MPD daemon feeding rmpc + a cava visualizer fifo.
-            services.mpd = lib.mkIf cfg.media {
-              enable = true;
-              musicDirectory = "${config.home.homeDirectory}/mus";
-              network.port = 6601;
-              extraConfig =
-                let
-                  dataDir = "${config.home.homeDirectory}/.local/share/mpd";
-                in
-                ''
-                  bind_to_address "${dataDir}/socket"
-                  audio_output {
-                      type   "fifo"
-                      name   "rmpc_visualizer"
-                      path   "/tmp/mpd.fifo"
-                      format "44100:16:2"
-                  }
-                  audio_output {
-                    type "pipewire"
-                    name "PipeWire Output"
-                  }
-                '';
-            };
+            # The MPD daemon (library on ~/mus, unix socket for rmpc, the
+            # /tmp/mpd.fifo cava visualizer feed, PipeWire output) is now owned
+            # by mjl-nix-extras `workstation.audioPlayer` (backend = "mpd",
+            # musicDirectory = "~/mus", visualizer = true). Kept out of here so
+            # there is a single MPD owner — the extras server binds both TCP
+            # 6600 (for the MPRIS bridge + mpc) and ~/.local/share/mpd/socket
+            # (which this config's rmpc still points at). The rmpc/cava/ncmpcpp
+            # config links above stay.
 
             programs.home-manager.enable = true;
           };
