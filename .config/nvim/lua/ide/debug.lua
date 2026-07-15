@@ -151,7 +151,9 @@ local plugins = {
     dependencies = { "mfussenegger/nvim-dap" },
     ft = "python",
     config = function()
-      local debugpy_path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
+      -- debugpy's venv interpreter lives under Scripts/ on Windows, bin/ elsewhere.
+      local venv = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv"
+      local debugpy_path = venv .. (vim.fn.has("win32") == 1 and "/Scripts/python.exe" or "/bin/python")
       require("dap-python").setup(debugpy_path)
 
       local dap = require("dap")
