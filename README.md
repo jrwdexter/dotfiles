@@ -50,6 +50,19 @@ pwsh -ExecutionPolicy Bypass -File .\windows\bootstrap.ps1
 It links `.config/nvim` → `%LOCALAPPDATA%\nvim` and the terminal settings, and
 refuses to overwrite real (non-symlink) files.
 
+The Neovim config also needs a toolchain that Nix provides on Linux/WSL but
+native Windows lacks: the `tree-sitter` CLI + `gcc` (parser compilation) and the
+`node`/`python`/`go` runtimes (Mason LSP servers). Install them in one shot with
+`-InstallDeps` (uses [scoop](https://scoop.sh)), then restart your terminal so
+the new PATH takes effect:
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File .\windows\bootstrap.ps1 -InstallDeps
+# equivalent to: scoop install tree-sitter gcc nodejs-lts python go
+```
+
+The Nix language server (`nil_ls`) is intentionally skipped on Windows.
+
 ## Awesome WM configuration
 
 First of all, update configuration located at `~/.config/awesome/rc.lua`. The vast majority of settings are included there.
