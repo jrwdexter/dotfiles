@@ -20,23 +20,28 @@ local plugins = {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     config = function()
+      -- Servers to automatically install
+      local ensure_installed = {
+        "lua_ls",
+        "ts_ls",
+        "cssls",
+        "dockerls",
+        "pylsp",
+        "terraformls",
+        "tflint",
+        "helm_ls",
+        "yamlls",
+        "gopls",
+        "taplo",
+        "omnisharp",
+      }
+      -- nil_ls is the Nix language server (built via cargo). Only useful where
+      -- you actually edit Nix, so skip it on Windows.
+      if vim.fn.has("win32") == 0 then
+        table.insert(ensure_installed, "nil_ls")
+      end
       require("mason-lspconfig").setup({
-        -- Servers to automatically install
-        ensure_installed = {
-          "lua_ls",
-          "ts_ls",
-          "cssls",
-          "dockerls",
-          "pylsp",
-          "terraformls",
-          "tflint",
-          "helm_ls",
-          "yamlls",
-          "gopls",
-          "taplo",
-          "omnisharp",
-          "nil_ls",
-        },
+        ensure_installed = ensure_installed,
         -- Auto-install servers configured via lspconfig
         automatic_installation = true,
       })

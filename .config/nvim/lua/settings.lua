@@ -1,12 +1,15 @@
--- Start dir! - second version is called for command-line vim
-if vim.fn.isdirectory("/src") == 1 then
-  vim.g.src_dir = "/src"
-elseif vim.fn.isdirectory(os.getenv("HOME").."/src") == 1 then
-  vim.g.src_dir = os.getenv("HOME").."/src"
-elseif vim.fn.isdirectory("/c/src") == 1 then
-  vim.g.src_dir = "/c/src"
-elseif vim.fn.isdirectory("/mnt/c/src") == 1 then
-  vim.g.src_dir = "/mnt/c/src"
+-- Start dir! - detect a "source" directory across platforms (Linux, WSL,
+-- Windows). Use Neovim's portable home lookup instead of $HOME, which is unset
+-- on native Windows (there it's %USERPROFILE%).
+local home = vim.loop.os_homedir()
+local candidates = { "/src" }
+if home then table.insert(candidates, home .. "/src") end
+vim.list_extend(candidates, { "/c/src", "/mnt/c/src" })
+for _, dir in ipairs(candidates) do
+  if vim.fn.isdirectory(dir) == 1 then
+    vim.g.src_dir = dir
+    break
+  end
 end
 
 -- Map leader!
