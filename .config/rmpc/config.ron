@@ -19,7 +19,7 @@
     album_art: (
         method: Auto,
         max_size_px: (width: 0, height: 0),
-        vertical_align: Center,
+        vertical_align: Top,
         horizontal_align: Center,
     ),
 
@@ -66,8 +66,7 @@
                         pane: Split(
                             direction: Vertical,
                             panes: [
-                                (size: "100%", pane: Pane(AlbumArt)),
-                                (size: "12", borders: "TOP", pane: Split(
+                                (size: "100%", pane: Split(
                                     direction: Vertical,
                                     panes: [
                                         (size: "1", pane: Pane(Property(
@@ -119,6 +118,7 @@
                                         ))),
                                     ],
                                 )),
+                                (size: "12", borders: "TOP", pane: Pane(AlbumArt)),
                             ],
                         ),
                     ),
