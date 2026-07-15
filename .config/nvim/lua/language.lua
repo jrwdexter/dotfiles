@@ -71,6 +71,15 @@ local plugins = {
       },
     },
     config = function()
+      -- On Windows the prebuilt tree-sitter CLI defaults to MSVC (cl.exe) and
+      -- MSVC-style flags. Point it at the mingw gcc (e.g. `scoop install gcc`)
+      -- so parsers compile without a Visual Studio install. No-op elsewhere,
+      -- and yields to a CC/CXX you've already set.
+      if vim.fn.has("win32") == 1 then
+        vim.env.CC = vim.env.CC or "gcc"
+        vim.env.CXX = vim.env.CXX or "g++"
+      end
+
       require("nvim-treesitter").setup()
 
       -- Ensure parsers are installed
