@@ -26,6 +26,16 @@
           options.dotfiles = {
             enable = lib.mkEnableOption "mandest dotfiles";
 
+            headless = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = ''
+                Headless profile (e.g. NixOS-WSL): disables the GUI categories
+                (hyprland, x11, sway, media, browser, cursor) by default. Any
+                category the consumer sets explicitly still wins.
+              '';
+            };
+
             username = lib.mkOption {
               type = lib.types.str;
               description = "Username whose home directory contains the dotfiles checkout (expects ~/src/dotfiles)";
@@ -119,7 +129,19 @@
             };
           };
 
-          config = lib.mkIf cfg.enable {
+          config = lib.mkIf cfg.enable (lib.mkMerge [
+            # Headless profile (WSL): turn GUI categories off unless the
+            # consumer sets them explicitly (mkDefault yields to the consumer).
+            (lib.mkIf cfg.headless {
+              dotfiles.hyprland = lib.mkDefault false;
+              dotfiles.x11 = lib.mkDefault false;
+              dotfiles.sway = lib.mkDefault false;
+              dotfiles.media = lib.mkDefault false;
+              dotfiles.browser = lib.mkDefault false;
+              dotfiles.cursor.enable = lib.mkDefault false;
+            })
+
+            {
             home.pointerCursor = lib.mkIf cfg.cursor.enable {
               name = cfg.cursor.name;
               package = cfg.cursor.package;
@@ -226,7 +248,8 @@
             # config links above stay.
 
             programs.home-manager.enable = true;
-          };
+            }
+          ]);
         };
 
     };

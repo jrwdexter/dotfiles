@@ -15,6 +15,41 @@ This is my setup for a bunch of things. It includes:
 - zsh
 - A lot of other tools: `rg`, `fuck`, `ncmpcpp`, `mopidy`, `kitty`, `cava`, `git [COMMANDS]`, and more
 
+## Nix / home-manager (Linux + WSL)
+
+This repo exports a single reusable home-manager module,
+`homeManagerModules.default`. It links these files live from `~/src/dotfiles`
+via `mkOutOfStoreSymlink` (edit in place, no rebuild) and is split into
+category toggles: `shell git scripts hyprland x11 sway terminal editor browser
+media`, plus `cursor.*` and a `headless` convenience flag.
+
+Import it from a consumer flake (see `../nixos` for the full workstation
+example) and enable what that machine needs:
+
+```nix
+# Arch / workstation desktop
+dotfiles = { enable = true; username = "jonathan"; x11 = true; };
+
+# NixOS-WSL (headless) — `headless` turns the GUI categories off by default;
+# anything you set explicitly still wins.
+dotfiles = { enable = true; username = "jonathan"; headless = true; };
+```
+
+The WSL *system* layer (`wsl.enable`, flakes, user) lives in the consumer flake,
+not here — this repo stays home-manager-only.
+
+## Windows (neovim, windows-terminal)
+
+Nix can't run on native Windows, so those configs are symlinked into place by a
+PowerShell bootstrap. From an admin shell (or with Developer Mode on):
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File .\windows\bootstrap.ps1
+```
+
+It links `.config/nvim` → `%LOCALAPPDATA%\nvim` and the terminal settings, and
+refuses to overwrite real (non-symlink) files.
+
 ## Awesome WM configuration
 
 First of all, update configuration located at `~/.config/awesome/rc.lua`. The vast majority of settings are included there.
