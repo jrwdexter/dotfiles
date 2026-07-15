@@ -9,8 +9,14 @@
 # Developer Mode is enabled):
 #     pwsh -ExecutionPolicy Bypass -File .\windows\bootstrap.ps1
 #
+# Pass -InstallDeps to also install the toolchain the Neovim config needs on
+# Windows (Nix provides these on Linux/WSL; native Windows has nothing):
+#     pwsh -ExecutionPolicy Bypass -File .\windows\bootstrap.ps1 -InstallDeps
+#
 # Idempotent: re-running replaces existing symlinks, but refuses to clobber a
 # real (non-symlink) file so nothing is lost by accident.
+
+param([switch]$InstallDeps)
 
 $ErrorActionPreference = 'Stop'
 
@@ -48,6 +54,21 @@ function New-DotfileLink {
     New-Item -ItemType SymbolicLink -Path $Target -Target $Source | Out-Null
     Write-Host "linked  $Target  ->  $Source"
 }
+
+function Install-Deps {
+    # Toolchain the Neovim config expects: tree-sitter CLI + gcc (parser
+    # compilation), and the Node/Python/Go runtimes for the Mason LSP servers.
+    if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
+        Write-Warning "scoop not found. Install it from https://scoop.sh then re-run with -InstallDeps."
+        return
+    }
+    $pkgs = @('tree-sitter', 'gcc', 'nodejs-lts', 'python', 'go')
+    Write-Host "Installing Neovim deps via scoop: $($pkgs -join ', ')"
+    scoop install @pkgs
+    Write-Host "Deps installed. Restart your terminal so the new PATH entries take effect."
+}
+
+if ($InstallDeps) { Install-Deps }
 
 foreach ($t in $Links.Keys) { New-DotfileLink -Target $t -Source $Links[$t] }
 
